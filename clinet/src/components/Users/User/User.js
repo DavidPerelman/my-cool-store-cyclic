@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from '../../UI/Modal/Modal';
 import Login from '../Login/Login';
+import Logout from '../Logout/Logout';
 import Register from '../Register/Register';
 import classes from './User.module.css';
 
@@ -8,6 +9,7 @@ const User = ({ onCloseUserStatus }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [isRegisterPage, setIsRegisterPage] = useState(false);
+  const [userData, setUserData] = useState({});
 
   const [enteredLoginEmail, setEnteredLoginEmail] = useState('');
   const [enteredLoginPassword, setEnteredLoginPassword] = useState('');
@@ -21,6 +23,11 @@ const User = ({ onCloseUserStatus }) => {
     const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
     console.log(storedUserLoggedInInformation);
     if (storedUserLoggedInInformation === '1') {
+      setUserData({
+        firstName: 'David',
+        lastName: 'Perelman',
+      });
+
       setIsLoginPage(false);
       setIsRegisterPage(false);
       setIsLoggedIn(true);
@@ -63,6 +70,17 @@ const User = ({ onCloseUserStatus }) => {
     setIsLoggedIn(true);
   };
 
+  const onLogoutHandler = (event) => {
+    event.preventDefault();
+    console.log('onLogout');
+    // return;
+    localStorage.removeItem('isLoggedIn');
+
+    setIsLoginPage(true);
+    setIsRegisterPage(false);
+    setIsLoggedIn(false);
+  };
+
   return (
     <Modal onClose={onCloseUserStatus}>
       {isLoginPage && (
@@ -87,14 +105,7 @@ const User = ({ onCloseUserStatus }) => {
       )}
       {isLoggedIn && (
         <>
-          {/* <Register
-            goToLogin={goToLogin}
-            setEnteredFirstName={setEnteredRegisterFirstName}
-            setEnteredLastName={setEnteredRegisterLastName}
-            setEnteredEmail={setEnteredRegisterEmail}
-            setEnteredPassword={setEnteredRegisterPassword}
-          /> */}
-          <h2>Logout</h2>
+          <Logout userData={userData} onLogout={onLogoutHandler} />
         </>
       )}
       <div className={classes.actions}>
