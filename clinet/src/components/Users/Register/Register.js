@@ -27,7 +27,7 @@ const Register = ({
 
   return (
     <div className={classes.register}>
-      <h1>Register</h1>
+      <h2>Register</h2>
       <Input
         id='firstname'
         label='First Name'
@@ -53,7 +53,14 @@ const Register = ({
         onChange={passwordChangeHandler}
       />
       <Input id='confirm-password' label='Confirm Password' type='password' />
-      <button onClick={goToLogin}>Login</button>
+      <p>
+        If you already have an account?
+        <span onClick={goToLogin} className={classes['have-acount-span']}>
+          {' '}
+          login
+        </span>
+        .
+      </p>
     </div>
   );
 };

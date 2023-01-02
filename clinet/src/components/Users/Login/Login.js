@@ -13,7 +13,7 @@ const Login = ({ goToRegister, setEnteredEmail, setEnteredPassword }) => {
 
   return (
     <div className={classes.login}>
-      <h1>Login</h1>
+      <h2>Login</h2>
       <form className={classes['login-form']}>
         <Input
           id='email'
@@ -28,7 +28,14 @@ const Login = ({ goToRegister, setEnteredEmail, setEnteredPassword }) => {
           onChange={passwordChangeHandler}
         />
       </form>
-      <button onClick={goToRegister}>Register</button>
+      <p>
+        Don't have an account?
+        <span onClick={goToRegister} className={classes['have-acount-span']}>
+          {' '}
+          Sign Up
+        </span>
+        .
+      </p>
     </div>
   );
 };
