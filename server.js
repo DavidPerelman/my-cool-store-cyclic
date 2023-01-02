@@ -11,8 +11,19 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello from server</h1>');
+app.get('/api', (req, res) => {
+  const responseData = {
+    message: 'Hello, GFG Learner',
+    articleData: {
+      articleName: 'How to send JSON response from NodeJS',
+      category: 'NodeJS',
+      status: 'published',
+    },
+    endingMessage: 'Visit Geeksforgeeks.org for more',
+  };
+
+  const jsonContent = JSON.stringify(responseData);
+  res.send(jsonContent);
 });
 
 const PORT = 8080 || process.env.PORT;
