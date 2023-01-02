@@ -5,6 +5,11 @@
   width: 300px;
 }
 
+.input label,
+.input input {
+  display: block;
+}
+
 .input input {
   width: 300px;
   padding: 10px 15px;
@@ -12,4 +17,16 @@
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 16px;
+  background: white;
+}
+
+.input input:focus {
+  outline: none;
+  border-color: #4f005f;
+  background: #f6dbfc;
+}
+
+.input.invalid input {
+  border-color: red;
+  background: #fbdada;
 }

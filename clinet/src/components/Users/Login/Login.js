@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../../UI/Input/Input';
 import classes from './Login.module.css';
 
@@ -8,8 +8,16 @@ const Login = ({
   enteredLoginPassword,
   setEnteredEmail,
   setEnteredPassword,
+  setFormIsValid,
 }) => {
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [passwordIsValid, setPasswordIsValid] = useState('');
+  const [emailIsValid, setEmailIsValid] = useState('');
+
+  useEffect(() => {
+    setFormIsValid(
+      enteredLoginEmail.includes('@') && enteredLoginPassword.trim().length > 6
+    );
+  }, [setFormIsValid, enteredLoginEmail, enteredLoginPassword]);
 
   const emailChangeHandler = (e) => {
     setEnteredEmail(e.target.value);
@@ -27,6 +35,14 @@ const Login = ({
     );
   };
 
+  const validateEmailHandler = () => {
+    setEmailIsValid(enteredLoginEmail.includes('@'));
+  };
+
+  const validatePasswordHandler = () => {
+    setPasswordIsValid(enteredLoginPassword.trim().length > 6);
+  };
+
   return (
     <div className={classes.login}>
       <h2>Login</h2>
@@ -36,12 +52,16 @@ const Login = ({
           label='E-Mail'
           type='email'
           onChange={emailChangeHandler}
+          onBlur={validateEmailHandler}
+          isValid={emailIsValid}
         />
         <Input
           id='password'
           label='Password'
           type='password'
           onChange={passwordChangeHandler}
+          onBlur={validatePasswordHandler}
+          isValid={passwordIsValid}
         />
       </form>
       <p>

@@ -10,6 +10,7 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [isRegisterPage, setIsRegisterPage] = useState(false);
   const [userData, setUserData] = useState({});
+  const [formIsValid, setFormIsValid] = useState(false);
 
   const [enteredLoginEmail, setEnteredLoginEmail] = useState('');
   const [enteredLoginPassword, setEnteredLoginPassword] = useState('');
@@ -93,6 +94,7 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
             enteredLoginPassword={enteredLoginPassword}
             setEnteredEmail={setEnteredLoginEmail}
             setEnteredPassword={setEnteredLoginPassword}
+            setFormIsValid={setFormIsValid}
           />
         </>
       )}
@@ -118,7 +120,9 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
         </button>
         {isLoginPage && (
           <form className={classes['login-form']} onSubmit={onLoginHandler}>
-            <button className={classes.button}>Login</button>
+            <button className={classes.button} disabled={!formIsValid}>
+              Login
+            </button>
           </form>
         )}
         {isRegisterPage && (
