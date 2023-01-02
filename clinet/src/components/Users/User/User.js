@@ -11,6 +11,11 @@ const User = ({ onCloseUserStatus }) => {
   const [enteredLoginEmail, setEnteredLoginEmail] = useState('');
   const [enteredLoginPassword, setEnteredLoginPassword] = useState('');
 
+  const [enteredRegisterFirstName, setEnteredRegisterFirstName] = useState('');
+  const [enteredRegisterLastName, setEnteredRegisterLastName] = useState('');
+  const [enteredRegisterEmail, setEnteredRegisterEmail] = useState('');
+  const [enteredRegisterPassword, setEnteredRegisterPassword] = useState('');
+
   const goToRegister = () => {
     setIsLoginPage(false);
     setIsRegisterPage(true);
@@ -23,7 +28,15 @@ const User = ({ onCloseUserStatus }) => {
 
   const onRegisterHandler = (event) => {
     event.preventDefault();
-    console.log('onRegisterHandler');
+
+    const registerData = {
+      firstName: enteredRegisterFirstName,
+      lastName: enteredRegisterLastName,
+      email: enteredRegisterEmail,
+      password: enteredRegisterPassword,
+    };
+
+    console.log(registerData);
   };
 
   const onLoginHandler = (event) => {
@@ -51,8 +64,11 @@ const User = ({ onCloseUserStatus }) => {
       {isRegisterPage && (
         <>
           <Register
-            onRegisterHandler={onRegisterHandler}
             goToLogin={goToLogin}
+            setEnteredFirstName={setEnteredRegisterFirstName}
+            setEnteredLastName={setEnteredRegisterLastName}
+            setEnteredEmail={setEnteredRegisterEmail}
+            setEnteredPassword={setEnteredRegisterPassword}
           />
         </>
       )}
