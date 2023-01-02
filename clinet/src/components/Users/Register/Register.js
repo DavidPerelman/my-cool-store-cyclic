@@ -2,8 +2,7 @@ import React from 'react';
 import Input from '../../UI/Input/Input';
 import classes from './Register.module.css';
 
-const Register = ({ onRegisterHandler, goToLogin }) => {
-  console.log(onRegisterHandler);
+const Register = ({ goToLogin }) => {
   return (
     <div className={classes.register}>
       <h1>Register</h1>

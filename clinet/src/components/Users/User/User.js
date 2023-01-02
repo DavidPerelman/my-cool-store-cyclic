@@ -20,7 +20,12 @@ const User = ({ onCloseUserStatus }) => {
 
   const onRegisterHandler = (event) => {
     event.preventDefault();
-    console.log('submitHandler');
+    console.log('onRegisterHandler');
+  };
+
+  const onLoginHandler = (event) => {
+    event.preventDefault();
+    console.log('onLoginHandler');
   };
 
   return (
@@ -42,7 +47,11 @@ const User = ({ onCloseUserStatus }) => {
         <button className={classes['button--alt']} onClick={onCloseUserStatus}>
           Close
         </button>
-        {isLoginPage && <button className={classes.button}>Login</button>}
+        {isLoginPage && (
+          <form className={classes['login-form']} onSubmit={onLoginHandler}>
+            <button className={classes.button}>Login</button>
+          </form>
+        )}
         {isRegisterPage && (
           <form
             className={classes['register-form']}
