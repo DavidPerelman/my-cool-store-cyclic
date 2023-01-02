@@ -1,9 +1,9 @@
 import React from 'react';
-import './Input.css';
+import classes from './Input.module.css';
 
 const Input = ({ type, id, value, onChange, onBlur, isValid, label }) => {
   return (
-    <div className='input'>
+    <div className={classes.input}>
       <label htmlFor={id}>{label}</label>
       <input
         // ref={inputRef}
