@@ -1,7 +1,6 @@
 import classes from './Icon.module.css';
 
 const Icon = ({ size, type, count, amount, onClick }) => {
-  console.log(type);
   return (
     <>
       <span>

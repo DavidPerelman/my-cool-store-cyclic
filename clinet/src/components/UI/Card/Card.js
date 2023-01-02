@@ -7,16 +7,6 @@ import CartContext from '../../../store/cart-context';
 const Card = ({ product, onCartClick }) => {
   const cartCtx = useContext(CartContext);
 
-  useEffect(() => {
-    const existingCartItemIndex = cartCtx.items.findIndex((item) => {
-      return item.name === product.name;
-    });
-    const existingCartItem = cartCtx.items[existingCartItemIndex];
-    if (existingCartItem) {
-      console.log('dsd');
-    }
-  }, [cartCtx]);
-
   let existingCartItemName;
   const existingCartItemIndex = cartCtx.items.findIndex((item) => {
     return item.name === product.name;
@@ -29,7 +19,6 @@ const Card = ({ product, onCartClick }) => {
   const submitHandler = (e) => {};
 
   const addToCartHandler = () => {
-    console.log(product);
     cartCtx.addItem({
       id: product.id,
       name: product.name,
@@ -54,11 +43,6 @@ const Card = ({ product, onCartClick }) => {
         </h4>
         <span className={classes['price-action']}>
           ${product.price}
-          {/* <Icon
-            type='fa-solid fa-cart-minus'
-            onClick={addToCartHandler}
-            size='lg'
-          /> */}
           {existingCartItemName !== product.name ? (
             <Icon
               type='fa-solid fa-cart-plus'
