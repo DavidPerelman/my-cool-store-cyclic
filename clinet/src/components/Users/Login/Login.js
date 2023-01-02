@@ -14,9 +14,15 @@ const Login = ({
   const [emailIsValid, setEmailIsValid] = useState('');
 
   useEffect(() => {
-    setFormIsValid(
-      enteredLoginEmail.includes('@') && enteredLoginPassword.trim().length > 6
-    );
+    setTimeout(() => {
+      console.log('Checkin form validaty');
+      setFormIsValid(
+        enteredLoginEmail.includes('@') &&
+          enteredLoginPassword.trim().length > 6
+      );
+    }, 500);
+
+    return;
   }, [setFormIsValid, enteredLoginEmail, enteredLoginPassword]);
 
   const emailChangeHandler = (e) => {
