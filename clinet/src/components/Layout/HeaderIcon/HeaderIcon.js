@@ -1,7 +1,6 @@
 import classes from './HeaderIcon.module.css';
 
 const HeaderIcon = ({ type, count, amount, onClick }) => {
-  console.log(count);
   return (
     <h2>
       <div className={classes.cart} onClick={onClick}>
