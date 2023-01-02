@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cart from './components/Cart/Cart/Cart';
 import CategoryContainer from './components/Layout/CategoryContainer/CategoryContainer';
 import Header from './components/Layout/Header/Header';
 import User from './components/Users/User/User';
 import categories from './data/categories.json';
+import CartProvider from './store/CartProvider';
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
@@ -36,7 +37,7 @@ function App() {
   };
 
   return (
-    <Fragment>
+    <CartProvider>
       {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
       {userStatusIsShown && (
         <User
@@ -59,7 +60,7 @@ function App() {
           return <CategoryContainer key={category.id} category={category} />;
         })}
       </div>
-    </Fragment>
+    </CartProvider>
   );
 }
 
