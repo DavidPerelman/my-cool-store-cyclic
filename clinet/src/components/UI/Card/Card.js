@@ -19,6 +19,7 @@ const Card = ({ product, onCartClick }) => {
       name: product.name,
       amount: product.amount,
       price: product.price,
+      image: product.image,
     });
   };
 
