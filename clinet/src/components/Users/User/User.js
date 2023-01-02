@@ -19,6 +19,8 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
   const [enteredRegisterLastName, setEnteredRegisterLastName] = useState('');
   const [enteredRegisterEmail, setEnteredRegisterEmail] = useState('');
   const [enteredRegisterPassword, setEnteredRegisterPassword] = useState('');
+  const [enteredRegisterConfirmPassword, setEnteredRegisterConfirmPassword] =
+    useState('');
 
   useEffect(() => {
     const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
@@ -54,8 +56,6 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
       email: enteredRegisterEmail,
       password: enteredRegisterPassword,
     };
-
-    console.log(registerData);
   };
 
   const onLoginHandler = (event) => {
@@ -76,7 +76,6 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
   const onLogoutHandler = (event) => {
     event.preventDefault();
     console.log('onLogout');
-    // return;
     localStorage.removeItem('isLoggedIn');
 
     setIsLoginPage(true);
@@ -102,10 +101,17 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
         <>
           <Register
             goToLogin={goToLogin}
+            enteredRegisterFirstName={enteredRegisterFirstName}
+            enteredRegisterLastName={enteredRegisterLastName}
+            enteredRegisterEmail={enteredRegisterEmail}
+            enteredRegisterPassword={enteredRegisterPassword}
+            enteredRegisterConfirmPassword={enteredRegisterConfirmPassword}
             setEnteredFirstName={setEnteredRegisterFirstName}
             setEnteredLastName={setEnteredRegisterLastName}
             setEnteredEmail={setEnteredRegisterEmail}
             setEnteredPassword={setEnteredRegisterPassword}
+            setEnteredConfirmPassword={setEnteredRegisterConfirmPassword}
+            setFormIsValid={setFormIsValid}
           />
         </>
       )}
@@ -130,7 +136,11 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
             className={classes['register-form']}
             onSubmit={onRegisterHandler}
           >
-            <button className={classes.button} type='submit'>
+            <button
+              className={classes.button}
+              type='submit'
+              disabled={!formIsValid}
+            >
               Register
             </button>
           </form>
