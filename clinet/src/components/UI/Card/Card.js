@@ -7,7 +7,24 @@ import CartContext from '../../../store/cart-context';
 const Card = ({ product, onCartClick }) => {
   const cartCtx = useContext(CartContext);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const existingCartItemIndex = cartCtx.items.findIndex((item) => {
+      return item.name === product.name;
+    });
+    const existingCartItem = cartCtx.items[existingCartItemIndex];
+    if (existingCartItem) {
+      console.log('dsd');
+    }
+  }, [cartCtx]);
+
+  let existingCartItemName;
+  const existingCartItemIndex = cartCtx.items.findIndex((item) => {
+    return item.name === product.name;
+  });
+  const existingCartItem = cartCtx.items[existingCartItemIndex];
+  if (existingCartItem) {
+    existingCartItemName = Object.values(existingCartItem)[1];
+  }
 
   const submitHandler = (e) => {};
 
@@ -37,7 +54,20 @@ const Card = ({ product, onCartClick }) => {
         </h4>
         <span className={classes['price-action']}>
           ${product.price}
-          <Icon type='fa fa-cart-plus' onClick={addToCartHandler} size='lg' />
+          {/* <Icon
+            type='fa-solid fa-cart-minus'
+            onClick={addToCartHandler}
+            size='lg'
+          /> */}
+          {existingCartItemName !== product.name ? (
+            <Icon
+              type='fa-solid fa-cart-plus'
+              onClick={addToCartHandler}
+              size='lg'
+            />
+          ) : (
+            <span className={classes['in-cart']}>in cart</span>
+          )}
         </span>
       </div>
     </div>

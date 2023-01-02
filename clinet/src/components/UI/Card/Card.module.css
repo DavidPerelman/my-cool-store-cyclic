@@ -30,6 +30,13 @@
   flex-direction: row;
   justify-content: center;
   gap: 10px;
+  align-items: center;
+}
+
+.in-cart {
+  background-color: limegreen;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 @media only screen and (max-width: 600px) {
