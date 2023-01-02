@@ -9,10 +9,6 @@ const CategoryContainer = ({ category }) => {
     console.log(category);
   };
 
-  const onCartClick = () => {
-    console.log('onCartClick');
-  };
-
   return (
     <div className={classes.CategoryContainer}>
       <header>
@@ -24,13 +20,7 @@ const CategoryContainer = ({ category }) => {
       </header>
       <main className={classes.main}>
         {products.map((product) => {
-          return (
-            <Card
-              key={product.id}
-              product={product}
-              onCartClick={onCartClick}
-            />
-          );
+          return <Card key={product.id} product={product} />;
         })}
       </main>
     </div>
