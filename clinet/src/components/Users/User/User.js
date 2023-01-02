@@ -1,20 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '../../UI/Modal/Modal';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 const User = ({ onCloseUserStatus }) => {
+  const [isLoginPage, setIsLoginPage] = useState(true);
+  const [isRegisterPage, setIsRegisterPage] = useState(false);
+
+  const goToRegister = () => {
+    setIsLoginPage(false);
+    setIsRegisterPage(true);
+  };
+
+  const goToLogin = () => {
+    setIsLoginPage(true);
+    setIsRegisterPage(false);
+  };
+
   return (
     <Modal onClose={onCloseUserStatus}>
-      {/* {cartItems}
-      <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>35.62</span>
-      </div>
-      <div className={classes.actions}>
-        <button className={classes['button--alt']} onClick={onCloseUserStatus}>
-          Close
-        </button>
-        <button className={classes.button}>Order</button>
-      </div> */}
+      {isLoginPage && (
+        <>
+          <Login goToRegister={goToRegister} />
+        </>
+      )}
+      {isRegisterPage && (
+        <>
+          <Register goToLogin={goToLogin} />
+        </>
+      )}
     </Modal>
   );
 };
