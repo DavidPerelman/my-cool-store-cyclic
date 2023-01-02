@@ -18,6 +18,11 @@ const User = ({ onCloseUserStatus }) => {
     setIsRegisterPage(false);
   };
 
+  const onRegisterHandler = (event) => {
+    event.preventDefault();
+    console.log('submitHandler');
+  };
+
   return (
     <Modal onClose={onCloseUserStatus}>
       {isLoginPage && (
@@ -27,7 +32,10 @@ const User = ({ onCloseUserStatus }) => {
       )}
       {isRegisterPage && (
         <>
-          <Register goToLogin={goToLogin} />
+          <Register
+            onRegisterHandler={onRegisterHandler}
+            goToLogin={goToLogin}
+          />
         </>
       )}
       <div className={classes.actions}>
@@ -35,7 +43,16 @@ const User = ({ onCloseUserStatus }) => {
           Close
         </button>
         {isLoginPage && <button className={classes.button}>Login</button>}
-        {isRegisterPage && <button className={classes.button}>Register</button>}
+        {isRegisterPage && (
+          <form
+            className={classes['register-form']}
+            onSubmit={onRegisterHandler}
+          >
+            <button className={classes.button} type='submit'>
+              Register
+            </button>
+          </form>
+        )}
       </div>
     </Modal>
   );

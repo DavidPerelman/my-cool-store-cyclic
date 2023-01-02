@@ -17,6 +17,9 @@
 
 .actions {
   text-align: right;
+  display: flex;
+  flex-direction: inherit;
+  float: right;
 }
 
 .actions button {
