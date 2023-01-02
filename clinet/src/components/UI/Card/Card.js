@@ -1,7 +1,9 @@
 import React from 'react';
+import HeaderIcon from '../../Layout/HeaderIcon/HeaderIcon';
+import Icon from '../Icon/Icon';
 import classes from './Card.module.css';
 
-const Card = ({ product }) => {
+const Card = ({ product, onCartClick }) => {
   return (
     <div className={classes.card}>
       <div>
@@ -15,7 +17,10 @@ const Card = ({ product }) => {
         <h4>
           <b>{product.title}</b>
         </h4>
-        <p>{product.price}</p>
+        <span className={classes['price-action']}>
+          ${product.price}
+          <Icon type='fa-shopping-cart' onClick={onCartClick} size='lg' />
+        </span>
       </div>
     </div>
   );
