@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '../../UI/Modal/Modal';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import classes from './User.module.css';
 
 const User = ({ onCloseUserStatus }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [isRegisterPage, setIsRegisterPage] = useState(false);
 
@@ -15,6 +16,16 @@ const User = ({ onCloseUserStatus }) => {
   const [enteredRegisterLastName, setEnteredRegisterLastName] = useState('');
   const [enteredRegisterEmail, setEnteredRegisterEmail] = useState('');
   const [enteredRegisterPassword, setEnteredRegisterPassword] = useState('');
+
+  useEffect(() => {
+    const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
+    console.log(storedUserLoggedInInformation);
+    if (storedUserLoggedInInformation === '1') {
+      setIsLoginPage(false);
+      setIsRegisterPage(false);
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const goToRegister = () => {
     setIsLoginPage(false);
@@ -48,6 +59,8 @@ const User = ({ onCloseUserStatus }) => {
     };
 
     console.log(loginData);
+    localStorage.setItem('isLoggedIn', '1');
+    setIsLoggedIn(true);
   };
 
   return (
@@ -70,6 +83,18 @@ const User = ({ onCloseUserStatus }) => {
             setEnteredEmail={setEnteredRegisterEmail}
             setEnteredPassword={setEnteredRegisterPassword}
           />
+        </>
+      )}
+      {isLoggedIn && (
+        <>
+          {/* <Register
+            goToLogin={goToLogin}
+            setEnteredFirstName={setEnteredRegisterFirstName}
+            setEnteredLastName={setEnteredRegisterLastName}
+            setEnteredEmail={setEnteredRegisterEmail}
+            setEnteredPassword={setEnteredRegisterPassword}
+          /> */}
+          <h2>Logout</h2>
         </>
       )}
       <div className={classes.actions}>
