@@ -12,7 +12,6 @@ const Logout = ({ userData, onLogout }) => {
       <Button onClick={onLogout}>Logout</Button>
     </div>
   );
-  //   return <div>{userData.firstName}</div>;
 };
 
 export default Logout;

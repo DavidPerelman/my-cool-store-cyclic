@@ -5,7 +5,7 @@ import Logout from '../Logout/Logout';
 import Register from '../Register/Register';
 import classes from './User.module.css';
 
-const User = ({ onCloseUserStatus }) => {
+const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [isRegisterPage, setIsRegisterPage] = useState(false);
@@ -65,9 +65,11 @@ const User = ({ onCloseUserStatus }) => {
       password: enteredLoginPassword,
     };
 
-    console.log(loginData);
+    setUserStatusIsShown(false);
     localStorage.setItem('isLoggedIn', '1');
     setIsLoggedIn(true);
+    setIsLoginPage(false);
+    setIsRegisterPage(false);
   };
 
   const onLogoutHandler = (event) => {
@@ -87,6 +89,8 @@ const User = ({ onCloseUserStatus }) => {
         <>
           <Login
             goToRegister={goToRegister}
+            enteredLoginEmail={enteredLoginEmail}
+            enteredLoginPassword={enteredLoginPassword}
             setEnteredEmail={setEnteredLoginEmail}
             setEnteredPassword={setEnteredLoginPassword}
           />

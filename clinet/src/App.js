@@ -38,7 +38,12 @@ function App() {
   return (
     <Fragment>
       {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
-      {userStatusIsShown && <User onCloseUserStatus={hideUserStatusHandler} />}
+      {userStatusIsShown && (
+        <User
+          onCloseUserStatus={hideUserStatusHandler}
+          setUserStatusIsShown={setUserStatusIsShown}
+        />
+      )}
 
       <Header
         onShowCart={showCartHandler}

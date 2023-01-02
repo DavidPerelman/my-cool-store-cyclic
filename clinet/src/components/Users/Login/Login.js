@@ -2,13 +2,29 @@ import React, { useState } from 'react';
 import Input from '../../UI/Input/Input';
 import classes from './Login.module.css';
 
-const Login = ({ goToRegister, setEnteredEmail, setEnteredPassword }) => {
+const Login = ({
+  goToRegister,
+  enteredLoginEmail,
+  enteredLoginPassword,
+  setEnteredEmail,
+  setEnteredPassword,
+}) => {
+  const [formIsValid, setFormIsValid] = useState(false);
+
   const emailChangeHandler = (e) => {
     setEnteredEmail(e.target.value);
+
+    setFormIsValid(
+      e.target.value.includes('@') && enteredLoginPassword.trim().length > 6
+    );
   };
 
   const passwordChangeHandler = (e) => {
     setEnteredPassword(e.target.value);
+
+    setFormIsValid(
+      e.target.value.trim().length > 6 && enteredLoginEmail.includes('@')
+    );
   };
 
   return (
