@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+import React, { Fragment, useEffect, useState } from 'react';
+import Cart from './components/Cart/Cart/Cart';
+import CategoryContainer from './components/Layout/CategoryContainer/CategoryContainer';
+import Header from './components/Layout/Header/Header';
+import User from './components/Users/User/User';
+import categories from './data/categories.json';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [cartIsShown, setCartIsShown] = useState(false);
+  const [userStatusIsShown, setUserStatusIsShown] = useState(false);
 
   const getData = async () => {
     await fetch('/api')
@@ -14,21 +19,42 @@ function App() {
     getData();
   }, []);
 
-  const increment = () => {
-    setCount(count + 1);
+  const showCartHandler = () => {
+    setCartIsShown(true);
   };
 
-  const decrement = () => {
-    setCount(count - 1);
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  };
+
+  const showUserStatusHandler = () => {
+    setUserStatusIsShown(true);
+  };
+
+  const hideUserStatusHandler = () => {
+    setUserStatusIsShown(false);
   };
 
   return (
-    <>
-      <h1>My App</h1>
-      <p>{count}</p>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
-    </>
+    <Fragment>
+      {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
+      {userStatusIsShown && <User onCloseUserStatus={hideUserStatusHandler} />}
+
+      <Header
+        onShowCart={showCartHandler}
+        onHideCart={hideCartHandler}
+        onShowUserStatus={showUserStatusHandler}
+        onHideUserStatus={hideUserStatusHandler}
+      />
+      <div
+        id='categoriesContainers'
+        style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column' }}
+      >
+        {categories.map((category) => {
+          return <CategoryContainer key={category.id} category={category} />;
+        })}
+      </div>
+    </Fragment>
   );
 }
 
