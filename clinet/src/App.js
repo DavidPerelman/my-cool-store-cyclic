@@ -16,7 +16,7 @@ function App() {
   };
 
   useEffect(() => {
-    getData();
+    // getData();
   }, []);
 
   const showCartHandler = () => {

@@ -14,7 +14,7 @@ const Login = ({
   const [emailIsValid, setEmailIsValid] = useState('');
 
   useEffect(() => {
-    setTimeout(() => {
+    const identifier = setTimeout(() => {
       console.log('Checkin form validaty');
       setFormIsValid(
         enteredLoginEmail.includes('@') &&
@@ -22,8 +22,11 @@ const Login = ({
       );
     }, 500);
 
-    return;
-  }, [setFormIsValid, enteredLoginEmail, enteredLoginPassword]);
+    return () => {
+      console.log('CLEANUP');
+      clearTimeout(identifier);
+    };
+  }, [enteredLoginEmail, enteredLoginPassword]);
 
   const emailChangeHandler = (e) => {
     setEnteredEmail(e.target.value);
