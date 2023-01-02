@@ -13,7 +13,6 @@ const Card = ({ product, onCartClick }) => {
 
   const addToCartHandler = () => {
     console.log(product);
-    // return;
     cartCtx.addItem({
       id: product.id,
       name: product.name,
@@ -34,7 +33,7 @@ const Card = ({ product, onCartClick }) => {
       </div>
       <div className={classes.container}>
         <h4>
-          <b>{product.title}</b>
+          <b>{product.name}</b>
         </h4>
         <span className={classes['price-action']}>
           ${product.price}

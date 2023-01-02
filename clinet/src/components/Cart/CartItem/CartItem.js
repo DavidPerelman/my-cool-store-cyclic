@@ -1,7 +1,6 @@
 import classes from './CartItem.module.css';
 
 const CartItem = ({ item, onAdd, onRemove }) => {
-  console.log(item);
   const price = `$${item.price.toFixed(2)}`;
 
   return (
