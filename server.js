@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const path = require('path');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -24,6 +25,12 @@ app.get('/api', (req, res) => {
 
   const jsonContent = JSON.stringify(responseData);
   res.send(jsonContent);
+});
+
+app.use(express.static(path.join(__dirname, './clinet/build')));
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, './clinet/build/index.html'));
 });
 
 const PORT = 8080 || process.env.PORT;
