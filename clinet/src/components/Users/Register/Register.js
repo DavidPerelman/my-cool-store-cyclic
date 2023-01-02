@@ -48,67 +48,22 @@ const Register = ({
 
   const firstNameChangeHandler = (e) => {
     setEnteredFirstName(e.target.value);
-
-    setFormIsValid(
-      enteredRegisterFirstName.trim().length > 0 &&
-        enteredRegisterLastName.trim().length > 0 &&
-        enteredRegisterEmail.includes('@') &&
-        enteredRegisterPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword === enteredRegisterPassword
-    );
   };
 
   const lastNameChangeHandler = (e) => {
     setEnteredLastName(e.target.value);
-
-    setFormIsValid(
-      enteredRegisterFirstName.trim().length > 0 &&
-        enteredRegisterLastName.trim().length > 0 &&
-        enteredRegisterEmail.includes('@') &&
-        enteredRegisterPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword === enteredRegisterPassword
-    );
   };
 
   const emailChangeHandler = (e) => {
     setEnteredEmail(e.target.value);
-
-    setFormIsValid(
-      enteredRegisterFirstName.trim().length > 0 &&
-        enteredRegisterLastName.trim().length > 0 &&
-        enteredRegisterEmail.includes('@') &&
-        enteredRegisterPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword === enteredRegisterPassword
-    );
   };
 
   const passwordChangeHandler = (e) => {
     setEnteredPassword(e.target.value);
-
-    setFormIsValid(
-      enteredRegisterFirstName.trim().length > 0 &&
-        enteredRegisterLastName.trim().length > 0 &&
-        enteredRegisterEmail.includes('@') &&
-        enteredRegisterPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword === enteredRegisterPassword
-    );
   };
 
   const confirmPasswordChangeHandler = (e) => {
     setEnteredConfirmPassword(e.target.value);
-
-    setFormIsValid(
-      enteredRegisterFirstName.trim().length > 0 &&
-        enteredRegisterLastName.trim().length > 0 &&
-        enteredRegisterEmail.includes('@') &&
-        enteredRegisterPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword.trim().length > 6 &&
-        enteredRegisterConfirmPassword === enteredRegisterPassword
-    );
   };
 
   const validateFirstNameHandler = () => {

@@ -30,18 +30,10 @@ const Login = ({
 
   const emailChangeHandler = (e) => {
     setEnteredEmail(e.target.value);
-
-    setFormIsValid(
-      e.target.value.includes('@') && enteredLoginPassword.trim().length > 6
-    );
   };
 
   const passwordChangeHandler = (e) => {
     setEnteredPassword(e.target.value);
-
-    setFormIsValid(
-      e.target.value.trim().length > 6 && enteredLoginEmail.includes('@')
-    );
   };
 
   const validateEmailHandler = () => {
