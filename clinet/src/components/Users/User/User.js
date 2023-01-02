@@ -8,6 +8,9 @@ const User = ({ onCloseUserStatus }) => {
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [isRegisterPage, setIsRegisterPage] = useState(false);
 
+  const [enteredLoginEmail, setEnteredLoginEmail] = useState('');
+  const [enteredLoginPassword, setEnteredLoginPassword] = useState('');
+
   const goToRegister = () => {
     setIsLoginPage(false);
     setIsRegisterPage(true);
@@ -25,14 +28,24 @@ const User = ({ onCloseUserStatus }) => {
 
   const onLoginHandler = (event) => {
     event.preventDefault();
-    console.log('onLoginHandler');
+
+    const loginData = {
+      email: enteredLoginEmail,
+      password: enteredLoginPassword,
+    };
+
+    console.log(loginData);
   };
 
   return (
     <Modal onClose={onCloseUserStatus}>
       {isLoginPage && (
         <>
-          <Login goToRegister={goToRegister} />
+          <Login
+            goToRegister={goToRegister}
+            setEnteredEmail={setEnteredLoginEmail}
+            setEnteredPassword={setEnteredLoginPassword}
+          />
         </>
       )}
       {isRegisterPage && (
