@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  justify-content: center;
 }
 
 .card:hover {
@@ -21,6 +22,7 @@
 
 .container {
   margin-bottom: 20px;
+  width: 50%;
 }
 
 .product-name {
@@ -80,33 +82,16 @@
   }
 
   .card-image {
-    height: 120px;
-    width: 100px;
+    height: 110px;
+    width: 90px;
   }
 
   .card:hover {
     transform: translateY(-8px);
   }
-}
 
-.bump {
-  animation: bump 300ms ease-out;
-}
-
-@keyframes bump {
-  0% {
-    transform: scale(1);
-  }
-  10% {
-    transform: scale(0.9);
-  }
-  30% {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1);
+  .Card_product-brand__bXXV3 {
+    display: flex;
+    gap: 5px;
   }
 }

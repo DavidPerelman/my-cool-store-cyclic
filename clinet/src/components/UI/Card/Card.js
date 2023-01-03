@@ -37,14 +37,13 @@ const Card = ({ product, onCartClick }) => {
           className={classes['card-image']}
           src={product.thumbnail}
           alt='Avatar'
-          // style={{ width: '150px', height: '170px' }}
         />
       </div>
       <div className={classes.container}>
         <div className={classes['product-name']}>
-          <h4>
+          <h5>
             <b>{product.title}</b>
-          </h4>
+          </h5>
         </div>
         <div className={classes['product-brand']}>
           <Icon type='fa-brands fa-font-awesome' size='sm' />
