@@ -24,7 +24,6 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
 
   useEffect(() => {
     const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
-    console.log(storedUserLoggedInInformation);
     if (storedUserLoggedInInformation === '1') {
       setUserData({
         firstName: 'David',
@@ -75,7 +74,6 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
 
   const onLogoutHandler = (event) => {
     event.preventDefault();
-    console.log('onLogout');
     localStorage.removeItem('isLoggedIn');
 
     setIsLoginPage(true);

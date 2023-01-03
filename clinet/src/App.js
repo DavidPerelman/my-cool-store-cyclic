@@ -22,7 +22,6 @@ function App() {
       .then((res) => res.json())
       .then((data) => setCategories(data));
 
-    console.log(categories);
     // getData();
   }, []);
 
@@ -63,7 +62,6 @@ function App() {
         style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column' }}
       >
         {categories.map((category) => {
-          console.log(category);
           return <CategoryContainer key={category} category={category} />;
         })}
       </div>

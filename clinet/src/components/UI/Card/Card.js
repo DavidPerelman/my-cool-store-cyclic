@@ -10,9 +10,10 @@ const Card = ({ product, onCartClick }) => {
 
   let existingCartItemName;
   const existingCartItemIndex = cartCtx.items.findIndex((item) => {
-    return item.name === product.name;
+    return item.title === product.title;
   });
   const existingCartItem = cartCtx.items[existingCartItemIndex];
+
   if (existingCartItem) {
     existingCartItemName = Object.values(existingCartItem)[1];
   }
@@ -22,10 +23,10 @@ const Card = ({ product, onCartClick }) => {
   const addToCartHandler = () => {
     cartCtx.addItem({
       id: product.id,
-      name: product.name,
-      amount: product.amount,
+      title: product.title,
+      amount: 1,
       price: product.price,
-      image: product.image,
+      image: product.thumbnail,
     });
   };
 

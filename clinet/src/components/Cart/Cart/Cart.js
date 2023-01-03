@@ -14,7 +14,6 @@ const Cart = ({ onCloseCart }) => {
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
-  console.log(cartCtx.totalAmount);
   const cartItemAddHandler = (item) => {
     cartCtx.addItem(item);
   };

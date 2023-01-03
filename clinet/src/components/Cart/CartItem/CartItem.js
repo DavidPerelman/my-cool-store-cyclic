@@ -8,7 +8,7 @@ const CartItem = ({ item, onAdd, onRemove }) => {
       <div className={classes['cart-product-details']}>
         <img className={classes['cart-image']} src={item.image} />
         <div>
-          <h2>{item.name}</h2>
+          <h2>{item.title}</h2>
           <div className={classes.summary}>
             <span className={classes.price}>{price}</span>
             <span className={classes.amount}>x {item.amount}</span>
