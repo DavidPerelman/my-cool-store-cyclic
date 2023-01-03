@@ -10,10 +10,13 @@ const HeaderCartButton = ({ onShowCart, onShowUserStatus }) => {
     return currentNumber + item.amount;
   }, 0);
 
+  const btnClasses = `${classes.button} ${classes.bump}`;
+
   return (
     <>
       <div className={classes.HeaderCartButton}>
         <HeaderIcon
+          className={btnClasses}
           type='fa-shopping-cart'
           count={true}
           amount={numOfCartItems}
