@@ -27,6 +27,24 @@
   display: flex;
   align-items: center;
   height: 110px;
+  flex-direction: column;
+}
+
+.product-brand {
+  /* font-size: 0.9rem; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.product-brand p {
+  font-size: 0.9rem;
+}
+
+.product-brand div:hover {
+  color: black;
+  cursor: auto;
 }
 
 .price-action {

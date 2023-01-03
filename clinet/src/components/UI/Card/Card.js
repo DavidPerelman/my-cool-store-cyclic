@@ -34,7 +34,7 @@ const Card = ({ product, onCartClick }) => {
       <div>
         <img
           className={classes['card-image']}
-          src={product.image}
+          src={product.thumbnail}
           alt='Avatar'
           // style={{ width: '150px', height: '170px' }}
         />
@@ -42,12 +42,16 @@ const Card = ({ product, onCartClick }) => {
       <div className={classes.container}>
         <div className={classes['product-name']}>
           <h4>
-            <b>{product.name}</b>
+            <b>{product.title}</b>
           </h4>
+        </div>
+        <div className={classes['product-brand']}>
+          <Icon type='fa-brands fa-font-awesome' size='sm' />
+          <p>{product.brand}</p>
         </div>
         <span className={classes['price-action']}>
           ${product.price}
-          {existingCartItemName !== product.name ? (
+          {existingCartItemName !== product.title ? (
             <Icon
               type='fa-solid fa-cart-plus'
               onClick={addToCartHandler}

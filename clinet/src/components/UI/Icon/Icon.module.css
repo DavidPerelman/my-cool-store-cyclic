@@ -2,6 +2,9 @@
   color: forestgreen;
   cursor: pointer;
 }
+.icon {
+  align-self: center;
+}
 /* .cart {
   margin-top: 10px;
   position: relative;
