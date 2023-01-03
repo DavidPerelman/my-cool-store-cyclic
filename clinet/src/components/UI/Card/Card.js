@@ -41,9 +41,9 @@ const Card = ({ product, onCartClick }) => {
       </div>
       <div className={classes.container}>
         <div className={classes['product-name']}>
-          <h5>
+          <h4>
             <b>{product.title}</b>
-          </h5>
+          </h4>
         </div>
         <div className={classes['product-brand']}>
           <Icon type='fa-brands fa-font-awesome' size='sm' />

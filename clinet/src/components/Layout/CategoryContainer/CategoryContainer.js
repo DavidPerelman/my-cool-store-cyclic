@@ -13,6 +13,8 @@ const CategoryContainer = ({ category }) => {
       .then((data) => setProducts(data.products));
   }, []);
 
+  console.log(products.pop());
+
   const onCategoryClick = () => {
     console.log(category);
   };
