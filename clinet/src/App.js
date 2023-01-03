@@ -3,8 +3,8 @@ import Cart from './components/Cart/Cart/Cart';
 import CategoryContainer from './components/Layout/CategoryContainer/CategoryContainer';
 import Header from './components/Layout/Header/Header';
 import User from './components/Users/User/User';
-// import categories from './data/categories.json';
 import CartProvider from './store/CartProvider';
+import ProductsProvider from './store/ProductsProvider';
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
@@ -42,30 +42,36 @@ function App() {
   };
 
   return (
-    <CartProvider>
-      {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
-      {userStatusIsShown && (
-        <User
-          onCloseUserStatus={hideUserStatusHandler}
-          setUserStatusIsShown={setUserStatusIsShown}
-        />
-      )}
+    <ProductsProvider>
+      <CartProvider>
+        {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
+        {userStatusIsShown && (
+          <User
+            onCloseUserStatus={hideUserStatusHandler}
+            setUserStatusIsShown={setUserStatusIsShown}
+          />
+        )}
 
-      <Header
-        onShowCart={showCartHandler}
-        onHideCart={hideCartHandler}
-        onShowUserStatus={showUserStatusHandler}
-        onHideUserStatus={hideUserStatusHandler}
-      />
-      <div
-        id='categoriesContainers'
-        style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column' }}
-      >
-        {categories.map((category) => {
-          return <CategoryContainer key={category} category={category} />;
-        })}
-      </div>
-    </CartProvider>
+        <Header
+          onShowCart={showCartHandler}
+          onHideCart={hideCartHandler}
+          onShowUserStatus={showUserStatusHandler}
+          onHideUserStatus={hideUserStatusHandler}
+        />
+        <div
+          id='categoriesContainers'
+          style={{
+            marginTop: '4rem',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          {categories.map((category) => {
+            return <CategoryContainer key={category} category={category} />;
+          })}
+        </div>
+      </CartProvider>
+    </ProductsProvider>
   );
 }
 

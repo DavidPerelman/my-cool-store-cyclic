@@ -15,9 +15,6 @@
 
 .card:hover {
   transform: translateY(-15px);
-}
-
-.card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -88,7 +85,7 @@
   }
 
   .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(0px);
   }
 
   .Card_product-brand__bXXV3 {

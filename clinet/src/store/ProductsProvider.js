@@ -8,26 +8,26 @@ const defaultProductsState = {
 
 const productsReducer = (state, action) => {};
 
-const ProductsProvider = ({}) => {
+const ProductsProvider = ({ children }) => {
   const [productsState, dispatchProductsAction] = useReducer(
     productsReducer,
     defaultProductsState
   );
 
-  const getAllProductsHandler = () => {
-    dispatchCartAction({ type: 'ADD', item: item });
+  const getAllProductsHandler = (products) => {
+    dispatchProductsAction({ type: 'ADD', products: products });
   };
 
-  const getAllCategoriesHandler = (item) => {
-    dispatchCartAction({ type: 'REMOVE', item: item });
+  const getAllCategoriesHandler = (category) => {
+    dispatchProductsAction({ type: 'REMOVE', category: category });
   };
 
-  const getAllProductsByCategoryHandler = (item) => {
-    dispatchCartAction({ type: 'REMOVE', item: item });
+  const getAllProductsByCategoryHandler = (products) => {
+    dispatchProductsAction({ type: 'REMOVE', products: products });
   };
 
-  const getProductByIdHandler = (item) => {
-    dispatchCartAction({ type: 'REMOVE', item: item });
+  const getProductByIdHandler = (products) => {
+    dispatchProductsAction({ type: 'REMOVE', products: products });
   };
 
   const productsContext = {
