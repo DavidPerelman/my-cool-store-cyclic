@@ -1,5 +1,6 @@
 .icon:hover {
   color: forestgreen;
+  cursor: pointer;
 }
 /* .cart {
   margin-top: 10px;

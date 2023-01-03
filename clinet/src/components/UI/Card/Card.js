@@ -3,6 +3,7 @@ import HeaderIcon from '../../Layout/HeaderIcon/HeaderIcon';
 import Icon from '../Icon/Icon';
 import classes from './Card.module.css';
 import CartContext from '../../../store/cart-context';
+import Button from '../Button/Button';
 
 const Card = ({ product, onCartClick }) => {
   const cartCtx = useContext(CartContext);
@@ -32,15 +33,18 @@ const Card = ({ product, onCartClick }) => {
     <div className={classes.card}>
       <div>
         <img
+          className={classes['card-image']}
           src={product.image}
           alt='Avatar'
-          style={{ width: '150px', height: '170px' }}
+          // style={{ width: '150px', height: '170px' }}
         />
       </div>
       <div className={classes.container}>
-        <h4>
-          <b>{product.name}</b>
-        </h4>
+        <div className={classes['product-name']}>
+          <h4>
+            <b>{product.name}</b>
+          </h4>
+        </div>
         <span className={classes['price-action']}>
           ${product.price}
           {existingCartItemName !== product.name ? (
@@ -50,10 +54,13 @@ const Card = ({ product, onCartClick }) => {
               size='lg'
             />
           ) : (
-            <span className={classes['in-cart']}>in cart</span>
+            <span className={classes['in-cart']}>In Cart</span>
           )}
         </span>
       </div>
+      <Button className={classes['details-button']} color='darkblue'>
+        Details
+      </Button>
     </div>
   );
 };

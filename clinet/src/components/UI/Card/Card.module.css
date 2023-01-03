@@ -12,9 +12,6 @@
 }
 
 .card:hover {
-  /* cursor: pointer;
-  transition: 0.5s;
-  width: 60%; */
   transform: translateY(-15px);
 }
 
@@ -23,7 +20,13 @@
 }
 
 .container {
-  padding: 2px 16px;
+  margin-bottom: 20px;
+}
+
+.product-name {
+  display: flex;
+  align-items: center;
+  height: 110px;
 }
 
 .price-action {
@@ -40,16 +43,31 @@
   border-radius: 5px;
 }
 
+.details-button {
+  margin-top: auto;
+  margin: 1px !important;
+}
+
+.card-image {
+  height: 170px;
+  width: 150px;
+}
+
 @media only screen and (max-width: 600px) {
   .card {
     width: 90%;
+    padding: 0.3rem;
     flex-direction: row;
+    margin-bottom: 0;
+  }
+
+  .card-image {
+    height: 120px;
+    width: 100px;
   }
 
   .card:hover {
-    cursor: pointer;
-    transition: 0.5s;
-    width: 90%;
+    transform: translateY(-8px);
   }
 }
 

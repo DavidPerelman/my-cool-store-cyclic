@@ -46,13 +46,7 @@
 
 .actions {
   display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 768px) {
-  .actions {
-    flex-direction: row;
-  }
+  flex-direction: row;
 }
 
 .cart-item button {
@@ -74,4 +68,10 @@
 .cart-item button:active {
   background-color: #8a2b06;
   color: white;
+}
+
+@media (max-width: 600px) {
+  .actions {
+    flex-direction: column-reverse;
+  }
 }
