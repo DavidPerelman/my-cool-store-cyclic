@@ -1,3 +1,5 @@
+const Category = require('../models/categoryModel');
+
 const getAllCategories = async (req, res) => {
   try {
     // get all categories
