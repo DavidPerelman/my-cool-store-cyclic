@@ -17,7 +17,6 @@ const CategoryContainer = ({ category }) => {
     console.log(category);
   };
 
-  console.log(products);
   return (
     <div className={classes.CategoryContainer}>
       <header>

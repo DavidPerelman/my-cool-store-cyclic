@@ -21,7 +21,11 @@ function App() {
       .then((res) => res.json())
       .then((data) => setCategories(data));
 
-    // getData();
+    fetch('api/categories')
+      .then((res) => res.json())
+      .then((data) => console.log(data.categories));
+
+    getData();
   }, []);
 
   const showCartHandler = () => {
@@ -64,8 +68,8 @@ function App() {
           flexDirection: 'column',
         }}
       >
-        {categories.map((category) => {
-          return <CategoryContainer key={category} category={category} />;
+        {categories.map((category, i) => {
+          return <CategoryContainer key={i} category={category} />;
         })}
       </div>
     </CartProvider>
