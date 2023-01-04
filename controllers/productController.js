@@ -12,4 +12,17 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-module.exports = { getAllProducts };
+const deleteAllProducts = async (req, res) => {
+  try {
+    // get all products
+    const products = await Product.deleteMany({});
+
+    console.log('products');
+    res.json({ products: products });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+};
+
+module.exports = { getAllProducts, deleteAllProducts };
