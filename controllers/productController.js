@@ -1,4 +1,5 @@
 const Product = require('../models/productModel');
+const Category = require('../models/categoryModel');
 
 const getAllProducts = async (req, res) => {
   try {
@@ -6,6 +7,26 @@ const getAllProducts = async (req, res) => {
     const products = await Product.find({});
     console.log('products');
     res.json({ products: products });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+};
+
+const getAllProductsByCategoryId = async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+
+    // get all products by category
+    const category = await Category.findById({
+      _id: categoryId,
+    }).exec();
+
+    const products = await Product.find({
+      category: category.name,
+    });
+
+    res.json({ products });
   } catch (err) {
     console.error(err);
     res.status(500).send();
@@ -25,4 +46,8 @@ const deleteAllProducts = async (req, res) => {
   }
 };
 
-module.exports = { getAllProducts, deleteAllProducts };
+module.exports = {
+  getAllProducts,
+  deleteAllProducts,
+  getAllProductsByCategoryId,
+};
