@@ -20,11 +20,12 @@ const getAllProductsByCategoryId = async (req, res) => {
     // get all products by category
     const category = await Category.findById({
       _id: categoryId,
-    }).exec();
+    })
+    .exec();
 
     const products = await Product.find({
       category: category.name,
-    });
+    }).limit(4);
 
     res.json({ products });
   } catch (err) {

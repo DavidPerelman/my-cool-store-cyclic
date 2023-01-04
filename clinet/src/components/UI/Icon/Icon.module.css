@@ -2,8 +2,15 @@
   color: forestgreen;
   cursor: pointer;
 }
+
 .icon {
   align-self: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .icon {
+    /* margin-left: 10px; */
+  }
 }
 /* .cart {
   margin-top: 10px;

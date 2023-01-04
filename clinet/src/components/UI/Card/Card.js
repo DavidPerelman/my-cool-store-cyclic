@@ -32,19 +32,13 @@ const Card = ({ product, onCartClick }) => {
 
   return (
     <div className={classes.card}>
-      <div>
-        <img
-          className={classes['card-image']}
-          src={product.thumbnail}
-          alt='Avatar'
-        />
-      </div>
+      <img
+        className={classes['card-image']}
+        src={product.thumbnail}
+        alt='Avatar'
+      />
       <div className={classes.container}>
-        <div className={classes['product-name']}>
-          <h4>
-            <b>{product.title}</b>
-          </h4>
-        </div>
+        <div className={classes['product-name']}>{product.title}</div>
         <div className={classes['product-brand']}>
           <Icon type='fa-brands fa-font-awesome' size='sm' />
           <p>{product.brand}</p>
@@ -62,7 +56,11 @@ const Card = ({ product, onCartClick }) => {
           )}
         </span>
       </div>
-      <Button className={classes['details-button']} color='darkblue'>
+      <Button
+        className={classes['details-button']}
+        color='darkblue'
+        style='square'
+      >
         Details
       </Button>
     </div>
