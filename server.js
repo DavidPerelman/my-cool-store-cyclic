@@ -19,6 +19,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routers
+const categoriesRouter = require('./routers/categoriesRouter');
+app.use('/api/categories', categoriesRouter);
+
 const productsRouter = require('./routers/productsRouter');
 app.use('/api/products', productsRouter);
 
