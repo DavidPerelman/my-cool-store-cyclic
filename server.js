@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
 
 const connectDB = require('./config/connectDB');
 
@@ -14,6 +15,12 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Routers
+const productsRouter = require('./routers/productsRouter');
+app.use('/api/products', productsRouter);
 
 app.get('/api', (req, res) => {
   const responseData = {
