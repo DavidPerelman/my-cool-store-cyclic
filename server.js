@@ -4,8 +4,11 @@ const morgan = require('morgan');
 const path = require('path');
 const dotenv = require('dotenv');
 
+const connectDB = require('./config/connectDB');
+
 dotenv.config();
 
+connectDB();
 const app = express();
 
 app.use(morgan('dev'));

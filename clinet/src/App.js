@@ -4,7 +4,6 @@ import CategoryContainer from './components/Layout/CategoryContainer/CategoryCon
 import Header from './components/Layout/Header/Header';
 import User from './components/Users/User/User';
 import CartProvider from './store/CartProvider';
-import ProductsProvider from './store/ProductsProvider';
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
@@ -42,36 +41,34 @@ function App() {
   };
 
   return (
-    <ProductsProvider>
-      <CartProvider>
-        {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
-        {userStatusIsShown && (
-          <User
-            onCloseUserStatus={hideUserStatusHandler}
-            setUserStatusIsShown={setUserStatusIsShown}
-          />
-        )}
-
-        <Header
-          onShowCart={showCartHandler}
-          onHideCart={hideCartHandler}
-          onShowUserStatus={showUserStatusHandler}
-          onHideUserStatus={hideUserStatusHandler}
+    <CartProvider>
+      {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
+      {userStatusIsShown && (
+        <User
+          onCloseUserStatus={hideUserStatusHandler}
+          setUserStatusIsShown={setUserStatusIsShown}
         />
-        <div
-          id='categoriesContainers'
-          style={{
-            marginTop: '4rem',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          {categories.map((category) => {
-            return <CategoryContainer key={category} category={category} />;
-          })}
-        </div>
-      </CartProvider>
-    </ProductsProvider>
+      )}
+
+      <Header
+        onShowCart={showCartHandler}
+        onHideCart={hideCartHandler}
+        onShowUserStatus={showUserStatusHandler}
+        onHideUserStatus={hideUserStatusHandler}
+      />
+      <div
+        id='categoriesContainers'
+        style={{
+          marginTop: '4rem',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {categories.map((category) => {
+          return <CategoryContainer key={category} category={category} />;
+        })}
+      </div>
+    </CartProvider>
   );
 }
 
