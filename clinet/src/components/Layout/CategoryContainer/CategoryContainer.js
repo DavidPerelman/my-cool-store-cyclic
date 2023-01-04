@@ -8,7 +8,7 @@ const CategoryContainer = ({ category }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/category/${category}`)
+    fetch(`https://dummyjson.com/products/category/${category.name}`)
       .then((res) => res.json())
       .then((data) => setProducts(data.products));
   }, []);
@@ -21,7 +21,11 @@ const CategoryContainer = ({ category }) => {
     <div className={classes.CategoryContainer}>
       <header>
         <Button onClick={onCategoryClick}>
-          <>Our {category.charAt(0).toUpperCase() + category.slice(1)}</>
+          <>
+            Our{' '}
+            {category.name[0].charAt(0).toUpperCase() +
+              category.name[0].slice(1)}
+          </>
         </Button>
       </header>
       <main className={classes.main}>

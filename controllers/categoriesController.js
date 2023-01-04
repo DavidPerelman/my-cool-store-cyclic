@@ -11,4 +11,16 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-module.exports = { getAllCategories };
+const deleteAllCategories = async (req, res) => {
+  try {
+    // get all products
+    const categories = await Category.deleteMany({});
+
+    res.json({ categories: categories });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+};
+
+module.exports = { getAllCategories, deleteAllCategories };

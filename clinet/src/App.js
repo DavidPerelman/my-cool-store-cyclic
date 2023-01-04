@@ -10,22 +10,18 @@ function App() {
   const [userStatusIsShown, setUserStatusIsShown] = useState(false);
   const [categories, setCategories] = useState([]);
 
-  const getData = async () => {
-    await fetch('/api')
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
-
   useEffect(() => {
-    fetch('https://dummyjson.com/products/categories')
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
+    // fetch('https://dummyjson.com/products/categories')
+    //   .then((res) => res.json())
+    //   .then((data) => setCategories(data));
 
     fetch('api/categories')
       .then((res) => res.json())
-      .then((data) => console.log(data.categories));
+      .then((data) => setCategories(data.categories));
 
-    getData();
+    // fetch('api/products')
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data));
   }, []);
 
   const showCartHandler = () => {
