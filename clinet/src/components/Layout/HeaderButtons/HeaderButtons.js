@@ -1,15 +1,19 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext } from 'react';
 import CartContext from '../../../store/cart-context';
+import UserContext from '../../../store/user-context';
 import HeaderIcon from '../HeaderIcon/HeaderIcon';
-import classes from './HeaderCartButton.module.css';
+import classes from './HeaderButtons.module.css';
 
-const HeaderCartButton = ({ onShowCart, onShowUserStatus }) => {
+const HeaderButtons = () => {
   const cartCtx = useContext(CartContext);
-
-  useEffect(() => {}, []);
+  const userCtx = useContext(UserContext);
 
   const showCartHandler = () => {
     cartCtx.showCart();
+  };
+
+  const showUserModalHandler = () => {
+    userCtx.showUserModal();
   };
 
   const numOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
@@ -20,7 +24,7 @@ const HeaderCartButton = ({ onShowCart, onShowUserStatus }) => {
 
   return (
     <>
-      <div className={classes.HeaderCartButton}>
+      <div className={classes.HeaderButtons}>
         <HeaderIcon
           className={btnClasses}
           type='fa-shopping-cart'
@@ -28,10 +32,10 @@ const HeaderCartButton = ({ onShowCart, onShowUserStatus }) => {
           amount={numOfCartItems}
           onClick={showCartHandler}
         />
-        {/* <HeaderIcon type='fa-user' onClick={showCartHandler} /> */}
+        <HeaderIcon type='fa-user' onClick={showUserModalHandler} />
       </div>
     </>
   );
 };
 
-export default HeaderCartButton;
+export default HeaderButtons;

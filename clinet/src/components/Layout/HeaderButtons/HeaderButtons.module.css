@@ -12,7 +12,7 @@
   font-weight: bold;
 }
 
-.HeaderCartButton {
+.HeaderButtons {
   display: flex;
   gap: 10px;
 }

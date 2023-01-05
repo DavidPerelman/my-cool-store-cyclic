@@ -5,7 +5,7 @@ import Logout from '../Logout/Logout';
 import Register from '../Register/Register';
 import classes from './User.module.css';
 
-const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
+const User = ({ onCloseUserModal, setUserStatusIsShown }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [isRegisterPage, setIsRegisterPage] = useState(false);
@@ -49,21 +49,21 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
   const onRegisterHandler = (event) => {
     event.preventDefault();
 
-    const registerData = {
-      firstName: enteredRegisterFirstName,
-      lastName: enteredRegisterLastName,
-      email: enteredRegisterEmail,
-      password: enteredRegisterPassword,
-    };
+    // const registerData = {
+    //   firstName: enteredRegisterFirstName,
+    //   lastName: enteredRegisterLastName,
+    //   email: enteredRegisterEmail,
+    //   password: enteredRegisterPassword,
+    // };
   };
 
   const onLoginHandler = (event) => {
     event.preventDefault();
 
-    const loginData = {
-      email: enteredLoginEmail,
-      password: enteredLoginPassword,
-    };
+    // const loginData = {
+    //   email: enteredLoginEmail,
+    //   password: enteredLoginPassword,
+    // };
 
     setUserStatusIsShown(false);
     localStorage.setItem('isLoggedIn', '1');
@@ -82,7 +82,7 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
   };
 
   return (
-    <Modal onClose={onCloseUserStatus}>
+    <Modal onClose={onCloseUserModal}>
       {isLoginPage && (
         <>
           <Login
@@ -119,7 +119,7 @@ const User = ({ onCloseUserStatus, setUserStatusIsShown }) => {
         </>
       )}
       <div className={classes.actions}>
-        <button className={classes['button--alt']} onClick={onCloseUserStatus}>
+        <button className={classes['button--alt']} onClick={onCloseUserModal}>
           Close
         </button>
         {isLoginPage && (

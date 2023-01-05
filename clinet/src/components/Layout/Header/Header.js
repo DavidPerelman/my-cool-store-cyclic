@@ -1,16 +1,13 @@
 import React, { Fragment } from 'react';
-import HeaderCartButton from '../HeaderCartButton/HeaderCartButton';
+import HeaderButtons from '../HeaderButtons/HeaderButtons';
 import classes from './Header.module.css';
 
-const Header = ({ onShowCart, onShowUserStatus }) => {
+const Header = () => {
   return (
     <Fragment>
       <header className={classes.header}>
         <h2>MyCoolStore</h2>
-        <HeaderCartButton
-          onShowCart={onShowCart}
-          onShowUserStatus={onShowUserStatus}
-        />
+        <HeaderButtons />
       </header>
     </Fragment>
   );

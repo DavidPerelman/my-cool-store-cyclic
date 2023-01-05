@@ -9,20 +9,16 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
   if (action.type === 'SHOW_CART') {
-    const showCartModalStatus = true;
-
     return {
+      show: true,
       items: state.items,
-      show: showCartModalStatus,
       totalAmount: state.totalAmount,
     };
   }
   if (action.type === 'HIDE_CART') {
-    const showCartModalStatus = false;
-
     return {
+      show: false,
       items: state.items,
-      show: showCartModalStatus,
       totalAmount: state.totalAmount,
     };
   }
