@@ -139,7 +139,7 @@ const Register = ({
         If you already have an account?
         <span onClick={goToLogin} className={classes['have-acount-span']}>
           {' '}
-          login
+          Login
         </span>
         .
       </p>

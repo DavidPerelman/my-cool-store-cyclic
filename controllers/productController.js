@@ -14,14 +14,14 @@ const getAllProducts = async (req, res) => {
 };
 
 const getAllProductsByCategoryId = async (req, res) => {
+  console.log(req);
   try {
     const categoryId = req.params.categoryId;
 
     // get all products by category
     const category = await Category.findById({
       _id: categoryId,
-    })
-    .exec();
+    }).exec();
 
     const products = await Product.find({
       category: category.name,
