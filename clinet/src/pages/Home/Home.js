@@ -27,8 +27,6 @@ const Home = () => {
     userCtx.hideUserModal();
   };
 
-  console.log('Home Running!');
-
   return (
     <div>
       {cartCtx.show && <Cart onCloseCart={closeCartHandler} />}

@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react';
 import UserProvider from './store/UserProvider';
 import CartProvider from './store/CartProvider';
-import Router from './Router';
+import NotFound from './pages/NotFound/NotFound';
+import Home from './pages/Home/Home';
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom';
+import ProductDetails from './components/Products/ProductDetails/ProductDetails';
 
 function App() {
   useEffect(() => {
@@ -10,12 +18,24 @@ function App() {
     //   .then((data) => setCategories(data));
   }, []);
 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route>
+        <Route path='/' element={<Home />} errorElement={<NotFound />} exact />
+        <Route path='/product/:productId' element={<ProductDetails />} exact />
+        <Route path='/*' element={<NotFound />} />
+      </Route>
+    )
+  );
+
   return (
-    <CartProvider>
-      <UserProvider>
-        <Router />
-      </UserProvider>
-    </CartProvider>
+    <div>
+      <CartProvider>
+        <UserProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </UserProvider>
+      </CartProvider>
+    </div>
   );
 }
 
