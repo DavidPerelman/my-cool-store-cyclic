@@ -63,7 +63,7 @@ const Card = ({ product, onCartClick }) => {
         </span>
       </div>
       <Button
-        onClick={() => productDetailsClickHandler(product.id)}
+        onClick={() => productDetailsClickHandler(product._id)}
         className={classes['details-button']}
         color='darkblue'
         style='square'

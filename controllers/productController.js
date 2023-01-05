@@ -13,8 +13,20 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const getSingleProduct = async (req, res) => {
+  try {
+    // get single product
+    const productId = req.params.productId;
+    const product = await Product.findById(productId).exec();
+
+    res.json({ product: product });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+};
+
 const getAllProductsByCategoryId = async (req, res) => {
-  console.log(req);
   try {
     const categoryId = req.params.categoryId;
 
@@ -49,6 +61,7 @@ const deleteAllProducts = async (req, res) => {
 
 module.exports = {
   getAllProducts,
+  getSingleProduct,
   deleteAllProducts,
   getAllProductsByCategoryId,
 };

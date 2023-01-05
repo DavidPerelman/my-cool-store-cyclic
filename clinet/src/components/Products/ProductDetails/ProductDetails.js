@@ -7,13 +7,12 @@ const ProductDetails = () => {
   const { productId } = useParams();
 
   useEffect(() => {
-    fetch(`api/products/${productId}`)
+    fetch(`/api/products/product/${productId}`)
       .then((res) => res.json())
-      .then((data) => setProduct(data.products));
+      .then((data) => setProduct(data.product));
   }, []);
 
-  console.log(productId);
-  return <h1>Product {productId} Details Page</h1>;
+  return <h1>Product {product.title} Details Page</h1>;
 };
 
 export default ProductDetails;
