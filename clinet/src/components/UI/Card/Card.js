@@ -4,8 +4,10 @@ import Icon from '../Icon/Icon';
 import classes from './Card.module.css';
 import CartContext from '../../../store/cart-context';
 import Button from '../Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const Card = ({ product, onCartClick }) => {
+  const navigate = useNavigate();
   const cartCtx = useContext(CartContext);
 
   let existingCartItemName;
@@ -17,6 +19,10 @@ const Card = ({ product, onCartClick }) => {
   if (existingCartItem) {
     existingCartItemName = Object.values(existingCartItem)[1];
   }
+
+  const productDetailsClickHandler = (id) => {
+    navigate(`/product/${id}`);
+  };
 
   const submitHandler = (e) => {};
 
@@ -57,6 +63,7 @@ const Card = ({ product, onCartClick }) => {
         </span>
       </div>
       <Button
+        onClick={() => productDetailsClickHandler(product.id)}
         className={classes['details-button']}
         color='darkblue'
         style='square'
