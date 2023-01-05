@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import classes from './Home.module.css';
 import CategoryContainer from '../../components/Layout/CategoryContainer/CategoryContainer';
 
 const Home = () => {

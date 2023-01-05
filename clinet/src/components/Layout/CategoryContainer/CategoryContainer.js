@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 const CategoryContainer = ({ category }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const cartCtx = useContext(CartContext);
 
   useEffect(() => {
     fetch(`api/products/${category._id}`)
