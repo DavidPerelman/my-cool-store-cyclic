@@ -42,7 +42,7 @@ app.get('/api', (req, res) => {
 
 app.use(express.static(path.join(__dirname, './clinet/build')));
 
-app.get('*', function (req, res) {
+app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, './clinet/build/index.html'));
 });
 
