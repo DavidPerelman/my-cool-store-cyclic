@@ -17,11 +17,8 @@ const CategoryContainer = ({ category }) => {
   }, []);
 
   const onCategoryClick = () => {
-    console.log(category);
-  };
-
-  const productDetailsClickHandler = (id) => {
-    navigate(`/product/${id}`);
+    console.log(category._id);
+    navigate(`/products/${category._id}`);
   };
 
   return (
@@ -35,13 +32,7 @@ const CategoryContainer = ({ category }) => {
       </header>
       <main className={classes.main}>
         {products.map((product) => {
-          return (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onProductDetailsClick={productDetailsClickHandler}
-            />
-          );
+          return <ProductCard key={product.id} product={product} />;
         })}
       </main>
     </div>

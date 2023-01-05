@@ -13,14 +13,7 @@ const Home = () => {
 
   return (
     <>
-      <div
-        id='categoriesContainers'
-        style={{
-          marginTop: '4rem',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+      <div id='categoriesContainers'>
         {categories.map((category, i) => {
           return <CategoryContainer key={i} category={category} />;
         })}

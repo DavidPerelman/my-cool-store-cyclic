@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import classes from './ProductDetails.module.css';
+import classes from './ProductDetailsPage.module.css';
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -13,19 +13,9 @@ const ProductDetails = () => {
   }, []);
 
   return (
-    <div
-      className={classes.productDetails}
-      style={{
-        // marginTop: '4rem',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      {/* <Card>
-        <ul>{mealList}</ul>
-      </Card> */}
+    <div className={classes.ProductDetails}>
       <div className={classes.productDetailsContainer}>
-        <h1>Card</h1>
+        <h1>{product.title}</h1>
       </div>
     </div>
   );
