@@ -3,16 +3,28 @@
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: aqua;
-  animation: meals-appear 1s ease-out forwards;
+  background-color: beige;
+  /* animation: product-appear 1s ease-out forwards; */
 }
 
 .productDetailsContainer {
-  margin-top: 7rem;
-  margin-bottom: 7rem;
-  height: 90%;
-  width: 90%;
+  margin-top: 5rem;
+  margin-bottom: 1rem;
+  height: 95%;
+  width: 95%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 14px;
   background-color: white;
+}
+
+@keyframes product-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

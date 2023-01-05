@@ -46,10 +46,6 @@ function App() {
     <CartProvider>
       <UserProvider>
         <RouterProvider router={router}></RouterProvider>
-
-        {/* <Layout>
-
-        </Layout> */}
       </UserProvider>
     </CartProvider>
   );

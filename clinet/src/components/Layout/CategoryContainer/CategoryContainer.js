@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import classes from './CategoryContainer.module.css';
-import products from '../../../data/products/clothes.json';
-import Card from '../../UI/Card/Card';
 import Button from '../../UI/Button/Button';
+import ProductCard from '../../Products/ProductCard/ProductCard';
+import CartContext from '../../../store/cart-context';
+import { useNavigate } from 'react-router-dom';
 
 const CategoryContainer = ({ category }) => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const cartCtx = useContext(CartContext);
 
   useEffect(() => {
     fetch(`api/products/${category._id}`)
@@ -15,6 +18,10 @@ const CategoryContainer = ({ category }) => {
 
   const onCategoryClick = () => {
     console.log(category);
+  };
+
+  const productDetailsClickHandler = (id) => {
+    navigate(`/product/${id}`);
   };
 
   return (
@@ -28,7 +35,13 @@ const CategoryContainer = ({ category }) => {
       </header>
       <main className={classes.main}>
         {products.map((product) => {
-          return <Card key={product.id} product={product} />;
+          return (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onProductDetailsClick={productDetailsClickHandler}
+            />
+          );
         })}
       </main>
     </div>
