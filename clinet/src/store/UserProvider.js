@@ -33,7 +33,6 @@ const UserProvider = ({ children }) => {
   );
 
   const showUserModalHandler = () => {
-    console.log(userState.isUserModalShown);
     dispatchUserAction({ type: 'SHOW_USER_MODAL' });
   };
 

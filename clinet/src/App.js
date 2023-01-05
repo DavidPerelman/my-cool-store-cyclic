@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import UserProvider from './store/UserProvider';
 import CartProvider from './store/CartProvider';
 import NotFound from './pages/NotFound/NotFound';
@@ -10,6 +10,10 @@ import {
   Route,
 } from 'react-router-dom';
 import ProductDetails from './components/Products/ProductDetails/ProductDetails';
+import CartContext from './store/cart-context';
+import UserContext from './store/user-context';
+import Layout from './components/Layout/Layout/Layout';
+import Header from './components/Layout/Header/Header';
 
 function App() {
   useEffect(() => {
@@ -18,10 +22,20 @@ function App() {
     //   .then((data) => setCategories(data));
   }, []);
 
+  // const router = createBrowserRouter(
+  //   createRoutesFromElements(
+  //     <Route>
+  //       <Route path='/' element={<Home />} errorElement={<NotFound />} exact />
+  //       <Route path='/product/:productId' element={<ProductDetails />} exact />
+  //       <Route path='/*' element={<NotFound />} />
+  //     </Route>
+  //   )
+  // );
+
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route>
-        <Route path='/' element={<Home />} errorElement={<NotFound />} exact />
+      <Route path='/' element={<Header />}>
+        <Route index element={<Home />} errorElement={<NotFound />} exact />
         <Route path='/product/:productId' element={<ProductDetails />} exact />
         <Route path='/*' element={<NotFound />} />
       </Route>
@@ -29,13 +43,15 @@ function App() {
   );
 
   return (
-    <div>
-      <CartProvider>
-        <UserProvider>
-          <RouterProvider router={router}></RouterProvider>
-        </UserProvider>
-      </CartProvider>
-    </div>
+    <CartProvider>
+      <UserProvider>
+        <RouterProvider router={router}></RouterProvider>
+
+        {/* <Layout>
+
+        </Layout> */}
+      </UserProvider>
+    </CartProvider>
   );
 }
 

@@ -1,13 +1,12 @@
 import React, { Fragment, useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import Home from '../../../pages/Home/Home';
 import CartContext from '../../../store/cart-context';
 import UserContext from '../../../store/user-context';
 import Cart from '../../Cart/Cart/Cart';
 import User from '../../Users/User/User';
-import HeaderButtons from '../HeaderButtons/HeaderButtons';
-import classes from './Header.module.css';
+import Header from '../Header/Header';
 
-const Header = () => {
+const Layout = (props) => {
   const cartCtx = useContext(CartContext);
   const userCtx = useContext(UserContext);
 
@@ -25,17 +24,11 @@ const Header = () => {
       {userCtx.isUserModalShown && (
         <User onCloseUserModal={closeUserModalHandler} />
       )}
-      <header className={classes.header}>
-        <h2>
-          <Link to='/' className={classes.linkHeader}>
-            MyCoolStore
-          </Link>
-        </h2>
-        <HeaderButtons />
-      </header>
-      <Outlet />
+      <Header />
+      <main>{props.children}</main>
+      <footer style={{ backgroundColor: 'red' }}>footer</footer>
     </Fragment>
   );
 };
 
-export default Header;
+export default Layout;

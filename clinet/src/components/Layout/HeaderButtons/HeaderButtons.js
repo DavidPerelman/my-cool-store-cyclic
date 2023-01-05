@@ -23,18 +23,16 @@ const HeaderButtons = () => {
   const btnClasses = `${classes.button} ${classes.bump}`;
 
   return (
-    <>
-      <div className={classes.HeaderButtons}>
-        <HeaderIcon
-          className={btnClasses}
-          type='fa-shopping-cart'
-          count={true}
-          amount={numOfCartItems}
-          onClick={showCartHandler}
-        />
-        <HeaderIcon type='fa-user' onClick={showUserModalHandler} />
-      </div>
-    </>
+    <div className={classes.HeaderButtons}>
+      <HeaderIcon
+        className={btnClasses}
+        type='fa-shopping-cart'
+        count={true}
+        amount={numOfCartItems}
+        onClick={showCartHandler}
+      />
+      <HeaderIcon type='fa-user' onClick={showUserModalHandler} />
+    </div>
   );
 };
 

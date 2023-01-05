@@ -12,7 +12,23 @@ const ProductDetails = () => {
       .then((data) => setProduct(data.product));
   }, []);
 
-  return <h1>Product {product.title} Details Page</h1>;
+  return (
+    <div
+      className={classes.productDetails}
+      style={{
+        // marginTop: '4rem',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {/* <Card>
+        <ul>{mealList}</ul>
+      </Card> */}
+      <div className={classes.productDetailsContainer}>
+        <h1>Card</h1>
+      </div>
+    </div>
+  );
 };
 
 export default ProductDetails;

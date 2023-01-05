@@ -1,0 +1,18 @@
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: aqua;
+  animation: meals-appear 1s ease-out forwards;
+}
+
+.productDetailsContainer {
+  margin-top: 7rem;
+  margin-bottom: 7rem;
+  height: 90%;
+  width: 90%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  background-color: white;
+}
