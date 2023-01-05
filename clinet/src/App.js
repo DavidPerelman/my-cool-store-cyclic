@@ -5,11 +5,13 @@ import Header from './components/Layout/Header/Header';
 import User from './components/Users/User/User';
 import CartProvider from './store/CartProvider';
 import CartContext from './store/cart-context';
-
 import Router from './Router';
+import UserProvider from './store/UserProvider';
+import UserContext from './store/user-context';
 
 function App() {
   const cartCtx = useContext(CartContext);
+  const userCtx = useContext(UserContext);
   const [cartIsShown, setCartIsShown] = useState(false);
   const [userStatusIsShown, setUserStatusIsShown] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -45,10 +47,12 @@ function App() {
   };
 
   return (
-    <CartProvider>
-      {cartCtx.show && <Cart onCloseCart={hideCartHandler} />}
-      <Router />
-      {/* {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
+    <UserProvider>
+      <CartProvider>
+        {cartCtx.show && <Cart />}
+        {userCtx.show && <Cart />}
+        <Router />
+        {/* {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
       {userStatusIsShown && (
         <User
           onCloseUserStatus={hideUserStatusHandler}
@@ -74,7 +78,8 @@ function App() {
           return <CategoryContainer key={i} category={category} />;
         })}
       </div> */}
-    </CartProvider>
+      </CartProvider>
+    </UserProvider>
   );
 }
 

@@ -1,28 +1,28 @@
 import React, { useReducer } from 'react';
-import CartContext from './cart-context';
+import UserContext from './user-context';
 
-const defaultCartState = {
+const defaultUserState = {
   show: false,
-  items: [],
-  totalAmount: 0,
+  user: {},
+  isLoggedIn: false,
 };
 
-const cartReducer = (state, action) => {
-  if (action.type === 'SHOW_CART') {
-    const showCartModalStatus = true;
+const userReducer = (state, action) => {
+  if (action.type === 'SHOW_USER_MODAL') {
+    const showUserModalStatus = true;
 
     return {
-      items: state.items,
-      show: showCartModalStatus,
-      totalAmount: state.totalAmount,
+      show: showUserModalStatus,
+      user: state.user,
+      isLoggedIn: state.isLoggedIn,
     };
   }
-  if (action.type === 'HIDE_CART') {
-    const showCartModalStatus = false;
+  if (action.type === 'HIDE_USER_MODAL') {
+    const showCartStatus = false;
 
     return {
       items: state.items,
-      show: showCartModalStatus,
+      show: showCartStatus,
       totalAmount: state.totalAmount,
     };
   }
@@ -82,41 +82,46 @@ const cartReducer = (state, action) => {
   return defaultCartState;
 };
 
-const CartProvider = ({ children }) => {
-  const [cartState, dispatchCartAction] = useReducer(
-    cartReducer,
-    defaultCartState
+const UserProvider = ({ children }) => {
+  const [userState, dispatchUserAction] = useReducer(
+    userReducer,
+    defaultUserState
   );
 
-  const showCartHandler = () => {
-    dispatchCartAction({ type: 'SHOW_CART' });
+  const showUserModalHandler = () => {
+    dispatchUserAction({ type: 'SHOW_USER_MODAL' });
   };
 
-  const hideCartHandler = () => {
-    dispatchCartAction({ type: 'HIDE_CART' });
+  const hideUserModalHandler = () => {
+    dispatchUserAction({ type: 'HIDE_USER_MODAL' });
   };
 
-  const addItemToCartHandler = (item) => {
-    dispatchCartAction({ type: 'ADD', item: item });
+  const loginUserHandler = (userData) => {
+    dispatchUserAction({ type: 'LOGIN', userData: userData });
   };
 
-  const removeItemFromCartHandler = (item) => {
-    dispatchCartAction({ type: 'REMOVE', item: item });
+  const registerUserHandler = (newUserData) => {
+    dispatchUserAction({ type: 'REGISTER', newUserData: newUserData });
   };
 
-  const cartContext = {
-    show: cartState.show,
-    showCart: showCartHandler,
-    hideCart: hideCartHandler,
-    items: cartState.items,
-    totalAmount: cartState.totalAmount,
-    addItem: addItemToCartHandler,
-    removeItem: removeItemFromCartHandler,
+  const logoutHandler = (newUserData) => {
+    dispatchUserAction({ type: 'REGISTER', newUserData: newUserData });
+  };
+
+  const userContext = {
+    show: false,
+    showUserModal: showUserModalHandler,
+    hideUserModal: hideUserModalHandler,
+    user: userState.user,
+    isLoggedIn: userState.isLoggedIn,
+    login: loginUserHandler,
+    register: registerUserHandler,
+    logout: logoutHandler,
   };
 
   return (
-    <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>
+    <UserContext.Provider value={userContext}>{children}</UserContext.Provider>
   );
 };
 
-export default CartProvider;
+export default UserProvider;
