@@ -18,6 +18,16 @@ const cartReducer = (state, action) => {
       totalAmount: state.totalAmount,
     };
   }
+  if (action.type === 'HIDE_CART') {
+    console.log(state);
+    const showCartStatus = false;
+
+    return {
+      items: state.items,
+      show: showCartStatus,
+      totalAmount: state.totalAmount,
+    };
+  }
   if (action.type === 'ADD') {
     const updatedTotalAmount = state.totalAmount + action.item.price;
 
@@ -84,6 +94,11 @@ const CartProvider = ({ children }) => {
     dispatchCartAction({ type: 'SHOW_CART' });
   };
 
+  const hideCartHandler = () => {
+    console.log('HIDE_CART');
+    dispatchCartAction({ type: 'HIDE_CART' });
+  };
+
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item: item });
   };
@@ -95,6 +110,7 @@ const CartProvider = ({ children }) => {
   const cartContext = {
     show: cartState.show,
     showCart: showCartHandler,
+    hideCart: hideCartHandler,
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,

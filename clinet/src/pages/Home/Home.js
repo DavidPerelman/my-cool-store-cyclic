@@ -4,16 +4,23 @@ import CartContext from '../../store/cart-context';
 import classes from './Home.module.css';
 import Cart from '../../components/Cart/Cart/Cart';
 
-const Home = ({ hideCartHandler }) => {
+const Home = () => {
   const cartCtx = useContext(CartContext);
 
   useEffect(() => {
-    console.log(cartCtx.show);
+    console.log(cartCtx);
   }, []);
+
+  const onCloseCart = () => {
+    console.log('onCloseCart');
+    console.log(cartCtx);
+
+    cartCtx.hideCart();
+  };
 
   return (
     <div>
-      {cartCtx.show && <Cart onCloseCart={hideCartHandler} />}
+      {cartCtx.show && <Cart onCloseCart={onCloseCart} />}
       <Header
       // onShowCart={showCartHandler}
       // onHideCart={hideCartHandler}
