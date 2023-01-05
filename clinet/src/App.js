@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Cart from './components/Cart/Cart/Cart';
 import CategoryContainer from './components/Layout/CategoryContainer/CategoryContainer';
 import Header from './components/Layout/Header/Header';
 import User from './components/Users/User/User';
 import CartProvider from './store/CartProvider';
+import CartContext from './store/cart-context';
+
+import Router from './Router';
 
 function App() {
+  const cartCtx = useContext(CartContext);
   const [cartIsShown, setCartIsShown] = useState(false);
   const [userStatusIsShown, setUserStatusIsShown] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -42,7 +46,9 @@ function App() {
 
   return (
     <CartProvider>
-      {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
+      {cartCtx.show && <Cart onCloseCart={hideCartHandler} />}
+      <Router />
+      {/* {cartIsShown && <Cart onCloseCart={hideCartHandler} />}
       {userStatusIsShown && (
         <User
           onCloseUserStatus={hideUserStatusHandler}
@@ -67,7 +73,7 @@ function App() {
         {categories.map((category, i) => {
           return <CategoryContainer key={i} category={category} />;
         })}
-      </div>
+      </div> */}
     </CartProvider>
   );
 }

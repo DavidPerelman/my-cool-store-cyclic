@@ -2,11 +2,22 @@ import React, { useReducer } from 'react';
 import CartContext from './cart-context';
 
 const defaultCartState = {
+  show: false,
   items: [],
   totalAmount: 0,
 };
 
 const cartReducer = (state, action) => {
+  if (action.type === 'SHOW_CART') {
+    console.log(state);
+    const showCartStatus = true;
+
+    return {
+      items: state.items,
+      show: showCartStatus,
+      totalAmount: state.totalAmount,
+    };
+  }
   if (action.type === 'ADD') {
     const updatedTotalAmount = state.totalAmount + action.item.price;
 
@@ -69,6 +80,10 @@ const CartProvider = ({ children }) => {
     defaultCartState
   );
 
+  const showCartHandler = () => {
+    dispatchCartAction({ type: 'SHOW_CART' });
+  };
+
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item: item });
   };
@@ -78,6 +93,8 @@ const CartProvider = ({ children }) => {
   };
 
   const cartContext = {
+    show: cartState.show,
+    showCart: showCartHandler,
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
