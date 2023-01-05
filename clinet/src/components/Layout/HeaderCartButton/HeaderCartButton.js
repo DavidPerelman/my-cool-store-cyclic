@@ -6,20 +6,15 @@ import classes from './HeaderCartButton.module.css';
 const HeaderCartButton = ({ onShowCart, onShowUserStatus }) => {
   const cartCtx = useContext(CartContext);
 
-  useEffect(() => {
-    console.log(cartCtx.items);
-  }, []);
+  useEffect(() => {}, []);
 
   const showCartHandler = () => {
     cartCtx.showCart();
-    console.log(cartCtx);
   };
 
   const numOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
     return currentNumber + item.amount;
   }, 0);
-
-  console.log(numOfCartItems);
 
   const btnClasses = `${classes.button} ${classes.bump}`;
 

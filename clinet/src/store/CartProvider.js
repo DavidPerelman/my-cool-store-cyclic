@@ -9,7 +9,6 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
   if (action.type === 'SHOW_CART') {
-    console.log(state);
     const showCartStatus = true;
 
     return {
@@ -19,7 +18,6 @@ const cartReducer = (state, action) => {
     };
   }
   if (action.type === 'HIDE_CART') {
-    console.log(state);
     const showCartStatus = false;
 
     return {
@@ -95,7 +93,6 @@ const CartProvider = ({ children }) => {
   };
 
   const hideCartHandler = () => {
-    console.log('HIDE_CART');
     dispatchCartAction({ type: 'HIDE_CART' });
   };
 

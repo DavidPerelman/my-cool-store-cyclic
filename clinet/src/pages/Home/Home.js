@@ -7,14 +7,9 @@ import Cart from '../../components/Cart/Cart/Cart';
 const Home = () => {
   const cartCtx = useContext(CartContext);
 
-  useEffect(() => {
-    console.log(cartCtx);
-  }, []);
+  useEffect(() => {}, []);
 
   const onCloseCart = () => {
-    console.log('onCloseCart');
-    console.log(cartCtx);
-
     cartCtx.hideCart();
   };
 
@@ -22,8 +17,6 @@ const Home = () => {
     <div>
       {cartCtx.show && <Cart onCloseCart={onCloseCart} />}
       <Header
-      // onShowCart={showCartHandler}
-      // onHideCart={hideCartHandler}
       // onShowUserStatus={showUserStatusHandler}
       // onHideUserStatus={hideUserStatusHandler}
       />
