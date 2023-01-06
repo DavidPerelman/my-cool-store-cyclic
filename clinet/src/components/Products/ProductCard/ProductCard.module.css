@@ -23,7 +23,9 @@
 }
 
 .product-details-link a {
-  margin: 1rem;
+  margin-top: auto;
+  margin: 1px !important;
+  /* margin: 1rem; */
   cursor: pointer;
   font: inherit;
   border: none;
@@ -123,5 +125,9 @@
 
   .price-action {
     margin-bottom: 0.4rem;
+  }
+
+  .product-details-link a {
+    padding: 0.55rem 0.5rem;
   }
 }

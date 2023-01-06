@@ -9,7 +9,12 @@ html {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
+html,
 body {
   margin: 0;
-  /* background-color: #3f3f3f; */
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }

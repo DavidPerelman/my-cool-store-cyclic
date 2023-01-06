@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CategoryContainer from '../../components/Layout/CategoryContainer/CategoryContainer';
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <>
-      <div id='categoriesContainers'>
+      <div>
         {categories.map((category, i) => {
           return <CategoryContainer key={i} category={category} />;
         })}
