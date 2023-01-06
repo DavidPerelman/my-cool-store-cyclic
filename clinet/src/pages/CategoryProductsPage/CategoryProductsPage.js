@@ -19,9 +19,6 @@ const CategoryProductsPage = () => {
     <div className={classes.CategoryProductsPage}>
       <main className={classes.main}>
         {products.length === 0 ? (
-          //   <div className={classes.LoadingSpinner}>
-
-          //   </div>
           <LoadingSpinner />
         ) : (
           products.map((product) => {
