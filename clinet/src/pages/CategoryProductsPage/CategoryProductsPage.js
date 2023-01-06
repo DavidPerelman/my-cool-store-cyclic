@@ -13,10 +13,18 @@ const CategoryProductsPage = () => {
     fetch(`/api/products/category/${categoryId}`)
       .then((res) => res.json())
       .then((data) => setProducts(data.products));
+
+    // console.log(products[0].category);
   }, []);
 
   return (
     <div className={classes.CategoryProductsPage}>
+      <h2 style={{ textAlign: 'center' }}>
+        {products.length === 0
+          ? ''
+          : products[0].category.charAt(0).toUpperCase() +
+            products[0].category.slice(1)}
+      </h2>
       <main className={classes.main}>
         {products.length === 0 ? (
           <LoadingSpinner />
