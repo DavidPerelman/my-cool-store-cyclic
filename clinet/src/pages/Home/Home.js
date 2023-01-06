@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CategoryContainer from '../../components/Layout/CategoryContainer/CategoryContainer';
+import './Home.css';
 
 const Home = () => {
   const [categories, setCategories] = useState([]);
@@ -12,7 +13,8 @@ const Home = () => {
 
   return (
     <>
-      <div>
+      <div id='CategoryContainer'>
+        <div className='margin-4'></div>
         {categories.map((category, i) => {
           return <CategoryContainer key={i} category={category} />;
         })}

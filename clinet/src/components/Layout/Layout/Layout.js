@@ -1,5 +1,4 @@
 import React, { Fragment, useContext } from 'react';
-import Home from '../../../pages/Home/Home';
 import CartContext from '../../../store/cart-context';
 import UserContext from '../../../store/user-context';
 import Cart from '../../Cart/Cart/Cart';

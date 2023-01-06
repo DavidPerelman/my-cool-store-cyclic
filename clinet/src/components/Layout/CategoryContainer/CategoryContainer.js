@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import classes from './CategoryContainer.module.css';
 import Button from '../../UI/Button/Button';
 import ProductCard from '../../Products/ProductCard/ProductCard';
-import CartContext from '../../../store/cart-context';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 const CategoryContainer = ({ category }) => {
   const navigate = useNavigate();
@@ -30,9 +30,13 @@ const CategoryContainer = ({ category }) => {
         </Button>
       </header>
       <main className={classes.main}>
-        {products.map((product) => {
-          return <ProductCard key={product.id} product={product} />;
-        })}
+        {products.length === 0 ? (
+          <LoadingSpinner />
+        ) : (
+          products.map((product) => {
+            return <ProductCard key={product.id} product={product} />;
+          })
+        )}
       </main>
     </div>
   );
