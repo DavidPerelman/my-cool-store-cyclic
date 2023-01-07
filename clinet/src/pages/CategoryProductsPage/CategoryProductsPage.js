@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
 import ProductCard from '../../components/Products/ProductCard/ProductCard';
 import classes from './CategoryProductsPage.module.css';
 
@@ -10,10 +10,14 @@ const CategoryProductsPage = () => {
   console.log(categoryId);
 
   useEffect(() => {
-    fetch(`/api/products/category/${categoryId}`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data.products));
+    const fetchProductsByCategory = async () => {
+      const response = await fetch(`/api/products/category/${categoryId}`);
+      const data = await response.json();
 
+      setProducts(data.products);
+    };
+
+    fetchProductsByCategory();
     // console.log(products[0].category);
   }, []);
 

@@ -7,9 +7,14 @@ const ProductDetails = () => {
   const { productId } = useParams();
 
   useEffect(() => {
-    fetch(`/api/products/product/${productId}`)
-      .then((res) => res.json())
-      .then((data) => setProduct(data.product));
+    const fetchProduct = async () => {
+      const response = await fetch(`/api/products/product/${productId}`);
+      const data = await response.json();
+
+      setProduct(data.product);
+    };
+
+    fetchProduct();
   }, []);
 
   return (

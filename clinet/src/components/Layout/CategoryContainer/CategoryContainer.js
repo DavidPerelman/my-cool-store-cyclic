@@ -3,16 +3,21 @@ import classes from './CategoryContainer.module.css';
 import Button from '../../UI/Button/Button';
 import ProductCard from '../../Products/ProductCard/ProductCard';
 import { useNavigate } from 'react-router-dom';
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../../UI/LoadingSpinner/LoadingSpinner';
 
 const CategoryContainer = ({ category }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`api/products/${category._id}`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data.products));
+    const fetchProductsByCategory = async () => {
+      const response = await fetch(`api/products/${category._id}`);
+      const data = await response.json();
+
+      setProducts(data.products);
+    };
+
+    fetchProductsByCategory();
   }, []);
 
   const onCategoryClick = () => {

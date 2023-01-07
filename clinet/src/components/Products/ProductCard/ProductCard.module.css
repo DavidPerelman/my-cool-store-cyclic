@@ -71,7 +71,8 @@
   justify-content: center;
   gap: 10px;
   align-items: center;
-  margin-bottom: 0.1rem;
+  /* margin-bottom: 0.1rem; */
+  margin-bottom: 0.7rem;
 }
 
 .in-cart {
@@ -124,7 +125,7 @@
   }
 
   .price-action {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.1rem;
   }
 
   .product-details-link a {

@@ -6,9 +6,14 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch('api/categories')
-      .then((res) => res.json())
-      .then((data) => setCategories(data.categories));
+    const fetchCategories = async () => {
+      const response = await fetch(`api/categories`);
+      const data = await response.json();
+
+      setCategories(data.categories);
+    };
+
+    fetchCategories();
   }, []);
 
   return (
