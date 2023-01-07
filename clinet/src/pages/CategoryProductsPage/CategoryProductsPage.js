@@ -3,36 +3,29 @@ import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
 import ProductCard from '../../components/Products/ProductCard/ProductCard';
 import classes from './CategoryProductsPage.module.css';
+import useHttp from '../../hooks/use-http';
 
 const CategoryProductsPage = () => {
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { categoryId } = useParams();
-  console.log(categoryId);
+
+  const transformProducts = (productsObj) => {
+    for (const productKey in productsObj) {
+      setProducts(productsObj[productKey]);
+    }
+  };
+
+  const httpData = useHttp(
+    {
+      url: `/api/products/category/${categoryId}`,
+    },
+    transformProducts
+  );
+
+  const { isLoading, error, sendRequest: fetchProductsByCategory } = httpData;
 
   useEffect(() => {
-    const fetchProductsByCategory = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(`/api/products/category/${categoryId}`);
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error('Something went wrong!');
-        }
-
-        setProducts(data.products);
-      } catch (error) {
-        setError(error.message);
-      }
-
-      setIsLoading(false);
-    };
-
     fetchProductsByCategory();
-    // console.log(products[0].category);
   }, []);
 
   let content = <p>Found no products.</p>;
