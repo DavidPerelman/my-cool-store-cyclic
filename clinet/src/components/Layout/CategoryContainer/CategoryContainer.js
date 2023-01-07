@@ -4,38 +4,32 @@ import Button from '../../UI/Button/Button';
 import ProductCard from '../../Products/ProductCard/ProductCard';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../UI/LoadingSpinner/LoadingSpinner';
+import useHttp from '../../../hooks/use-http';
 
 const CategoryContainer = ({ category }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+
+  const transformProducts = (productsObj) => {
+    for (const productKey in productsObj) {
+      setProducts(productsObj[productKey]);
+    }
+  };
+
+  const httpData = useHttp(
+    {
+      url: `api/products/${category._id}`,
+    },
+    transformProducts
+  );
+
+  const { isLoading, error, sendRequest: fetchProductsByCategory } = httpData;
 
   useEffect(() => {
-    const fetchProductsByCategory = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const response = await fetch(`api/products/${category._id}`);
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error('Something went wrong!');
-        }
-
-        setProducts(data.products);
-      } catch (error) {
-        setError(error.message);
-      }
-      setIsLoading(false);
-    };
-
     fetchProductsByCategory();
   }, []);
 
   const onCategoryClick = () => {
-    console.log(category._id);
     navigate(`/products/${category._id}`);
   };
 
