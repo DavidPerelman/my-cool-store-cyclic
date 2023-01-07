@@ -9,7 +9,7 @@ import {
   createRoutesFromElements,
   Route,
 } from 'react-router-dom';
-import ProductDetails from './pages/ProductDetailsPage/ProductDetailsPage';
+import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
 import Header from './components/Layout/Header/Header';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
 
@@ -29,7 +29,11 @@ function App() {
           element={<CategoryProductsPage />}
           exact
         />
-        <Route path='/product/:productId' element={<ProductDetails />} exact />
+        <Route
+          path='/product/:productId'
+          element={<ProductDetailsPage />}
+          exact
+        />
         <Route path='/*' element={<NotFound />} />
       </Route>
     )

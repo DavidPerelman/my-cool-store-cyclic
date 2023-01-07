@@ -1,36 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
+import useHttp from '../../hooks/use-http';
 import classes from './ProductDetailsPage.module.css';
 
-const ProductDetails = () => {
+const ProductDetailsPage = () => {
   const [product, setProduct] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { productId } = useParams();
 
+  const { isLoading, error, sendRequest: fetchProduct } = useHttp();
+
   useEffect(() => {
-    fetchProduct();
-  }, []);
+    const transformProduct = (productObj) => {
+      setProduct(productObj.product);
+    };
 
-  const fetchProduct = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(`/api/products/product/${productId}`);
-      const data = await response.json();
+    fetchProduct(
+      {
+        url: `/api/products/product/${productId}`,
+      },
+      transformProduct
+    );
+  }, [fetchProduct]);
 
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
-
-      setProduct(data.product);
-    } catch (error) {
-      setError(error.message);
-    }
-    setIsLoading(false);
-  };
-
+  console.log(product);
   return (
     <div className={classes.ProductDetails}>
       <div className={classes.productDetailsContainer}>
@@ -41,4 +34,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ProductDetailsPage;
