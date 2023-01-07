@@ -6,15 +6,18 @@ import classes from './CategoryProductsPage.module.css';
 
 const CategoryProductsPage = () => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { categoryId } = useParams();
   console.log(categoryId);
 
   useEffect(() => {
     const fetchProductsByCategory = async () => {
+      setIsLoading(true);
       const response = await fetch(`/api/products/category/${categoryId}`);
       const data = await response.json();
 
       setProducts(data.products);
+      setIsLoading(false);
     };
 
     fetchProductsByCategory();
@@ -30,13 +33,13 @@ const CategoryProductsPage = () => {
             products[0].category.slice(1)}
       </h2>
       <main className={classes.main}>
-        {products.length === 0 ? (
-          <LoadingSpinner />
-        ) : (
+        {!isLoading &&
+          products.length > 0 &&
           products.map((product) => {
             return <ProductCard key={product.id} product={product} />;
-          })
-        )}
+          })}
+        {!isLoading && products.length === 0 && <p>Found no products.</p>}
+        {isLoading && <LoadingSpinner />}
       </main>
     </div>
   );
