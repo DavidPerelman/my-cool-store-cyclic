@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import classes from './CategoryContainer.module.css';
 import Button from '../../UI/Button/Button';
 import ProductCard from '../../Products/ProductCard/ProductCard';
@@ -10,24 +10,22 @@ const CategoryContainer = ({ category }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
-  const transformProducts = (productsObj) => {
-    for (const productKey in productsObj) {
-      setProducts(productsObj[productKey]);
-    }
-  };
-
-  const httpData = useHttp(
-    {
-      url: `api/products/${category._id}`,
-    },
-    transformProducts
-  );
-
-  const { isLoading, error, sendRequest: fetchProductsByCategory } = httpData;
+  const { isLoading, error, sendRequest: fetchProductsByCategory } = useHttp();
 
   useEffect(() => {
-    fetchProductsByCategory();
-  }, []);
+    const transformProducts = (productsObj) => {
+      for (const productKey in productsObj) {
+        setProducts(productsObj[productKey]);
+      }
+    };
+
+    fetchProductsByCategory(
+      {
+        url: `api/products/${category._id}`,
+      },
+      transformProducts
+    );
+  }, [fetchProductsByCategory]);
 
   const onCategoryClick = () => {
     navigate(`/products/${category._id}`);

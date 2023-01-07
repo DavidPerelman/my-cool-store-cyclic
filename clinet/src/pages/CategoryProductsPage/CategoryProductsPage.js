@@ -9,24 +9,22 @@ const CategoryProductsPage = () => {
   const [products, setProducts] = useState([]);
   const { categoryId } = useParams();
 
-  const transformProducts = (productsObj) => {
-    for (const productKey in productsObj) {
-      setProducts(productsObj[productKey]);
-    }
-  };
-
-  const httpData = useHttp(
-    {
-      url: `/api/products/category/${categoryId}`,
-    },
-    transformProducts
-  );
-
-  const { isLoading, error, sendRequest: fetchProductsByCategory } = httpData;
+  const { isLoading, error, sendRequest: fetchProductsByCategory } = useHttp();
 
   useEffect(() => {
-    fetchProductsByCategory();
-  }, []);
+    const transformProducts = (productsObj) => {
+      for (const productKey in productsObj) {
+        setProducts(productsObj[productKey]);
+      }
+    };
+
+    fetchProductsByCategory(
+      {
+        url: `/api/products/category/${categoryId}`,
+      },
+      transformProducts
+    );
+  }, [fetchProductsByCategory]);
 
   let content = <p>Found no products.</p>;
 
