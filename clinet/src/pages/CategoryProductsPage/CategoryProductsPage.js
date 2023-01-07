@@ -7,22 +7,49 @@ import classes from './CategoryProductsPage.module.css';
 const CategoryProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const { categoryId } = useParams();
   console.log(categoryId);
 
   useEffect(() => {
     const fetchProductsByCategory = async () => {
       setIsLoading(true);
-      const response = await fetch(`/api/products/category/${categoryId}`);
-      const data = await response.json();
+      setError(null);
+      try {
+        const response = await fetch(`/api/products/category/${categoryId}`);
+        const data = await response.json();
 
-      setProducts(data.products);
+        if (!response.ok) {
+          throw new Error('Something went wrong!');
+        }
+
+        setProducts(data.products);
+      } catch (error) {
+        setError(error.message);
+      }
+
       setIsLoading(false);
     };
 
     fetchProductsByCategory();
     // console.log(products[0].category);
   }, []);
+
+  let content = <p>Found no products.</p>;
+
+  if (products.length > 0) {
+    content = products.map((product) => {
+      return <ProductCard key={product.id} product={product} />;
+    });
+  }
+
+  if (error) {
+    content = <p>{error}</p>;
+  }
+
+  if (isLoading) {
+    content = <LoadingSpinner />;
+  }
 
   return (
     <div className={classes.CategoryProductsPage}>
@@ -32,15 +59,7 @@ const CategoryProductsPage = () => {
           : products[0].category.charAt(0).toUpperCase() +
             products[0].category.slice(1)}
       </h2>
-      <main className={classes.main}>
-        {!isLoading &&
-          products.length > 0 &&
-          products.map((product) => {
-            return <ProductCard key={product.id} product={product} />;
-          })}
-        {!isLoading && products.length === 0 && <p>Found no products.</p>}
-        {isLoading && <LoadingSpinner />}
-      </main>
+      <main className={classes.main}>{content}</main>
     </div>
   );
 };

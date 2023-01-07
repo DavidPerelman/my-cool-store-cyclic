@@ -9,14 +9,25 @@ const CategoryContainer = ({ category }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProductsByCategory = async () => {
       setIsLoading(true);
-      const response = await fetch(`api/products/${category._id}`);
-      const data = await response.json();
+      setError(null);
 
-      setProducts(data.products);
+      try {
+        const response = await fetch(`api/products/${category._id}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error('Something went wrong!');
+        }
+
+        setProducts(data.products);
+      } catch (error) {
+        setError(error.message);
+      }
       setIsLoading(false);
     };
 
@@ -28,6 +39,22 @@ const CategoryContainer = ({ category }) => {
     navigate(`/products/${category._id}`);
   };
 
+  let content = <p>Found no products.</p>;
+
+  if (products.length > 0) {
+    content = products.map((product) => {
+      return <ProductCard key={product.id} product={product} />;
+    });
+  }
+
+  if (error) {
+    content = <p>{error}</p>;
+  }
+
+  if (isLoading) {
+    content = <LoadingSpinner />;
+  }
+
   return (
     <div className={classes.CategoryContainer}>
       <header>
@@ -37,15 +64,7 @@ const CategoryContainer = ({ category }) => {
           </>
         </Button>
       </header>
-      <main className={classes.main}>
-        {!isLoading &&
-          products.length > 0 &&
-          products.map((product) => {
-            return <ProductCard key={product.id} product={product} />;
-          })}
-        {!isLoading && products.length === 0 && <p>Found no products.</p>}
-        {isLoading && <LoadingSpinner />}
-      </main>
+      <main className={classes.main}>{content}</main>
     </div>
   );
 };
