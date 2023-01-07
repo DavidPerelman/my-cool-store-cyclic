@@ -10,26 +10,26 @@ const ProductDetails = () => {
   const { productId } = useParams();
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(`/api/products/product/${productId}`);
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error('Something went wrong!');
-        }
-
-        setProduct(data.product);
-      } catch (error) {
-        setError(error.message);
-      }
-      setIsLoading(false);
-    };
-
     fetchProduct();
   }, []);
+
+  const fetchProduct = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(`/api/products/product/${productId}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+
+      setProduct(data.product);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <div className={classes.ProductDetails}>
