@@ -12,6 +12,7 @@ import {
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
 import Header from './components/Layout/Header/Header';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
+import { AuthContextProvider } from './store/auth-context';
 
 function App() {
   useEffect(() => {
@@ -40,11 +41,13 @@ function App() {
   );
 
   return (
-    <CartProvider>
-      <UserProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </UserProvider>
-    </CartProvider>
+    <AuthContextProvider>
+      <CartProvider>
+        <UserProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </UserProvider>
+      </CartProvider>
+    </AuthContextProvider>
   );
 }
 

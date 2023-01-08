@@ -84,7 +84,7 @@ const User = ({ onCloseUserModal, setUserStatusIsShown }) => {
 
   return (
     <Modal onClose={onCloseUserModal}>
-      <AuthForm />
+      <AuthForm onCloseUserModal={onCloseUserModal} />
       {/* {isLoginPage && (
         <>
           <Login

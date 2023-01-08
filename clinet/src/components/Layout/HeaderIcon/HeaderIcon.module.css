@@ -43,3 +43,7 @@
 .headerIcon {
   margin-top: 20px;
 }
+
+.isLogin {
+  color: limegreen;
+}

@@ -1,10 +1,15 @@
 import React, { Fragment, useContext } from 'react';
+import AuthContext from '../../../store/auth-context';
 import CartContext from '../../../store/cart-context';
 import UserContext from '../../../store/user-context';
 import HeaderIcon from '../HeaderIcon/HeaderIcon';
 import classes from './HeaderButtons.module.css';
 
 const HeaderButtons = () => {
+  const authCtx = useContext(AuthContext);
+
+  const isLoggedIn = authCtx.isLoggedIn;
+
   const cartCtx = useContext(CartContext);
   const userCtx = useContext(UserContext);
 
@@ -31,7 +36,11 @@ const HeaderButtons = () => {
         amount={numOfCartItems}
         onClick={showCartHandler}
       />
-      <HeaderIcon type='fa-user' onClick={showUserModalHandler} />
+      <HeaderIcon
+        type='fa-user'
+        onClick={showUserModalHandler}
+        isLogin={isLoggedIn}
+      />
     </div>
   );
 };
