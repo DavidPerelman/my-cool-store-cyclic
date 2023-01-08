@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import AuthForm from '../../Auth/AuthForm/AuthForm';
 import Modal from '../../UI/Modal/Modal';
 import Login from '../Login/Login';
 import Logout from '../Logout/Logout';
@@ -83,7 +84,8 @@ const User = ({ onCloseUserModal, setUserStatusIsShown }) => {
 
   return (
     <Modal onClose={onCloseUserModal}>
-      {isLoginPage && (
+      <AuthForm />
+      {/* {isLoginPage && (
         <>
           <Login
             goToRegister={goToRegister}
@@ -143,7 +145,7 @@ const User = ({ onCloseUserModal, setUserStatusIsShown }) => {
             </button>
           </form>
         )}
-      </div>
+      </div> */}
     </Modal>
   );
 };
