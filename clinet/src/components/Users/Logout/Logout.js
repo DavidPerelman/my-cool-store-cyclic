@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AuthContext from '../../../store/auth-context';
 import Button from '../../UI/Button/Button';
-import './Logout.css';
+import classes from './Logout.module.css';
 
 const Logout = ({ userData, onLogout }) => {
+  const authCtx = useContext(AuthContext);
+
   return (
-    <div className='logout'>
-      <h2>
-        Hello {userData.firstName} {userData.lastName}!
-      </h2>
-      <Button>Edit My Profile</Button>
-      <Button onClick={onLogout}>Logout</Button>
+    <div className={classes.logout}>
+      <h2>{/* Hello {userData.firstName} {userData.lastName}! */}</h2>
+      <Button
+        className={classes.button}
+        background='#540d83'
+        color='white'
+        onClick={authCtx.logout}
+      >
+        Logout
+      </Button>
     </div>
   );
 };

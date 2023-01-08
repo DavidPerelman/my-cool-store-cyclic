@@ -50,7 +50,7 @@ const CategoryContainer = ({ category }) => {
   return (
     <div className={classes.CategoryContainer}>
       <header>
-        <Button onClick={onCategoryClick}>
+        <Button onClick={onCategoryClick} background='#4d1601'>
           <>
             Our {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
           </>

@@ -1,5 +1,7 @@
 import { useContext, useRef, useState } from 'react';
 import AuthContext from '../../../store/auth-context';
+import LoggedInLayout from '../../Layout/LoggedInLayout/LoggedInLayout';
+import Logout from '../../Users/Logout/Logout';
 
 import classes from './AuthForm.module.css';
 
@@ -84,7 +86,7 @@ const AuthForm = ({ onCloseUserModal }) => {
   //   }
 
   return (
-    <section className={classes.auth}>
+    <section className={!isLoggedIn ? classes.auth : classes.authLoggedIn}>
       {!isLoggedIn && (
         <>
           <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
@@ -118,7 +120,7 @@ const AuthForm = ({ onCloseUserModal }) => {
           </form>
         </>
       )}
-      {isLoggedIn && <p>logout</p>}
+      {isLoggedIn && <LoggedInLayout />}
     </section>
   );
 };
