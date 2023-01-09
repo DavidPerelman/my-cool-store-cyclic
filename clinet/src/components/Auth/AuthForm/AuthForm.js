@@ -11,18 +11,23 @@ const AuthForm = ({ onCloseUserModal }) => {
   const authCtx = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const usernameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
+  console.log(usernameInputRef);
   const isLoggedIn = authCtx.isLoggedIn;
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
 
+  console.log('check');
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const enteredUserName = emailInputRef.current.value;
+    console.log('isLogin');
+    const enteredUserName = usernameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
@@ -153,6 +158,13 @@ const AuthForm = ({ onCloseUserModal }) => {
         <>
           <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
           <form onSubmit={submitHandler}>
+            <div
+              className={`${classes.control} ${isLogin ? classes.hidden : ''}`}
+            >
+              <label htmlFor='username'>User Name</label>
+              <input type='text' id='username' ref={usernameInputRef} />
+            </div>
+
             <div className={classes.control}>
               <label htmlFor='email'>Your Email</label>
               <input type='email' id='email' required ref={emailInputRef} />
@@ -182,7 +194,7 @@ const AuthForm = ({ onCloseUserModal }) => {
           </form>
         </>
       )}
-      {isLoggedIn && <LoggedInLayout />}
+      {isLoggedIn && <LoggedInLayout onCloseUserModal={onCloseUserModal} />}
     </section>
   );
 };

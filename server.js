@@ -6,6 +6,8 @@ const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const admin = require('firebase-admin');
 
+const { authMiddlware } = require('./middleware/auth-middleware');
+
 const connectDB = require('./config/connectDB');
 
 dotenv.config();
@@ -31,6 +33,10 @@ admin.initializeApp({
 // Routers
 const authRouter = require('./routers/authRouter');
 app.use('/api/auth', authRouter);
+
+app.use('/api/auth-middleware', authMiddlware, () => {
+  console.log('success');
+});
 
 const categoriesRouter = require('./routers/categoriesRouter');
 app.use('/api/categories', categoriesRouter);
