@@ -28,6 +28,11 @@
   }
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
 @keyframes slide-down {
   from {
     opacity: 0;

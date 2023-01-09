@@ -194,7 +194,7 @@ const AuthForm = ({ onCloseUserModal }) => {
           </form>
         </>
       )}
-      {isLoggedIn && <LoggedInLayout onCloseUserModal={onCloseUserModal} />}
+      {/* {isLoggedIn && <LoggedInLayout onCloseUserModal={onCloseUserModal} />} */}
     </section>
   );
 };
