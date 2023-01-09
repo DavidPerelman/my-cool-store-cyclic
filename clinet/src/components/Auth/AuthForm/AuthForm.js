@@ -23,6 +23,7 @@ const AuthForm = ({ onCloseUserModal }) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    const enteredUserName = emailInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
@@ -31,20 +32,20 @@ const AuthForm = ({ onCloseUserModal }) => {
 
     if (isLogin) {
     } else {
-      const auth = getAuth();
-
-      createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
-        .then((userCredential) => {
-          // Signed in
-          console.log(userCredential);
-          const user = userCredential.user;
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
-        });
+      fetch('/api/auth/createUser', {
+        method: 'POST',
+        body: JSON.stringify({
+          userName: enteredUserName,
+          email: enteredEmail,
+          password: enteredPassword,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => {
+        console.log(res);
+        setIsLoading(false);
+      });
     }
     // let url;
     // if (isLogin) {
