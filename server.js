@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const path = require('path');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
+const admin = require('firebase-admin');
 
 const connectDB = require('./config/connectDB');
 
@@ -18,7 +19,19 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// import service account file (helps to know the firebase project details)
+const serviceAccount = require('./serviceAccountKey.json');
+
+// Intialize the firebase-admin project/account
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://react-auth-40b24-default-rtdb.firebaseio.com',
+});
+
 // Routers
+const authRouter = require('./routers/authRouter');
+app.use('/api/auth', authRouter);
+
 const categoriesRouter = require('./routers/categoriesRouter');
 app.use('/api/categories', categoriesRouter);
 
