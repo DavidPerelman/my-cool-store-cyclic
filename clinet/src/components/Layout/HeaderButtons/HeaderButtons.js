@@ -20,7 +20,7 @@ const HeaderButtons = () => {
     return currentNumber + item.amount;
   }, 0);
 
-  const btnClasses = `${classes.button} ${classes.bump}`;
+  const btnClasses = `${classes.button}`;
 
   return (
     <div className={classes.HeaderButtons}>
