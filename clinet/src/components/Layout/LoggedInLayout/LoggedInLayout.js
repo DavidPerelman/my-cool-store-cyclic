@@ -16,6 +16,11 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
     navigate(`/:userId/dashboard`);
   };
 
+  const onlogoutHandler = () => {
+    authCtx.logout();
+    navigate(`/`);
+  };
+
   return (
     <div className={classes.LoggedInLayout}>
       <Button
@@ -32,7 +37,7 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
         className={classes.button}
         background='#540d83'
         color='white'
-        onClick={authCtx.logout}
+        onClick={onlogoutHandler}
       >
         Logout
       </Button>

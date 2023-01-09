@@ -7,6 +7,10 @@
   overflow: hidden;
 }
 
+.cart:hover {
+  cursor: pointer;
+}
+
 .material-icons {
   position: relative;
   top: 4px;
