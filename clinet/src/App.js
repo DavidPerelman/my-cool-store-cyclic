@@ -18,7 +18,6 @@ import MyOrders from './pages/MyOrders/MyOrders';
 function App() {
   const authCtx = useContext(AuthContext);
 
-  console.log('App- isLoggedIn: ', authCtx.isLoggedIn);
   useEffect(() => {
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())

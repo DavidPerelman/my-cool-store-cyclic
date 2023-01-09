@@ -1,4 +1,5 @@
 import { useContext, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../store/auth-context';
 import LoggedInLayout from '../../Layout/LoggedInLayout/LoggedInLayout';
 import Logout from '../../Users/Logout/Logout';
@@ -6,6 +7,7 @@ import Logout from '../../Users/Logout/Logout';
 import classes from './AuthForm.module.css';
 
 const AuthForm = ({ onCloseUserModal }) => {
+  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,8 +67,11 @@ const AuthForm = ({ onCloseUserModal }) => {
         }
       })
       .then((data) => {
-        console.log(data);
-        authCtx.login(data.idToken);
+        const expirationTime = new Date(
+          new Date().getTime() + +data.expiresIn * 1000
+        );
+        authCtx.login(data.idToken, expirationTime.toISOString());
+        // navigate('/');
 
         if (isLogin) {
           onCloseUserModal();
