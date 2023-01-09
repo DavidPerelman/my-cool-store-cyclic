@@ -1,26 +1,26 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import {
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
+import { auth } from '../firebase';
 
 const AuthContext = createContext({
   token: '',
   isLoggedIn: false,
-  userData: null,
-  login: (token) => {},
+  currentUser: null,
+  signup: (email, password) => {},
+  login: (email, password) => {},
   logout: () => {},
 });
-
-const calculateRemainingTime = (expirationTime) => {
-  const currentTime = new Date().getTime();
-  const adjExpirationTime = new Date(expirationTime).getTime();
-
-  const remainingDuration = adjExpirationTime - currentTime;
-
-  return remainingDuration;
-};
 
 export const AuthContextProvider = (props) => {
   const initialToken = localStorage.getItem('token');
   const [token, setToken] = useState(initialToken);
-  const [userData, setUserData] = useState({});
+  const [currentUser, setCurrentUser] = useState();
+  const [loading, setLoading] = useState(true);
 
   const userIsLoggedIn = !!token;
 
@@ -29,34 +29,37 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem('token');
   };
 
-  const loginHandler = (data, expirationTime) => {
-    setToken(data.idToken);
-    setUserData({
-      userName: data.displayName,
-      email: data.email,
-      userId: data.localId,
-    });
-
-    localStorage.setItem('token', data.idToken);
-    localStorage.setItem(
-      'user',
-      JSON.stringify({
-        userName: data.displayName,
-        email: data.email,
-        userId: data.localId,
-      })
-    );
-
-    const remainingTime = calculateRemainingTime(expirationTime);
-
-    setTimeout(logoutHandler, remainingTime);
+  const signup = async (username, email, password) => {
+    const user = await createUserWithEmailAndPassword(auth, email, password);
+    updateProfile(auth.currentUser, { displayName: username });
+    return user;
   };
 
+  const login = async (email, password) => {
+    const user = await signInWithEmailAndPassword(auth, email, password);
+    return user;
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+        // setCurrentUser({
+        //   username: user.email,
+        //   email: user.email,
+        //   userId: user.uid,
+        // });
+      } else {
+      }
+    });
+  }, []);
+
   const contextValue = {
+    signup: signup,
     token: token,
-    userData: userData,
+    currentUser: currentUser,
     isLoggedIn: userIsLoggedIn,
-    login: loginHandler,
+    login: login,
     logout: logoutHandler,
   };
 

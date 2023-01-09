@@ -10,8 +10,6 @@ import classes from './User.module.css';
 
 const User = ({ onCloseUserModal, setUserStatusIsShown }) => {
   const authCtx = useContext(AuthContext);
-
-  console.log(onCloseUserModal);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const isLoggedIn = authCtx.isLoggedIn;

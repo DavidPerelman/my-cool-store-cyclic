@@ -1,10 +1,14 @@
 import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../store/auth-context';
-import LoggedInLayout from '../../Layout/LoggedInLayout/LoggedInLayout';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-
 import classes from './AuthForm.module.css';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
+import { auth } from '../../../firebase';
 
 const AuthForm = ({ onCloseUserModal }) => {
   const navigate = useNavigate();
@@ -15,24 +19,46 @@ const AuthForm = ({ onCloseUserModal }) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
-  console.log(usernameInputRef);
   const isLoggedIn = authCtx.isLoggedIn;
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
 
-  console.log('check');
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    console.log('isLogin');
     const enteredUserName = usernameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
-    // Add validation
     setIsLoading(true);
+
+    if (isLogin) {
+      try {
+        const user = await authCtx.login(enteredEmail, enteredPassword);
+
+        console.log(user);
+      } catch (error) {
+        console.log(error.message);
+      }
+
+      setIsLoading(false);
+    } else {
+      try {
+        const user = await authCtx.signup(
+          enteredUserName,
+          enteredEmail,
+          enteredPassword
+        );
+
+        console.log(user);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    return;
+
+    // Add validation
 
     if (isLogin) {
       fetch(

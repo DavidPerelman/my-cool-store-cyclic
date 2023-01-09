@@ -2,7 +2,7 @@ const { auth, initializeApp } = require('firebase-admin');
 
 const createNewUser = async (req, res) => {
   auth()
-    .createUser({
+    .signinwithemail.createUser({
       email: req.body.email,
       emailVerified: false,
       // phoneNumber: '+11234567890',
@@ -21,8 +21,10 @@ const createNewUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  auth();
+  console.log(req.body);
+  return;
   auth()
+    .createSessionCookie()
     .createUser({
       email: req.body.email,
       emailVerified: false,
@@ -41,4 +43,4 @@ const loginUser = async (req, res) => {
     });
 };
 
-module.exports = { createNewUser };
+module.exports = { createNewUser, loginUser };

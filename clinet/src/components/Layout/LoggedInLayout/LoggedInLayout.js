@@ -31,8 +31,6 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
       >
         Profile Setting
       </Button>
-      {/* {isEditProfile && <ProfileForm setIsEditProfile={setIsEditProfile} />} */}
-      {/* <Logout /> */}
       <Button
         className={classes.button}
         background='#540d83'

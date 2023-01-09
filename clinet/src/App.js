@@ -15,13 +15,13 @@ import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsP
 import AuthContext, { AuthContextProvider } from './store/auth-context';
 import MyOrders from './pages/MyOrders/MyOrders';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
+import { getAuth } from 'firebase/auth';
 
 function App() {
   const authCtx = useContext(AuthContext);
 
-  console.log(authCtx.userData);
-
   useEffect(() => {
+    console.log(getAuth().currentUser);
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())
     //   .then((data) => setCategories(data));
