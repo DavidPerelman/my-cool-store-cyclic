@@ -1,9 +1,6 @@
 import classes from './HeaderIcon.module.css';
-import { getAuth } from 'firebase/auth';
 
-const HeaderIcon = ({ type, count, amount, onClick }) => {
-  const isLoggedIn = getAuth().currentUser;
-
+const HeaderIcon = ({ type, count, amount, onClick, isLoggedIn }) => {
   return (
     <h2>
       <div className={classes.cart} onClick={onClick}>

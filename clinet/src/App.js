@@ -20,8 +20,9 @@ import { getAuth } from 'firebase/auth';
 function App() {
   const authCtx = useContext(AuthContext);
 
+  const isLoggedIn = getAuth().currentUser;
+
   useEffect(() => {
-    console.log(getAuth().currentUser);
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())
     //   .then((data) => setCategories(data));
@@ -41,10 +42,10 @@ function App() {
           element={<ProductDetailsPage />}
           exact
         />
-        {authCtx.isLoggedIn && (
+        {isLoggedIn && (
           <Route path='/:userId/my-orders' element={<MyOrders />} />
         )}
-        {authCtx.isLoggedIn && (
+        {isLoggedIn && (
           <Route path='/:userId/dashboard' element={<ProfileDashboard />} />
         )}
 

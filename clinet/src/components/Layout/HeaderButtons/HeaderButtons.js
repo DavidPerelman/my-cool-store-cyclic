@@ -3,8 +3,11 @@ import CartContext from '../../../store/cart-context';
 import UserContext from '../../../store/user-context';
 import HeaderIcon from '../HeaderIcon/HeaderIcon';
 import classes from './HeaderButtons.module.css';
+import { getAuth } from 'firebase/auth';
 
 const HeaderButtons = () => {
+  const isLoggedIn = getAuth().currentUser;
+
   const cartCtx = useContext(CartContext);
   const userCtx = useContext(UserContext);
 
@@ -31,7 +34,11 @@ const HeaderButtons = () => {
         amount={numOfCartItems}
         onClick={showCartHandler}
       />
-      <HeaderIcon type='fa-user' onClick={showUserModalHandler} />
+      <HeaderIcon
+        type='fa-user'
+        onClick={showUserModalHandler}
+        isLoggedIn={isLoggedIn}
+      />
     </div>
   );
 };

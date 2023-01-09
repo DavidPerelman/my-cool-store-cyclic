@@ -2,13 +2,8 @@ import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../store/auth-context';
 import classes from './AuthForm.module.css';
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from 'firebase/auth';
-import { auth } from '../../../firebase';
+import { getAuth } from 'firebase/auth';
+import LoggedInLayout from '../../Layout/LoggedInLayout/LoggedInLayout';
 
 const AuthForm = ({ onCloseUserModal }) => {
   const navigate = useNavigate();
@@ -18,8 +13,8 @@ const AuthForm = ({ onCloseUserModal }) => {
   const usernameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const isLoggedIn = getAuth().currentUser;
 
-  const isLoggedIn = authCtx.isLoggedIn;
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
@@ -43,6 +38,8 @@ const AuthForm = ({ onCloseUserModal }) => {
       }
 
       setIsLoading(false);
+      navigate('/');
+      onCloseUserModal();
     } else {
       try {
         const user = await authCtx.signup(
@@ -51,131 +48,14 @@ const AuthForm = ({ onCloseUserModal }) => {
           enteredPassword
         );
 
+        navigate('/');
+        onCloseUserModal();
         console.log(user);
       } catch (error) {
         console.log(error.message);
       }
+      setIsLoading(false);
     }
-    return;
-
-    // Add validation
-
-    if (isLogin) {
-      fetch(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAcSWdXQfnlGw3kIWkAdpXtQ3Gr6Oxo8Hk',
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            email: enteredEmail,
-            password: enteredPassword,
-            returnSecureToken: true,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-        .then((res) => {
-          setIsLoading(false);
-          if (res.ok) {
-            return res.json();
-            // ...
-          } else {
-            return res.json().then((data) => {
-              // show an error modal
-              let errorMessage = 'Authentication failed!';
-              // if (data && data.error && data.error.message) {
-              //   errorMessage = data.error.message;
-              //   console.log(data.error);
-              // }
-              throw new Error(errorMessage);
-            });
-          }
-        })
-        .then((data) => {
-          console.log(data);
-          const expirationTime = new Date(
-            new Date().getTime() + +data.expiresIn * 1000
-          );
-          authCtx.login(data, expirationTime.toISOString());
-          // navigate('/');
-
-          if (isLogin) {
-            onCloseUserModal();
-          }
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
-    } else {
-      fetch('/api/auth/createUser', {
-        method: 'POST',
-        body: JSON.stringify({
-          userName: enteredUserName,
-          email: enteredEmail,
-          password: enteredPassword,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(async (res) => {
-        const data = await res.json();
-        authCtx.login(data);
-        setIsLoading(false);
-      });
-    }
-    // let url;
-    // if (isLogin) {
-    //   url =
-    //     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAcSWdXQfnlGw3kIWkAdpXtQ3Gr6Oxo8Hk';
-    // } else {
-    //   url =
-    //     'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAcSWdXQfnlGw3kIWkAdpXtQ3Gr6Oxo8Hk';
-    // }
-
-    // fetch(url, {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     email: enteredEmail,
-    //     password: enteredPassword,
-    //     returnSecureToken: true,
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    //   .then((res) => {
-    //     setIsLoading(false);
-    //     if (res.ok) {
-    //       return res.json();
-    //       // ...
-    //     } else {
-    //       return res.json().then((data) => {
-    //         // show an error modal
-    //         let errorMessage = 'Authentication failed!';
-    //         // if (data && data.error && data.error.message) {
-    //         //   errorMessage = data.error.message;
-    //         //   console.log(data.error);
-    //         // }
-    //         throw new Error(errorMessage);
-    //       });
-    //     }
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //     const expirationTime = new Date(
-    //       new Date().getTime() + +data.expiresIn * 1000
-    //     );
-    //     authCtx.login(data, expirationTime.toISOString());
-    //     // navigate('/');
-
-    //     if (isLogin) {
-    //       onCloseUserModal();
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     alert(err.message);
-    //   });
   };
 
   return (
@@ -220,7 +100,7 @@ const AuthForm = ({ onCloseUserModal }) => {
           </form>
         </>
       )}
-      {/* {isLoggedIn && <LoggedInLayout onCloseUserModal={onCloseUserModal} />} */}
+      {isLoggedIn && <LoggedInLayout onCloseUserModal={onCloseUserModal} />}
     </section>
   );
 };

@@ -12,7 +12,7 @@ const ProfileDashboard = () => {
 
   return (
     <div className={classes.ProfileDashboard}>
-      <h1>Hello, {user.userName}!</h1>
+      {/* <h1>Hello, {user.userName}!</h1> */}
       <ProfileForm />
     </div>
   );

@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import {
-  onAuthStateChanged,
+  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
@@ -17,17 +17,7 @@ const AuthContext = createContext({
 });
 
 export const AuthContextProvider = (props) => {
-  const initialToken = localStorage.getItem('token');
-  const [token, setToken] = useState(initialToken);
   const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true);
-
-  const userIsLoggedIn = !!token;
-
-  const logoutHandler = () => {
-    setToken(null);
-    localStorage.removeItem('token');
-  };
 
   const signup = async (username, email, password) => {
     const user = await createUserWithEmailAndPassword(auth, email, password);
@@ -40,27 +30,15 @@ export const AuthContextProvider = (props) => {
     return user;
   };
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser(user);
-        // setCurrentUser({
-        //   username: user.email,
-        //   email: user.email,
-        //   userId: user.uid,
-        // });
-      } else {
-      }
-    });
-  }, []);
+  const logout = async () => {
+    return getAuth().signOut();
+  };
 
   const contextValue = {
     signup: signup,
-    token: token,
     currentUser: currentUser,
-    isLoggedIn: userIsLoggedIn,
     login: login,
-    logout: logoutHandler,
+    logout: logout,
   };
 
   return (

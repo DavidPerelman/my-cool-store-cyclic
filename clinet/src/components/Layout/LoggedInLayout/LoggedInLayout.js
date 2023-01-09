@@ -5,6 +5,7 @@ import UserContext from '../../../store/user-context';
 import Button from '../../UI/Button/Button';
 import Logout from '../../Users/Logout/Logout';
 import classes from './LoggedInLayout.module.css';
+import { getAuth } from 'firebase/auth';
 
 const LoggedInLayout = ({ onCloseUserModal }) => {
   const userCtx = useContext(UserContext);
@@ -16,8 +17,12 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
     navigate(`/:userId/dashboard`);
   };
 
-  const onlogoutHandler = () => {
+  const onLogoutHandler = () => {
     authCtx.logout();
+    userCtx.hideUserModal();
+
+    // authCtx.logout();
+
     navigate(`/`);
   };
 
@@ -35,7 +40,7 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
         className={classes.button}
         background='#540d83'
         color='white'
-        onClick={onlogoutHandler}
+        onClick={onLogoutHandler}
       >
         Logout
       </Button>
