@@ -30,6 +30,52 @@ const AuthForm = ({ onCloseUserModal }) => {
     setIsLoading(true);
 
     if (isLogin) {
+      fetch(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAcSWdXQfnlGw3kIWkAdpXtQ3Gr6Oxo8Hk',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            email: enteredEmail,
+            password: enteredPassword,
+            returnSecureToken: true,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+        .then((res) => {
+          setIsLoading(false);
+          if (res.ok) {
+            return res.json();
+            // ...
+          } else {
+            return res.json().then((data) => {
+              // show an error modal
+              let errorMessage = 'Authentication failed!';
+              // if (data && data.error && data.error.message) {
+              //   errorMessage = data.error.message;
+              //   console.log(data.error);
+              // }
+              throw new Error(errorMessage);
+            });
+          }
+        })
+        .then((data) => {
+          console.log(data);
+          const expirationTime = new Date(
+            new Date().getTime() + +data.expiresIn * 1000
+          );
+          authCtx.login(data, expirationTime.toISOString());
+          // navigate('/');
+
+          if (isLogin) {
+            onCloseUserModal();
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
     } else {
       fetch('/api/auth/createUser', {
         method: 'POST',

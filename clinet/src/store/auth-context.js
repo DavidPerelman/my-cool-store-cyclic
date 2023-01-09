@@ -20,7 +20,7 @@ const calculateRemainingTime = (expirationTime) => {
 export const AuthContextProvider = (props) => {
   const initialToken = localStorage.getItem('token');
   const [token, setToken] = useState(initialToken);
-  const [userData, setUserData] = useState(initialToken);
+  const [userData, setUserData] = useState({});
 
   const userIsLoggedIn = !!token;
 
@@ -30,16 +30,26 @@ export const AuthContextProvider = (props) => {
   };
 
   const loginHandler = (data, expirationTime) => {
-    setToken(data.token);
-    console.log('token: ', data.token);
-    setUserData(data.user);
+    setToken(data.idToken);
+    setUserData({
+      userName: data.displayName,
+      email: data.email,
+      userId: data.localId,
+    });
 
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
+    localStorage.setItem('token', data.idToken);
+    localStorage.setItem(
+      'user',
+      JSON.stringify({
+        userName: data.displayName,
+        email: data.email,
+        userId: data.localId,
+      })
+    );
 
-    // const remainingTime = calculateRemainingTime(expirationTime);
+    const remainingTime = calculateRemainingTime(expirationTime);
 
-    // setTimeout(logoutHandler, remainingTime);
+    setTimeout(logoutHandler, remainingTime);
   };
 
   const contextValue = {
