@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import AuthContext from '../../../store/auth-context';
 import classes from './HeaderIcon.module.css';
+import { getAuth } from 'firebase/auth';
 
 const HeaderIcon = ({ type, count, amount, onClick }) => {
-  const authCtx = useContext(AuthContext);
+  const isLoggedIn = getAuth().currentUser;
 
   return (
     <h2>
@@ -11,7 +10,7 @@ const HeaderIcon = ({ type, count, amount, onClick }) => {
         {count && <span className={classes.count}>{amount}</span>}
         <i
           className={`fas ${type} fa-lg ${classes.headerIcon} ${
-            type === 'fa-user' && authCtx.isLoggedIn ? classes.isLogin : ''
+            type === 'fa-user' && isLoggedIn !== null ? classes.isLogin : ''
           }`}
         ></i>
       </div>
