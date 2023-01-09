@@ -1,7 +1,6 @@
 const { auth, initializeApp } = require('firebase-admin');
 
 const createNewUser = async (req, res) => {
-  console.log(req.body);
   auth()
     .createUser({
       email: req.body.email,
@@ -12,8 +11,9 @@ const createNewUser = async (req, res) => {
       // photoURL: 'http://www.example.com/12345678/photo.png',
       disabled: false,
     })
-    .then((userRecord) => {
-      res.json({ user: userRecord });
+    .then(async (userRecord) => {
+      const token = await auth().createCustomToken(userRecord.uid);
+      res.json({ user: userRecord, token: token });
     })
     .catch((error) => {
       res.status(500).json({ error: error.message }).send();

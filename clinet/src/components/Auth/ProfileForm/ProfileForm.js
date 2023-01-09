@@ -6,7 +6,6 @@ const ProfileForm = ({ setIsEditProfile }) => {
   const newPasswordInputRef = useRef();
   const authCtx = useContext(AuthContext);
 
-  console.log(authCtx);
   const submitHandler = (e) => {
     e.preventDefault();
 

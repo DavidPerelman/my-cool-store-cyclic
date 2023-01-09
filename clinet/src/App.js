@@ -19,6 +19,8 @@ import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 function App() {
   const authCtx = useContext(AuthContext);
 
+  console.log(authCtx.userData);
+
   useEffect(() => {
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())

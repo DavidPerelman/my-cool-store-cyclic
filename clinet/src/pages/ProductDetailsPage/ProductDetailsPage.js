@@ -23,7 +23,6 @@ const ProductDetailsPage = () => {
     );
   }, [fetchProduct]);
 
-  console.log(product);
   return (
     <div className={classes.ProductDetails}>
       <div className={classes.productDetailsContainer}>

@@ -30,19 +30,16 @@ export const AuthContextProvider = (props) => {
   };
 
   const loginHandler = (data, expirationTime) => {
-    console.log(data);
-    setToken(data.idToken);
-    setUserData({
-      userId: data.localId,
-      email: data.email,
-      userName: data.displayName,
-    });
+    setToken(data.token);
+    console.log('token: ', data.token);
+    setUserData(data.user);
 
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', JSON.stringify(data.user));
 
-    const remainingTime = calculateRemainingTime(expirationTime);
+    // const remainingTime = calculateRemainingTime(expirationTime);
 
-    setTimeout(logoutHandler, remainingTime);
+    // setTimeout(logoutHandler, remainingTime);
   };
 
   const contextValue = {

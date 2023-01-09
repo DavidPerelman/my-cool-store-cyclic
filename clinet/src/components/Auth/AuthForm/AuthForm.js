@@ -15,12 +15,11 @@ const AuthForm = ({ onCloseUserModal }) => {
   const passwordInputRef = useRef();
 
   const isLoggedIn = authCtx.isLoggedIn;
-  console.log(onCloseUserModal);
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     const enteredUserName = emailInputRef.current.value;
@@ -42,8 +41,9 @@ const AuthForm = ({ onCloseUserModal }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-      }).then((res) => {
-        console.log(res);
+      }).then(async (res) => {
+        const data = await res.json();
+        authCtx.login(data);
         setIsLoading(false);
       });
     }

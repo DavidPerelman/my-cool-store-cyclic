@@ -22,7 +22,6 @@ const HeaderButtons = () => {
 
   const btnClasses = `${classes.button} ${classes.bump}`;
 
-  console.log('HeaderButtons');
   return (
     <div className={classes.HeaderButtons}>
       <HeaderIcon

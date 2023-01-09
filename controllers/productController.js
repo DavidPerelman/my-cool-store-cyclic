@@ -5,7 +5,6 @@ const getAllProducts = async (req, res) => {
   try {
     // get all products
     const products = await Product.find({});
-    console.log('products');
     res.json({ products: products });
   } catch (err) {
     console.error(err);
@@ -66,7 +65,6 @@ const deleteAllProducts = async (req, res) => {
     // get all products
     const products = await Product.deleteMany({});
 
-    console.log('products');
     res.json({ products: products });
   } catch (err) {
     console.error(err);
