@@ -65,7 +65,8 @@ const AuthForm = ({ onCloseUserModal }) => {
         }
       })
       .then((data) => {
-        authCtx.login(data);
+        console.log(data);
+        authCtx.login(data.idToken);
 
         if (isLogin) {
           onCloseUserModal();

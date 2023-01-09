@@ -18,6 +18,7 @@ import MyOrders from './pages/MyOrders/MyOrders';
 function App() {
   const authCtx = useContext(AuthContext);
 
+  console.log('App- isLoggedIn: ', authCtx.isLoggedIn);
   useEffect(() => {
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())
@@ -38,6 +39,7 @@ function App() {
           element={<ProductDetailsPage />}
           exact
         />
+        {/* <Route path='/:userId/my-orders' element={<MyOrders />} /> */}
         {authCtx.isLoggedIn && (
           <Route path='/:userId/my-orders' element={<MyOrders />} />
         )}
@@ -48,13 +50,11 @@ function App() {
   );
 
   return (
-    <AuthContextProvider>
-      <CartProvider>
-        <UserProvider>
-          <RouterProvider router={router}></RouterProvider>
-        </UserProvider>
-      </CartProvider>
-    </AuthContextProvider>
+    <CartProvider>
+      <UserProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </UserProvider>
+    </CartProvider>
   );
 }
 
