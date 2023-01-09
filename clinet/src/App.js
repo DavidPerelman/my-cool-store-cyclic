@@ -12,9 +12,12 @@ import {
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
 import Header from './components/Layout/Header/Header';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
-import { AuthContextProvider } from './store/auth-context';
+import AuthContext, { AuthContextProvider } from './store/auth-context';
+import MyOrders from './pages/MyOrders/MyOrders';
 
 function App() {
+  const authCtx = useContext(AuthContext);
+
   useEffect(() => {
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())
@@ -35,6 +38,10 @@ function App() {
           element={<ProductDetailsPage />}
           exact
         />
+        {authCtx.isLoggedIn && (
+          <Route path='/:userId/my-orders' element={<MyOrders />} />
+        )}
+
         <Route path='/*' element={<NotFound />} />
       </Route>
     )
