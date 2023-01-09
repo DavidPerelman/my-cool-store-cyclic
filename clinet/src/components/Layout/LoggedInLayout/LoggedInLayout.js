@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
-import ProfileForm from '../../Auth/ProfileForm/ProfileForm';
+import { useNavigate } from 'react-router-dom';
+import Button from '../../UI/Button/Button';
 import Logout from '../../Users/Logout/Logout';
 import classes from './LoggedInLayout.module.css';
 
 const LoggedInLayout = () => {
-  const [isEditProfile, setIsEditProfile] = useState(true);
+  const navigate = useNavigate();
+  const onEditProfileHandler = () => {
+    navigate(`/:userId/dashboard`);
+  };
 
-  console.log('LoggedInLayout');
   return (
     <div>
-      {isEditProfile && <ProfileForm setIsEditProfile={setIsEditProfile} />}
+      <Button
+        onClick={onEditProfileHandler}
+        className={classes.button}
+        background='#540d83'
+        color='white'
+      >
+        Profile Setting
+      </Button>
+      {/* {isEditProfile && <ProfileForm setIsEditProfile={setIsEditProfile} />} */}
       <Logout />
     </div>
   );

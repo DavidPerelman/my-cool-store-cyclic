@@ -14,6 +14,7 @@ import Header from './components/Layout/Header/Header';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
 import AuthContext, { AuthContextProvider } from './store/auth-context';
 import MyOrders from './pages/MyOrders/MyOrders';
+import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -38,9 +39,11 @@ function App() {
           element={<ProductDetailsPage />}
           exact
         />
-        {/* <Route path='/:userId/my-orders' element={<MyOrders />} /> */}
         {authCtx.isLoggedIn && (
           <Route path='/:userId/my-orders' element={<MyOrders />} />
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path='/:userId/dashboard' element={<ProfileDashboard />} />
         )}
 
         <Route path='/*' element={<NotFound />} />

@@ -2,7 +2,6 @@ import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../store/auth-context';
 import LoggedInLayout from '../../Layout/LoggedInLayout/LoggedInLayout';
-import Logout from '../../Users/Logout/Logout';
 
 import classes from './AuthForm.module.css';
 
@@ -67,10 +66,11 @@ const AuthForm = ({ onCloseUserModal }) => {
         }
       })
       .then((data) => {
+        console.log(data);
         const expirationTime = new Date(
           new Date().getTime() + +data.expiresIn * 1000
         );
-        authCtx.login(data.idToken, expirationTime.toISOString());
+        authCtx.login(data, expirationTime.toISOString());
         // navigate('/');
 
         if (isLogin) {
@@ -81,15 +81,6 @@ const AuthForm = ({ onCloseUserModal }) => {
         alert(err.message);
       });
   };
-
-  //   {
-  //     isLoggedIn === false && (
-
-  //     );
-  //   }
-  //   {
-  //     isLoggedIn && <p>logout</p>;
-  //   }
 
   return (
     <section className={!isLoggedIn ? classes.auth : classes.authLoggedIn}>

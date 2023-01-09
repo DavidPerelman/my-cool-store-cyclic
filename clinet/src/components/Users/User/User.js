@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import AuthContext from '../../../store/auth-context';
 import AuthForm from '../../Auth/AuthForm/AuthForm';
+import LoggedInLayout from '../../Layout/LoggedInLayout/LoggedInLayout';
 import Modal from '../../UI/Modal/Modal';
 import Login from '../Login/Login';
 import Logout from '../Logout/Logout';
@@ -7,7 +9,11 @@ import Register from '../Register/Register';
 import classes from './User.module.css';
 
 const User = ({ onCloseUserModal, setUserStatusIsShown }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const authCtx = useContext(AuthContext);
+
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const isLoggedIn = authCtx.isLoggedIn;
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [isRegisterPage, setIsRegisterPage] = useState(false);
   const [userData, setUserData] = useState({});
@@ -33,58 +39,15 @@ const User = ({ onCloseUserModal, setUserStatusIsShown }) => {
 
       setIsLoginPage(false);
       setIsRegisterPage(false);
-      setIsLoggedIn(true);
+      // setIsLoggedIn(true);
     }
   }, []);
 
-  const goToRegister = () => {
-    setIsLoginPage(false);
-    setIsRegisterPage(true);
-  };
-
-  const goToLogin = () => {
-    setIsLoginPage(true);
-    setIsRegisterPage(false);
-  };
-
-  const onRegisterHandler = (event) => {
-    event.preventDefault();
-
-    // const registerData = {
-    //   firstName: enteredRegisterFirstName,
-    //   lastName: enteredRegisterLastName,
-    //   email: enteredRegisterEmail,
-    //   password: enteredRegisterPassword,
-    // };
-  };
-
-  const onLoginHandler = (event) => {
-    event.preventDefault();
-
-    // const loginData = {
-    //   email: enteredLoginEmail,
-    //   password: enteredLoginPassword,
-    // };
-
-    setUserStatusIsShown(false);
-    localStorage.setItem('isLoggedIn', '1');
-    setIsLoggedIn(true);
-    setIsLoginPage(false);
-    setIsRegisterPage(false);
-  };
-
-  const onLogoutHandler = (event) => {
-    event.preventDefault();
-    localStorage.removeItem('isLoggedIn');
-
-    setIsLoginPage(true);
-    setIsRegisterPage(false);
-    setIsLoggedIn(false);
-  };
-
   return (
     <Modal onClose={onCloseUserModal}>
-      <AuthForm onCloseUserModal={onCloseUserModal} />
+      {isLoggedIn && <LoggedInLayout />}
+      {!isLoggedIn && <AuthForm onCloseUserModal={onCloseUserModal} />}
+
       {/* {isLoginPage && (
         <>
           <Login
