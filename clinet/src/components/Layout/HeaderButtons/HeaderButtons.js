@@ -26,7 +26,6 @@ const HeaderButtons = () => {
     return currentNumber + item.amount;
   }, 0);
   // const numOfCartItems = newCartCtx.cartItems;
-  console.log(newCartCtx.items.length);
 
   const btnClasses = `${classes.button}`;
 

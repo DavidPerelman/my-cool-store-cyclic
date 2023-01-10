@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import useLocalStorage from '../hooks/use-local-storage';
 
 const NewCartContext = createContext({
@@ -12,10 +12,23 @@ const NewCartContext = createContext({
 });
 
 export const CartContextProvider = (props) => {
-  console.log(useLocalStorage);
   const [cartIsShown, setCartIsShown] = useState(false);
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   console.log(cartItems);
+
+  useEffect(() => {
+    const calculateTotalCost = () => {
+      const itemsPrice = cartItems.reduce(
+        (previousValue, cartItem) =>
+          previousValue + cartItem.product.price * cartItem.amount,
+        0
+      );
+
+      console.log(itemsPrice);
+    };
+
+    calculateTotalCost();
+  }, []);
 
   const onShowCart = () => {
     setCartIsShown(true);

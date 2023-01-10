@@ -18,11 +18,13 @@ const Cart = ({ onCloseCart }) => {
   const hasItems = cartCtx.items.length > 0;
 
   const cartItemAddHandler = (item) => {
-    cartCtx.addItem(item);
+    console.log(item);
+    // cartCtx.addItem(item);
   };
 
   const cartItemRemoveHandler = (item) => {
-    cartCtx.removeItem(item);
+    console.log(item);
+    // cartCtx.removeItem(item);
   };
 
   const cartItems = (
