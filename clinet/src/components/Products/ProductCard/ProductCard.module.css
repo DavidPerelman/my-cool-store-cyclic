@@ -49,15 +49,23 @@
 }
 
 .product-brand {
-  /* font-size: 0.9rem; */
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.brandTitle {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .product-brand p {
   font-size: 0.9rem;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
 }
 
 .product-brand div:hover {

@@ -19,13 +19,11 @@ const ProfileDashboard = () => {
     };
     content = (
       <>
-        <h1>Hello, {user.userName}!</h1>
+        <h1 className={classes.userGreeting}>Hello, {user.userName}!</h1>
         <ProfileForm />
       </>
     );
   }
-
-  console.log(user);
 
   return <div className={classes.ProfileDashboard}>{content}</div>;
 };

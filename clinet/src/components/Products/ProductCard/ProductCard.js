@@ -38,8 +38,9 @@ const ProductCard = ({ product }) => {
       <div className={classes.container}>
         <div className={classes['product-name']}>{product.title}</div>
         <div className={classes['product-brand']}>
-          <Icon type='fa-brands fa-font-awesome' size='sm' />
-          <p>{product.brand}</p>
+          <p className={classes.brandTitle}>
+            <Icon type='fa-brands fa-font-awesome' size='sm' /> {product.brand}
+          </p>
         </div>
         <span className={classes['price-action']}>
           ${product.price}

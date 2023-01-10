@@ -49,6 +49,7 @@ const CategoryContainer = ({ category }) => {
 
   return (
     <div className={classes.CategoryContainer}>
+      {/* <div className={`${classes.CategoryContainer} d-flex flex-nowrap`}> */}
       <header>
         <Button onClick={onCategoryClick} background='#4d1601'>
           <>
