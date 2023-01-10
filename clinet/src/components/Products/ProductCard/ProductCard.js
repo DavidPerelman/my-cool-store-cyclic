@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CartContext from '../../../store/cart-context';
+import NewCartContext from '../../../store/cartContext';
 import Card from '../../UI/Card/Card';
 import Icon from '../../UI/Icon/Icon';
 import classes from './ProductCard.module.css';
 
 const ProductCard = ({ product }) => {
   const cartCtx = useContext(CartContext);
+  const newCartCtx = useContext(NewCartContext);
 
   let existingCartItemName;
   const existingCartItemIndex = cartCtx.items.findIndex((item) => {
@@ -19,14 +21,15 @@ const ProductCard = ({ product }) => {
   }
 
   const addToCartHandler = () => {
-    console.log(product);
-    cartCtx.addItem({
-      id: product.id,
-      title: product.title,
-      amount: 1,
-      price: product.price,
-      image: product.thumbnail,
-    });
+    newCartCtx.addItem(product);
+    // console.log(newCartCtx.addItem);
+    // cartCtx.addItem({
+    //   id: product.id,
+    //   title: product.title,
+    //   amount: 1,
+    //   price: product.price,
+    //   image: product.thumbnail,
+    // });
   };
 
   return (
