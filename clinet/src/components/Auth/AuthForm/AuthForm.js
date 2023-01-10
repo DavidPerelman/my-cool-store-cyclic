@@ -40,11 +40,11 @@ const AuthForm = ({ onCloseUserModal }) => {
     //   return;
     // }
 
-    if (enteredUserName === '') {
-      setError('User name is required!');
-      clearError();
-      return;
-    }
+    // if (enteredUserName === '') {
+    //   setError('User name is required!');
+    //   clearError();
+    //   return;
+    // }
     if (enteredPassword.length < 7) {
       setError('The password must contain at least 6 characters!');
       clearError();
