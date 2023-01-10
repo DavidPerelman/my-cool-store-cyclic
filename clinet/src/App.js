@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import UserProvider from './store/UserProvider';
 import CartProvider from './store/CartProvider';
 import NotFound from './pages/NotFound/NotFound';
@@ -12,21 +12,21 @@ import {
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
 import Header from './components/Layout/Header/Header';
 import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsPage';
-import AuthContext, { AuthContextProvider } from './store/auth-context';
+import AuthContext from './store/auth-context';
 import MyOrders from './pages/MyOrders/MyOrders';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
-import { getAuth } from 'firebase/auth';
 
 function App() {
   const authCtx = useContext(AuthContext);
 
-  const isLoggedIn = getAuth().currentUser;
+  const isLoggedIn = authCtx.currentUser !== null;
 
   useEffect(() => {
+    authCtx.checkLoggedIn();
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())
     //   .then((data) => setCategories(data));
-  }, []);
+  }, [authCtx.currentUser]);
 
   const router = createBrowserRouter(
     createRoutesFromElements(

@@ -43,4 +43,20 @@ const loginUser = async (req, res) => {
     });
 };
 
-module.exports = { createNewUser, loginUser };
+const checkLoggedIn = async (req, res) => {
+  const user = await auth().verifyIdToken(req.body.token);
+  console.log(user.uid);
+  auth()
+    .getUser(user.uid)
+    .then(async (userRecord) => {
+      console.log(await userRecord);
+      const uid = userRecord.uid;
+      // ...
+      res.json({ user: userRecord });
+    })
+    .catch((error) => {
+      // Handle error
+    });
+};
+
+module.exports = { createNewUser, loginUser, checkLoggedIn };

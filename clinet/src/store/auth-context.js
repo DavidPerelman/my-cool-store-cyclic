@@ -1,9 +1,10 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  onAuthStateChanged,
 } from 'firebase/auth';
 import { auth } from '../firebase';
 
@@ -19,6 +20,21 @@ const AuthContext = createContext({
 export const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState();
 
+  const checkLoggedIn = async () => {
+    const unSubscribeAuth = onAuthStateChanged(
+      auth,
+      async (authenticatedUser) => {
+        if (authenticatedUser) {
+          setCurrentUser(authenticatedUser);
+        } else {
+          setCurrentUser(null);
+        }
+      }
+    );
+
+    return unSubscribeAuth;
+  };
+
   const signup = async (username, email, password) => {
     const user = await createUserWithEmailAndPassword(auth, email, password);
     updateProfile(auth.currentUser, { displayName: username });
@@ -27,6 +43,13 @@ export const AuthContextProvider = (props) => {
 
   const login = async (email, password) => {
     const user = await signInWithEmailAndPassword(auth, email, password);
+    setCurrentUser({
+      displayName: user.user.displayName,
+      email: user.user.email,
+      uid: user.user.uid,
+    });
+
+    setCurrentUser(user);
     return user;
   };
 
@@ -35,6 +58,7 @@ export const AuthContextProvider = (props) => {
   };
 
   const contextValue = {
+    checkLoggedIn: checkLoggedIn,
     signup: signup,
     currentUser: currentUser,
     login: login,
