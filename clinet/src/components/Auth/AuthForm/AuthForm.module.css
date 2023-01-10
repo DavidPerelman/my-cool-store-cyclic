@@ -11,20 +11,25 @@
 }
 
 .hidden {
-  /* display: none; */
   height: 0;
   visibility: hidden;
 }
 
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  margin-top: 2rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
 .authLoggedIn {
-  /* margin: 3rem auto;
-  width: 95%;
-  max-width: 25rem; */
   border-radius: 6px;
   background-color: white;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
-  /* text-align: center; */
   color: black;
   text-align: -webkit-center;
 }

@@ -29,31 +29,15 @@ const AuthForm = ({ onCloseUserModal }) => {
     setIsLoading(true);
 
     if (isLogin) {
-      try {
-        const user = await authCtx.login(enteredEmail, enteredPassword);
-
-        console.log(user);
-      } catch (error) {
-        console.log(error.message);
-      }
-
+      const user = await authCtx.login(enteredEmail, enteredPassword);
       setIsLoading(false);
-      navigate('/');
-      onCloseUserModal();
     } else {
-      try {
-        const user = await authCtx.signup(
-          enteredUserName,
-          enteredEmail,
-          enteredPassword
-        );
+      const user = await authCtx.signup(
+        enteredUserName,
+        enteredEmail,
+        enteredPassword
+      );
 
-        navigate('/');
-        onCloseUserModal();
-        console.log(user);
-      } catch (error) {
-        console.log(error.message);
-      }
       setIsLoading(false);
     }
   };
@@ -84,8 +68,9 @@ const AuthForm = ({ onCloseUserModal }) => {
                 ref={passwordInputRef}
               />
             </div>
+            {authCtx.error && <p className={classes.error}>{authCtx.error}</p>}
             <div className={classes.actions}>
-              {!isLoading && (
+              {!isLoading && !authCtx.error && (
                 <button>{isLogin ? 'Login' : 'Create Account'}</button>
               )}
               {isLoading && <p>Sending request...</p>}

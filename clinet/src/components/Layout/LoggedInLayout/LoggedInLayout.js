@@ -21,8 +21,6 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
     authCtx.logout();
     userCtx.hideUserModal();
 
-    // authCtx.logout();
-
     navigate(`/`);
   };
 
