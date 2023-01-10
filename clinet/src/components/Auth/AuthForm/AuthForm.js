@@ -32,23 +32,25 @@ const AuthForm = ({ onCloseUserModal }) => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
-    // const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!isLogin) {
+      const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-    // if (!regex.test(enteredEmail)) {
-    //   setError('The email address is not valid!');
-    //   clearError();
-    //   return;
-    // }
+      if (!regex.test(enteredEmail)) {
+        setError('The email address is not valid!');
+        clearError();
+        return;
+      }
 
-    // if (enteredUserName === '') {
-    //   setError('User name is required!');
-    //   clearError();
-    //   return;
-    // }
-    if (enteredPassword.length < 7) {
-      setError('The password must contain at least 6 characters!');
-      clearError();
-      return;
+      if (enteredUserName === '') {
+        setError('User name is required!');
+        clearError();
+        return;
+      }
+      if (enteredPassword.length < 7) {
+        setError('The password must contain at least 6 characters!');
+        clearError();
+        return;
+      }
     }
 
     setIsLoading(true);
