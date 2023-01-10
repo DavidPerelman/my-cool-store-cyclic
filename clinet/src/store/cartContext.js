@@ -12,6 +12,7 @@ const NewCartContext = createContext({
 });
 
 export const CartContextProvider = (props) => {
+  console.log(useLocalStorage);
   const [cartIsShown, setCartIsShown] = useState(false);
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   console.log(cartItems);
@@ -32,7 +33,7 @@ export const CartContextProvider = (props) => {
         alert('The product is already in the cart');
         return prevCartItems;
       }
-      return [...prevCartItems, { product: product, quantity: 1 }];
+      return [...prevCartItems, { product: product, amount: 1 }];
     });
   };
 
@@ -40,7 +41,7 @@ export const CartContextProvider = (props) => {
     cartIsShown: cartIsShown,
     showCart: onShowCart,
     hideCart: onHideCart,
-    items: [],
+    items: cartItems,
     totalAmount: 0,
     addItem: addCartItem,
     removeItem: (id) => {},

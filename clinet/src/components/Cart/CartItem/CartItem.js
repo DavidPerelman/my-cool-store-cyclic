@@ -1,14 +1,14 @@
 import classes from './CartItem.module.css';
 
 const CartItem = ({ item, onAdd, onRemove }) => {
-  const price = `$${item.price.toFixed(2)}`;
+  const price = `$${item.product.price.toFixed(2)}`;
 
   return (
     <li className={classes['cart-item']}>
       <div className={classes['cart-product-details']}>
-        <img className={classes['cart-image']} src={item.image} />
+        <img className={classes['cart-image']} src={item.product.thumbnail} />
         <div>
-          <h3>{item.title}</h3>
+          <h3>{item.product.title}</h3>
           <div className={classes.summary}>
             <span className={classes.price}>{price}</span>
             <span className={classes.amount}>x {item.amount}</span>

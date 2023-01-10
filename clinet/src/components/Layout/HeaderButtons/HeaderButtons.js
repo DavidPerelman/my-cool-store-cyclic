@@ -25,7 +25,8 @@ const HeaderButtons = () => {
   const numOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
     return currentNumber + item.amount;
   }, 0);
-  // const numOfCartItems = 0;
+  // const numOfCartItems = newCartCtx.cartItems;
+  console.log(newCartCtx.items.length);
 
   const btnClasses = `${classes.button}`;
 
@@ -35,7 +36,7 @@ const HeaderButtons = () => {
         className={btnClasses}
         type='fa-shopping-cart'
         count={true}
-        amount={numOfCartItems}
+        amount={newCartCtx.items.length}
         onClick={showCartHandler}
       />
       <HeaderIcon
