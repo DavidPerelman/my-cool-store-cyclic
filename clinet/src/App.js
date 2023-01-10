@@ -15,6 +15,7 @@ import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsP
 import AuthContext from './store/auth-context';
 import MyOrders from './pages/MyOrders/MyOrders';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
+import { CartContextProvider } from './store/cartContext';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -55,11 +56,13 @@ function App() {
   );
 
   return (
-    <CartProvider>
-      <UserProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </UserProvider>
-    </CartProvider>
+    <CartContextProvider>
+      <CartProvider>
+        <UserProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </UserProvider>
+      </CartProvider>
+    </CartContextProvider>
   );
 }
 

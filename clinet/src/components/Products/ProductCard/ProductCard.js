@@ -19,6 +19,7 @@ const ProductCard = ({ product }) => {
   }
 
   const addToCartHandler = () => {
+    console.log(product);
     cartCtx.addItem({
       id: product.id,
       title: product.title,
