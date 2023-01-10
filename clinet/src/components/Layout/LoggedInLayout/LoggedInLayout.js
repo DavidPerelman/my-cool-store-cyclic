@@ -1,11 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../store/auth-context';
 import UserContext from '../../../store/user-context';
 import Button from '../../UI/Button/Button';
-import Logout from '../../Users/Logout/Logout';
 import classes from './LoggedInLayout.module.css';
-import { getAuth } from 'firebase/auth';
 
 const LoggedInLayout = ({ onCloseUserModal }) => {
   const userCtx = useContext(UserContext);
@@ -24,8 +22,12 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
     navigate(`/`);
   };
 
+  const username = authCtx.currentUser.displayName;
+  console.log(authCtx.currentUser.displayName);
+
   return (
     <div className={classes.LoggedInLayout}>
+      <h1>Hello {username !== null ? username : ''}!</h1>
       <Button
         onClick={onEditProfileHandler}
         className={classes.button}
@@ -41,6 +43,14 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
         onClick={onLogoutHandler}
       >
         Logout
+      </Button>
+      <Button
+        className={classes.button}
+        background='#540d83'
+        color='white'
+        onClick={onCloseUserModal}
+      >
+        Close
       </Button>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import UserProvider from './store/UserProvider';
 import CartProvider from './store/CartProvider';
 import NotFound from './pages/NotFound/NotFound';
@@ -26,7 +26,7 @@ function App() {
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())
     //   .then((data) => setCategories(data));
-  }, [authCtx.currentUser]);
+  }, [authCtx]);
 
   const router = createBrowserRouter(
     createRoutesFromElements(

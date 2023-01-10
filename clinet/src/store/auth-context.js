@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState } from 'react';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -7,7 +7,6 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { auth } from '../firebase';
-import UserContext from './user-context';
 
 const AuthContext = createContext({
   token: '',
@@ -19,7 +18,6 @@ const AuthContext = createContext({
 });
 
 export const AuthContextProvider = (props) => {
-  const userCtx = useContext(UserContext);
   const [currentUser, setCurrentUser] = useState();
   const [error, setError] = useState(null);
 
@@ -29,7 +27,6 @@ export const AuthContextProvider = (props) => {
     }, 3000);
   };
 
-  // console.log(userCtx.hideUserModal());
   const checkLoggedIn = async () => {
     const unSubscribeAuth = onAuthStateChanged(
       auth,
@@ -46,7 +43,7 @@ export const AuthContextProvider = (props) => {
   };
 
   const signup = async (username, email, password) => {
-    const user = await createUserWithEmailAndPassword(auth, email, password)
+    await createUserWithEmailAndPassword(auth, email, password)
       .then(async (user) => {
         await updateProfile(auth.currentUser, { displayName: username });
 
@@ -65,7 +62,7 @@ export const AuthContextProvider = (props) => {
   };
 
   const login = async (email, password) => {
-    const user = await signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, email, password)
       .then(async (user) => {
         setCurrentUser({
           displayName: user.user.displayName,
