@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { addDoc, collection, getDoc } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 
 const CategoriesContext = createContext({
   getCategories: () => {},
+  categories: [],
   clearError: () => {},
 });
 
@@ -22,12 +23,10 @@ export const CategoriesContextProvider = (props) => {
     }, 3000);
   };
 
-  const getCategories = async (product) => {
-    console.log(products[i].images);
-
-    await getDoc(categoriesCollectionRef)
-      .then(async (data) => {
-        console.log(data);
+  const getCategories = async () => {
+    await getDocs(categoriesCollectionRef)
+      .then((data) => {
+        setCategories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       })
       .catch((err) => {
         setError('error!');
@@ -37,6 +36,7 @@ export const CategoriesContextProvider = (props) => {
 
   const contextValue = {
     getCategories: getCategories,
+    categories: categories,
     clearError: clearError,
   };
 
