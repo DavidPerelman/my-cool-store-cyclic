@@ -9,14 +9,13 @@ const NewCartContext = createContext({
   totalAmount: 0,
   addItem: (item) => {},
   addCartItemAmount: (id) => {},
-  removeItem: (id) => {},
+  removeCartItemAmount: (id) => {},
 });
 
 export const CartContextProvider = (props) => {
   const [totalCartCost, setTotalCartCost] = useState(0);
   const [cartIsShown, setCartIsShown] = useState(false);
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
-  console.log(cartItems);
 
   const calculateTotalCost = () => {
     const itemsPrice = cartItems.reduce(
@@ -74,24 +73,33 @@ export const CartContextProvider = (props) => {
       }
       setCartItems(updatedItems);
     }
+  };
 
-    // updatedItems = [...cartItems];
+  const removeCartItemAmount = (item) => {
+    const existingCartItemIndex = cartItems.findIndex((cartItem) => {
+      return item.product._id === cartItem.product._id;
+    });
 
-    // console.log(updatedItems);
+    const existingItem = cartItems[existingCartItemIndex];
+    const updatedTotalAmount = totalCartCost - existingItem.product.price;
+    setTotalCartCost(updatedTotalAmount);
 
-    // const productId = item.product._id;
-    // console.log(cartItems);
-    // for (let i = 0; i < cartItems.length; i++) {
-    //   if (productId === cartItems[i].product['_id']) {
-    //     if (cartItems[i].amount === 99) {
-    //       return;
-    //     } else {
-    //       cartItems[i].amount += 1;
-    //     }
-    //   }
-    // }
+    let updatedItems;
 
-    // setCartItems(cartItems);
+    if (existingItem.amount === 1) {
+      updatedItems = cartItems.filter((cartItem) => {
+        return item.product._id !== cartItem.product._id;
+      });
+    } else {
+      const updatedItem = {
+        ...existingItem,
+        amount: (existingItem.amount -= 1),
+      };
+      updatedItems = [...cartItems];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    }
+
+    setCartItems(updatedItems);
   };
 
   const contextValue = {
@@ -102,7 +110,7 @@ export const CartContextProvider = (props) => {
     totalAmount: totalCartCost,
     addItem: addCartItem,
     addCartItemAmount: addCartItemAmount,
-    removeItem: (id) => {},
+    removeCartItemAmount: removeCartItemAmount,
   };
 
   return (

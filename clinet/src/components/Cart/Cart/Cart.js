@@ -13,18 +13,16 @@ const Cart = ({ onCloseCart }) => {
     newCartCtx.totalAmount = 0;
   }
 
-  console.log(newCartCtx.totalAmount);
   const totalAmount = `$${newCartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
   const cartItemAddHandler = (item) => {
-    // console.log(item);
     newCartCtx.addCartItemAmount(item);
     // cartCtx.addItem(item);
   };
 
   const cartItemRemoveHandler = (item) => {
-    console.log(item);
+    newCartCtx.removeCartItemAmount(item);
     // cartCtx.removeItem(item);
   };
 
