@@ -27,7 +27,7 @@ const Header = () => {
         <User onCloseUserModal={closeUserModalHandler} />
       )}
       <header className={classes.header}>
-        <h2>
+        <h2 className={classes.siteHeader}>
           <Link to='/' className={classes.linkHeader}>
             MyCoolStore
           </Link>

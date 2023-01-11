@@ -9,6 +9,9 @@ import {
 import { auth } from '../firebase';
 
 const AuthContext = createContext({
+  userModalIsShown: false,
+  showUserModal: () => {},
+  hideUserModal: () => {},
   token: '',
   isLoggedIn: false,
   currentUser: null,
@@ -19,7 +22,16 @@ const AuthContext = createContext({
 
 export const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState();
+  const [userModalIsShown, setUserModalIsShown] = useState(false);
   const [error, setError] = useState(null);
+
+  const onShowUserModal = () => {
+    setUserModalIsShown(true);
+  };
+
+  const onHideUserModal = () => {
+    setUserModalIsShown(false);
+  };
 
   const clearError = () => {
     setTimeout(() => {
@@ -71,9 +83,11 @@ export const AuthContextProvider = (props) => {
         });
 
         setCurrentUser(user);
+        onHideUserModal();
       })
       .catch((err) => {
         setError('Login error!');
+        onShowUserModal();
         clearError();
       });
   };
@@ -83,6 +97,9 @@ export const AuthContextProvider = (props) => {
   };
 
   const contextValue = {
+    userModalIsShown: userModalIsShown,
+    showUserModal: onShowUserModal,
+    hideUserModal: onHideUserModal,
     checkLoggedIn: checkLoggedIn,
     signup: signup,
     currentUser: currentUser,

@@ -23,7 +23,6 @@ const LoggedInLayout = ({ onCloseUserModal }) => {
   };
 
   const username = authCtx.currentUser.displayName;
-  console.log(authCtx.currentUser.displayName);
 
   return (
     <div className={classes.LoggedInLayout}>

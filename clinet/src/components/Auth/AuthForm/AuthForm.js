@@ -13,7 +13,7 @@ const AuthForm = ({ onCloseUserModal }) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const isLoggedIn = getAuth().currentUser;
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -21,7 +21,7 @@ const AuthForm = ({ onCloseUserModal }) => {
 
   const clearError = () => {
     setTimeout(() => {
-      setError('');
+      setError(null);
     }, 3000);
   };
 
@@ -92,9 +92,9 @@ const AuthForm = ({ onCloseUserModal }) => {
               />
             </div>
             {authCtx.error && <p className={classes.error}>{authCtx.error}</p>}
-            {error && <p className={classes.error}>{error}</p>}
+            {/* {error && <p className={classes.error}>{error}</p>} */}
             <div className={classes.actions}>
-              {!isLoading && !authCtx.error && !error && (
+              {!isLoading && !authCtx.error && (
                 <button>{isLogin ? 'Login' : 'Create Account'}</button>
               )}
               {isLoading && <p>Sending request...</p>}

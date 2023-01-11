@@ -17,6 +17,11 @@
 .linkHeader {
   color: white;
   text-decoration: none;
+  margin-top: 0.4rem;
+}
+
+.siteHeader {
+  margin-top: 0.4rem;
 }
 
 .main-image {
