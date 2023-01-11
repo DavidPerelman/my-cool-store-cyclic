@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from 'react';
 import UserProvider from './store/UserProvider';
-import CartProvider from './store/CartProvider';
 import NotFound from './pages/NotFound/NotFound';
 import Home from './pages/Home/Home';
 import {
@@ -15,7 +14,7 @@ import CategoryProductsPage from './pages/CategoryProductsPage/CategoryProductsP
 import AuthContext from './store/auth-context';
 import MyOrders from './pages/MyOrders/MyOrders';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
-import { CartContextProvider } from './store/cartContext';
+import { CartContextProvider } from './store/cart-context';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -57,11 +56,9 @@ function App() {
 
   return (
     <CartContextProvider>
-      <CartProvider>
-        <UserProvider>
-          <RouterProvider router={router}></RouterProvider>
-        </UserProvider>
-      </CartProvider>
+      <UserProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </UserProvider>
     </CartContextProvider>
   );
 }

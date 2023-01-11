@@ -1,7 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import CartContext from '../../../store/cart-context';
-import NewCartContext from '../../../store/cartContext';
 import UserContext from '../../../store/user-context';
 import Cart from '../../Cart/Cart/Cart';
 import User from '../../Users/User/User';
@@ -9,13 +8,11 @@ import HeaderButtons from '../HeaderButtons/HeaderButtons';
 import classes from './Header.module.css';
 
 const Header = () => {
-  const newCartCtx = useContext(NewCartContext);
   const cartCtx = useContext(CartContext);
   const userCtx = useContext(UserContext);
 
   const closeCartHandler = () => {
-    newCartCtx.hideCart();
-    // cartCtx.hideCart();
+    cartCtx.hideCart();
   };
 
   const closeUserModalHandler = () => {
@@ -24,7 +21,7 @@ const Header = () => {
 
   return (
     <Fragment>
-      {newCartCtx.cartIsShown && <Cart onCloseCart={closeCartHandler} />}
+      {cartCtx.cartIsShown && <Cart onCloseCart={closeCartHandler} />}
       {/* {cartCtx.show && <Cart onCloseCart={closeCartHandler} />} */}
       {userCtx.isUserModalShown && (
         <User onCloseUserModal={closeUserModalHandler} />

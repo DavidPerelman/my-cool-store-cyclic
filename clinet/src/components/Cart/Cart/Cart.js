@@ -1,34 +1,30 @@
 import React, { useContext } from 'react';
 import CartContext from '../../../store/cart-context';
-import NewCartContext from '../../../store/cartContext';
 import Modal from '../../UI/Modal/Modal';
 import CartItem from '../CartItem/CartItem';
 import classes from './Cart.module.css';
 
 const Cart = ({ onCloseCart }) => {
-  const newCartCtx = useContext(NewCartContext);
   const cartCtx = useContext(CartContext);
 
-  if (newCartCtx.totalAmount < 0) {
-    newCartCtx.totalAmount = 0;
+  if (cartCtx.totalAmount < 0) {
+    cartCtx.totalAmount = 0;
   }
 
-  const totalAmount = `$${newCartCtx.totalAmount.toFixed(2)}`;
+  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
   const cartItemAddHandler = (item) => {
-    newCartCtx.addCartItemAmount(item);
-    // cartCtx.addItem(item);
+    cartCtx.addCartItemAmount(item);
   };
 
   const cartItemRemoveHandler = (item) => {
-    newCartCtx.removeCartItemAmount(item);
-    // cartCtx.removeItem(item);
+    cartCtx.removeCartItemAmount(item);
   };
 
   const cartItems = (
     <ul className={classes['cart-items']}>
-      {newCartCtx.items.map((item) => {
+      {cartCtx.items.map((item) => {
         return (
           <CartItem
             key={item.id}

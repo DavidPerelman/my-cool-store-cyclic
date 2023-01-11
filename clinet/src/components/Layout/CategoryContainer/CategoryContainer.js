@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './CategoryContainer.module.css';
 import Button from '../../UI/Button/Button';
 import ProductCard from '../../Products/ProductCard/ProductCard';

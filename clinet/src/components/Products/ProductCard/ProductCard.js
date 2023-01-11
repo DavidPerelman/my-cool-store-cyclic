@@ -1,36 +1,38 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import useLocalStorage from '../../../hooks/use-local-storage';
 import CartContext from '../../../store/cart-context';
-import NewCartContext from '../../../store/cartContext';
 import Card from '../../UI/Card/Card';
 import Icon from '../../UI/Icon/Icon';
 import classes from './ProductCard.module.css';
 
 const ProductCard = ({ product }) => {
+  const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const cartCtx = useContext(CartContext);
-  const newCartCtx = useContext(NewCartContext);
 
-  let existingCartItemName;
-  const existingCartItemIndex = cartCtx.items.findIndex((item) => {
-    return item.title === product.title;
+  const existingCartItemIndex = cartItems.findIndex((cartItem) => {
+    return product._id === cartItem.product._id;
   });
-  const existingCartItem = cartCtx.items[existingCartItemIndex];
 
+  const existingCartItem = cartItems[existingCartItemIndex];
+
+  let existingCartItemId;
   if (existingCartItem) {
-    existingCartItemName = Object.values(existingCartItem)[1];
+    existingCartItemId = Object.values(existingCartItem)[0]._id;
   }
 
   const addToCartHandler = () => {
-    newCartCtx.addItem(product);
-    // console.log(newCartCtx.addItem);
-    // cartCtx.addItem({
-    //   id: product.id,
-    //   title: product.title,
-    //   amount: 1,
-    //   price: product.price,
-    //   image: product.thumbnail,
-    // });
+    cartCtx.addItem(product);
   };
+
+  // let cartIcon;
+  // if (product._id !== existingCartItemId) {
+  //   cartIcon = (
+  //     <Icon type='fa-solid fa-cart-plus' onClick={addToCartHandler} size='lg' />
+  //   );
+  // } else {
+  //   cartIcon = <span className={classes['in-cart']}>In Cart</span>;
+  // }
 
   return (
     <Card>
@@ -42,13 +44,13 @@ const ProductCard = ({ product }) => {
       <div className={classes.container}>
         <div className={classes['product-name']}>{product.title}</div>
         <div className={classes['product-brand']}>
-          <p className={classes.brandTitle}>
+          <span className={classes.brandTitle}>
             <Icon type='fa-brands fa-font-awesome' size='sm' /> {product.brand}
-          </p>
+          </span>
         </div>
         <span className={classes['price-action']}>
           ${product.price}
-          {existingCartItemName !== product.title ? (
+          {existingCartItemId !== product._id ? (
             <Icon
               type='fa-solid fa-cart-plus'
               onClick={addToCartHandler}
