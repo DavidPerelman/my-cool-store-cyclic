@@ -15,15 +15,19 @@ import AuthContext from './store/auth-context';
 import MyOrders from './pages/MyOrders/MyOrders';
 import ProfileDashboard from './pages/ProfileDashboard/ProfileDashboard';
 import { CartContextProvider } from './store/cart-context';
-import { ProductContextProvider } from './store/products-context';
+import ProductContext, {
+  ProductContextProvider,
+} from './store/products-context';
 import { CategoriesContextProvider } from './store/categories-context';
 
 function App() {
   const authCtx = useContext(AuthContext);
+  const productCxt = useContext(ProductContext);
 
   const isLoggedIn = authCtx.currentUser !== null;
 
   useEffect(() => {
+    productCxt.getProductsByCategory('skincare');
     authCtx.checkLoggedIn();
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())

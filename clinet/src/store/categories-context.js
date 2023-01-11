@@ -24,14 +24,19 @@ export const CategoriesContextProvider = (props) => {
   };
 
   const getCategories = async () => {
-    await getDocs(categoriesCollectionRef)
-      .then((data) => {
-        setCategories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      })
-      .catch((err) => {
-        setError('error!');
-        clearError();
-      });
+    const response = await fetch(`api/categories`);
+    const data = await response.json();
+
+    setCategories(data.categories);
+
+    // await getDocs(categoriesCollectionRef)
+    //   .then((data) => {
+    //     setCategories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    //   })
+    //   .catch((err) => {
+    //     setError('error!');
+    //     clearError();
+    //   });
   };
 
   const contextValue = {

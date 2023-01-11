@@ -10,7 +10,7 @@ import ProductContext from '../../../store/products-context';
 const CategoryContainer = ({ category }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  // const productCxt = useContext(ProductContext);
+  const productCxt = useContext(ProductContext);
 
   // console.log(productCxt);
   const { isLoading, error, sendRequest: fetchProductsByCategory } = useHttp();
