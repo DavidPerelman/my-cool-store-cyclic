@@ -2,13 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
 import useHttp from '../../hooks/use-http';
-import ProductContext from '../../store/products-context';
 import classes from './ProductDetailsPage.module.css';
 
 const ProductDetailsPage = () => {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
-  const productCxt = useContext(ProductContext);
 
   const { isLoading, error, sendRequest: fetchProduct } = useHttp();
 
@@ -24,8 +22,6 @@ const ProductDetailsPage = () => {
       transformProduct
     );
   }, []);
-
-  console.log(product);
 
   return (
     <div className={classes.ProductDetails}>
@@ -48,7 +44,11 @@ const ProductDetailsPage = () => {
             </div>
           </div>
         )}
-        {isLoading && <LoadingSpinner />}
+        {isLoading && (
+          <div className={classes.spinner}>
+            <LoadingSpinner />
+          </div>
+        )}
       </div>
     </div>
   );
