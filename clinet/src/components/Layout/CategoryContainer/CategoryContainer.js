@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import classes from './CategoryContainer.module.css';
 import Button from '../../UI/Button/Button';
 import ProductCard from '../../Products/ProductCard/ProductCard';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../UI/LoadingSpinner/LoadingSpinner';
 import useHttp from '../../../hooks/use-http';
+import ProductContext from '../../../store/products-context';
 
 const CategoryContainer = ({ category }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  // const productCxt = useContext(ProductContext);
 
+  // console.log(productCxt);
   const { isLoading, error, sendRequest: fetchProductsByCategory } = useHttp();
 
   useEffect(() => {

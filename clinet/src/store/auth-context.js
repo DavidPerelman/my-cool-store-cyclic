@@ -19,6 +19,7 @@ const AuthContext = createContext({
   signup: (email, password) => {},
   login: (email, password) => {},
   logout: () => {},
+  clearError: () => {},
 });
 
 export const AuthContextProvider = (props) => {
