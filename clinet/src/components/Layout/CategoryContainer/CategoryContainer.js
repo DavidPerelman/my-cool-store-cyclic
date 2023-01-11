@@ -8,6 +8,7 @@ import useHttp from '../../../hooks/use-http';
 import ProductContext from '../../../store/products-context';
 
 const CategoryContainer = ({ category }) => {
+  console.log(category);
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const productCxt = useContext(ProductContext);

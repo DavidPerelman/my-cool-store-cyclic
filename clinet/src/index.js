@@ -5,7 +5,11 @@ import { AuthContextProvider } from './store/auth-context';
 import React from 'react';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
-const client = new QueryClient();
+const client = new QueryClient({
+  defaultOptions: {
+    queries: { refetchOnWindowFocus: false },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
