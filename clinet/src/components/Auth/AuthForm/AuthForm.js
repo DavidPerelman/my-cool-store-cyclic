@@ -3,6 +3,8 @@ import AuthContext from '../../../store/auth-context';
 import classes from './AuthForm.module.css';
 import { getAuth } from 'firebase/auth';
 import LoggedInLayout from '../../Layout/LoggedInLayout/LoggedInLayout';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../../firebase';
 
 const AuthForm = ({ onCloseUserModal }) => {
   // const navigate = useNavigate();
@@ -14,6 +16,7 @@ const AuthForm = ({ onCloseUserModal }) => {
   const passwordInputRef = useRef();
   const isLoggedIn = getAuth().currentUser;
   const [error, setError] = useState(null);
+  const usersCollectionRef = collection(db, 'users');
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -60,7 +63,6 @@ const AuthForm = ({ onCloseUserModal }) => {
       setIsLoading(false);
     } else {
       await authCtx.signup(enteredUserName, enteredEmail, enteredPassword);
-
       setIsLoading(false);
     }
   };

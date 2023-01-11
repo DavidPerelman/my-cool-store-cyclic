@@ -6,7 +6,8 @@ import {
   updateProfile,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 const AuthContext = createContext({
   userModalIsShown: false,
@@ -24,6 +25,7 @@ export const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState();
   const [userModalIsShown, setUserModalIsShown] = useState(false);
   const [error, setError] = useState(null);
+  const usersCollectionRef = collection(db, 'users');
 
   const onShowUserModal = () => {
     setUserModalIsShown(true);
@@ -58,6 +60,12 @@ export const AuthContextProvider = (props) => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then(async (user) => {
         await updateProfile(auth.currentUser, { displayName: username });
+        await addDoc(usersCollectionRef, {
+          uid: user.user.uid,
+          email: email,
+          username: username,
+          role: 'customer',
+        });
 
         setCurrentUser({
           displayName: user.user.displayName,
