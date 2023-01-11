@@ -6,9 +6,12 @@ import classes from './ProductDetailsPage.module.css';
 
 const ProductDetailsPage = () => {
   const [product, setProduct] = useState({});
+  const [slides, setSlides] = useState([]);
   const { productId } = useParams();
 
   const { isLoading, error, sendRequest: fetchProduct } = useHttp();
+
+  const price = `$${product && product.price.toFixed(2)}`;
 
   useEffect(() => {
     const transformProduct = (productObj) => {
@@ -21,7 +24,14 @@ const ProductDetailsPage = () => {
       },
       transformProduct
     );
+
+    setTimeout(() => {
+      const price = `$${product && product.price.toFixed(2)}`;
+      console.log(price);
+    }, 5000);
   }, []);
+
+  console.log(product.images);
 
   return (
     <div className={classes.ProductDetails}>
@@ -32,7 +42,7 @@ const ProductDetailsPage = () => {
               <h1>{product.title}</h1>
               <p>{product.category}</p>
               <p>{product.description}</p>
-              <p>{product.price}</p>
+              <p>{price}</p>
             </div>
             <div className={classes.productImages}>
               <h1>images</h1>

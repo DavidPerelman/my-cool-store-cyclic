@@ -10,6 +10,8 @@ const ProductCard = ({ product }) => {
   const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const cartCtx = useContext(CartContext);
 
+  const price = `$${product.price.toFixed(2)}`;
+
   const existingCartItemIndex = cartItems.findIndex((cartItem) => {
     return product._id === cartItem.product._id;
   });
@@ -49,7 +51,7 @@ const ProductCard = ({ product }) => {
           </span>
         </div>
         <span className={classes['price-action']}>
-          ${product.price}
+          {price}
           {existingCartItemId !== product._id ? (
             <Icon
               type='fa-solid fa-cart-plus'
