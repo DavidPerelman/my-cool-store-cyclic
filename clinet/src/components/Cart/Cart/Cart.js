@@ -9,16 +9,17 @@ const Cart = ({ onCloseCart }) => {
   const newCartCtx = useContext(NewCartContext);
   const cartCtx = useContext(CartContext);
 
-  if (cartCtx.totalAmount < 0) {
-    cartCtx.totalAmount = 0;
+  if (newCartCtx.totalAmount < 0) {
+    newCartCtx.totalAmount = 0;
   }
 
-  console.log(newCartCtx.items);
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  console.log(newCartCtx.totalAmount);
+  const totalAmount = `$${newCartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
   const cartItemAddHandler = (item) => {
-    console.log(item);
+    // console.log(item);
+    newCartCtx.addCartItemAmount(item);
     // cartCtx.addItem(item);
   };
 
