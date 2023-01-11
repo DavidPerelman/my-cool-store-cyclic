@@ -27,7 +27,6 @@ function App() {
   const isLoggedIn = authCtx.currentUser !== null;
 
   useEffect(() => {
-    productCxt.getProductsByCategory('skincare');
     authCtx.checkLoggedIn();
     // fetch('https://dummyjson.com/products/categories')
     //   .then((res) => res.json())

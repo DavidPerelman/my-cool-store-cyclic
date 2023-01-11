@@ -1,29 +1,30 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { db } from '../firebase';
-import { addDoc, collection, query, where, getDocs } from 'firebase/firestore';
-import productsJson from '../data/products.json';
+import useHttp from '../hooks/use-http';
 
 const ProductContext = createContext({
+  products: [],
+  product: null,
+  getProduct: (productId) => {},
   createProduct: (product) => {},
   getProductsByCategory: () => {},
-  clearError: () => {},
+  // clearError: () => {},
 });
 
 export const ProductContextProvider = (props) => {
-  const [error, setError] = useState(null);
-  const [products, setproducts] = useState([]);
-  const productsCollectionRef = collection(db, 'products');
-  const categoriesCollectionRef = collection(db, 'categories');
+  // const [error, setError] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState({});
+  const { isLoading, error, sendRequest: fetchProduct } = useHttp();
 
   useEffect(() => {
     // getProductsByCategory();
   }, []);
 
-  const clearError = () => {
-    setTimeout(() => {
-      setError(null);
-    }, 3000);
-  };
+  // const clearError = () => {
+  //   setTimeout(() => {
+  //     setError(null);
+  //   }, 3000);
+  // };
 
   const createProduct = async (product) => {
     // const products = productsJson.products;
@@ -49,6 +50,19 @@ export const ProductContextProvider = (props) => {
     // }
   };
 
+  const getProduct = async (productId) => {
+    const transformProduct = (productObj) => {
+      setProduct(productObj.product);
+    };
+
+    fetchProduct(
+      {
+        url: `/api/products/product/${productId}`,
+      },
+      transformProduct
+    );
+  };
+
   const getProductsByCategory = async (category) => {
     // const q = query(
     //   productsCollectionRef,
@@ -67,9 +81,12 @@ export const ProductContextProvider = (props) => {
   };
 
   const contextValue = {
+    products: products,
+    product: product,
+    getProduct: getProduct,
     createProduct: createProduct,
     getProductsByCategory: getProductsByCategory,
-    clearError: clearError,
+    // clearError: clearError,
   };
 
   return (
