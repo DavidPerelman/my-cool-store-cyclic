@@ -16,10 +16,10 @@ const Home = () => {
 
   useEffect(() => {
     if (isLoading) {
-      return console.log('Loading...');
+      // return console.log('Loading...');
     }
     if (isError) {
-      return console.log('error...');
+      // return console.log('error...');
     }
   }, []);
 
