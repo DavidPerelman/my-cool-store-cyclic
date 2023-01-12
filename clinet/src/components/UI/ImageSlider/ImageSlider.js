@@ -4,9 +4,7 @@ import classes from './ImageSlider.module.css';
 const ImageSlider = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const slideStyles = {
-    backgroundImage: `url(${images[currentIndex]})`,
-  };
+  const slideStyles = `${images[currentIndex]}`;
 
   useEffect(() => {
     changeDotColor(0);
@@ -57,7 +55,9 @@ const ImageSlider = ({ images }) => {
       >
         ❱
       </div>
-      <div style={slideStyles} className={classes.slideStyles}></div>
+      <div className={classes.slideStyles}>
+        <img className={classes.slideImage} src={slideStyles} />
+      </div>
       <div className={classes.dotsContainerStyles}>
         {images.map((image, i) => {
           return (
