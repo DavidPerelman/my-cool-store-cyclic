@@ -8,3 +8,12 @@ export const fetchProductsByCategory = async (id) => {
   //   console.log('Products: ', products);
   return products;
 };
+
+export const fetchProduct = async (productId) => {
+  //   console.log('Fetching product');
+  const response = await axios.get(`/api/products/product/${productId}`);
+  const product = response.data.product;
+
+  //   console.log('Product: ', product);
+  return product;
+};
