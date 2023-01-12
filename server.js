@@ -21,13 +21,12 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// import service account file (helps to know the firebase project details)
-const serviceAccount = require('./serviceAccountKey.json');
+const { serviceAccountKey } = require('./config/serviceAccountKey');
 
 // Intialize the firebase-admin project/account
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://react-auth-40b24-default-rtdb.firebaseio.com',
+  credential: admin.credential.cert(serviceAccountKey),
+  databaseURL: process.env.firebase_databaseURL,
 });
 
 // Routers
