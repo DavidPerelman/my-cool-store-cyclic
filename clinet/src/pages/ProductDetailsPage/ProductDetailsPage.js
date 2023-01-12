@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fetchProduct } from '../../api/productsApi';
 import ImageSlider from '../../components/UI/ImageSlider/ImageSlider';
 import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
-import useHttp from '../../hooks/use-http';
+import Button from '../../components/UI/Button/Button';
 import classes from './ProductDetailsPage.module.css';
+import Icon from '../../components/UI/Icon/Icon';
 
 const ProductDetailsPage = () => {
-  // const [product, setProduct] = useState({});
   const { productId } = useParams();
 
   const {
@@ -19,38 +19,29 @@ const ProductDetailsPage = () => {
     refetch,
   } = useQuery('product', () => fetchProduct(productId));
 
-  // const { isLoading, error, sendRequest: fetchProduct } = useHttp();
-
-  // const price = `$${product && product.price.toFixed(2)}`;
-
-  // useEffect(() => {
-  //   const transformProduct = (productObj) => {
-  //     setProduct(productObj.product);
-  //   };
-
-  //   fetchProduct(
-  //     {
-  //       url: `/api/products/product/${productId}`,
-  //     },
-  //     transformProduct
-  //   );
-
-  //   // setTimeout(() => {
-  //   //   const price = `$${product && product.price.toFixed(2)}`;
-  //   //   console.log(price);
-  //   // }, 5000);
-  // }, []);
-
   let content;
 
   if (product) {
     content = (
       <div className={classes.detailsContainer}>
         <div className={classes.productContent}>
-          <h1>{product.title}</h1>
-          <p>{product.category}</p>
-          <p>{product.description}</p>
-          <p>{product.price}</p>
+          <div className={classes.productContentText}>
+            <div className={classes.productBrand}>
+              <Icon type='fa-brands fa-font-awesome' size='sm' />
+              <p>{product.brand}</p>
+            </div>
+            <h1>{product.title}</h1>
+            <p>
+              <Link>{product.category}</Link>
+              {/* <Link to={`/products/${category._id}`}>{product.category}</Link> */}
+            </p>
+            <p>{product.description}</p>
+
+            <div className={classes.productContentAction}>
+              <h5>{`$${product.price.toFixed(2)}`}</h5>
+              <Button>Add to cart</Button>
+            </div>
+          </div>
         </div>
         <div className={classes.productImages}>
           <h1>images</h1>

@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryContainer from '../../components/Layout/CategoryContainer/CategoryContainer';
+import { useCategoriesQuery } from '../../hooks/useCategoriesQuery';
 import './Home.css';
-import useCategoriesQuery from '../../hooks/useCategoriesQuery';
 
 const Home = () => {
   const { isLoading, isError, data: categories } = useCategoriesQuery();

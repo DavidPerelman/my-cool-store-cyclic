@@ -1,8 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { fetchCategories, fetchCategory } from '../api/categoriesApi';
 
-const useCategoryTitleQuery = (categoryId) => {
-  console.log(categoryId);
+export const useCategoryTitleQuery = (categoryId) => {
   const category = useQuery(['category', categoryId], () => {
     const result = fetchCategory(categoryId);
     return result;
@@ -10,7 +9,7 @@ const useCategoryTitleQuery = (categoryId) => {
   return category;
 };
 
-const useCategoriesQuery = () => {
+export const useCategoriesQuery = () => {
   const categories = useQuery(['categories'], () => {
     const result = fetchCategories();
     return result;
@@ -29,4 +28,4 @@ const useCategoriesQuery = () => {
 //   return order;
 // };
 
-export default (useCategoryTitleQuery, useCategoriesQuery);
+// export (useCategoryTitleQuery, useCategoriesQuery);

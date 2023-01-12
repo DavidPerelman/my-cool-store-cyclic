@@ -21,13 +21,13 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const { serviceAccountKey } = require('./config/serviceAccountKey');
+// const { serviceAccountKey } = require('./config/serviceAccountKey');
 
 // Intialize the firebase-admin project/account
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccountKey),
-  databaseURL: process.env.firebase_databaseURL,
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccountKey),
+//   databaseURL: process.env.firebase_databaseURL,
+// });
 
 // Routers
 const authRouter = require('./routers/authRouter');
