@@ -1,13 +1,21 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { fetchCategory } from '../api/categoriesApi';
+import { fetchCategories, fetchCategory } from '../api/categoriesApi';
 
-const useCategoriesQuery = (categoryId) => {
+const useCategoryTitleQuery = (categoryId) => {
   console.log(categoryId);
   const category = useQuery(['category', categoryId], () => {
     const result = fetchCategory(categoryId);
     return result;
   });
   return category;
+};
+
+const useCategoriesQuery = () => {
+  const categories = useQuery(['categories'], () => {
+    const result = fetchCategories();
+    return result;
+  });
+  return categories;
 };
 
 // const useOrder = (orderId) => {
@@ -21,4 +29,4 @@ const useCategoriesQuery = (categoryId) => {
 //   return order;
 // };
 
-export default useCategoriesQuery;
+export default (useCategoryTitleQuery, useCategoriesQuery);

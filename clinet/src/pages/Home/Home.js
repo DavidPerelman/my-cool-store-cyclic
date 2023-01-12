@@ -1,34 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import React from 'react';
 import CategoryContainer from '../../components/Layout/CategoryContainer/CategoryContainer';
-// import CategoriesContext from '../../store/categories-context';
 import './Home.css';
-import { fetchCategories } from '../../api/categoriesApi';
+import useCategoriesQuery from '../../hooks/useCategoriesQuery';
 
 const Home = () => {
-  const {
-    isLoading,
-    isError,
-    error,
-    data: categories,
-    refetch,
-  } = useQuery('categories', fetchCategories);
+  const { isLoading, isError, data: categories } = useCategoriesQuery();
 
-  useEffect(() => {
-    if (isLoading) {
-      // return console.log('Loading...');
-    }
-    if (isError) {
-      // return console.log('error...');
-    }
-  }, []);
-
-  // console.log(categories?.categories);
-  // const categoriesCxt = useContext(CategoriesContext);
-
-  // useEffect(() => {
-  //   categoriesCxt.getCategories();
-  // }, []);
+  if (isLoading) {
+    return console.log('Loading...');
+  }
+  if (isError) {
+    return console.log('error...');
+  }
 
   return (
     <>
