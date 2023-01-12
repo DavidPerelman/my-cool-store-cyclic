@@ -10,3 +10,12 @@ export const fetchCategories = async () => {
   // console.log('Categories: ', categories);
   return categories;
 };
+
+export const fetchCategory = async (categoryId) => {
+  // console.log('Fetching categories');
+  const response = await axios.get(`/api/categories//${categoryId}`);
+  const category = response.data.category.name;
+
+  // console.log('Categories: ', categories);
+  return category.charAt(0).toUpperCase() + category.slice(1);
+};

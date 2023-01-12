@@ -3,35 +3,54 @@ import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
 import ProductCard from '../../components/Products/ProductCard/ProductCard';
 import classes from './CategoryProductsPage.module.css';
-import useHttp from '../../hooks/use-http';
+import { useQuery } from 'react-query';
+import { fetchAllProductsByCategory } from '../../api/productsApi';
+import { fetchCategory } from '../../api/categoriesApi';
 
 const CategoryProductsPage = () => {
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const { categoryId } = useParams();
 
-  const { isLoading, error, sendRequest: fetchProductsByCategory } = useHttp();
+  const { data: category } = useQuery('category', () =>
+    fetchCategory(categoryId)
+  );
 
-  useEffect(() => {
-    const transformProducts = (productsObj) => {
-      for (const productKey in productsObj) {
-        setProducts(productsObj[productKey]);
-      }
-    };
+  console.log(category);
+  const {
+    isLoading,
+    isError,
+    error,
+    data: products,
+    refetch,
+  } = useQuery('products', () => fetchAllProductsByCategory(categoryId));
 
-    fetchProductsByCategory(
-      {
-        url: `/api/products/category/${categoryId}`,
-      },
-      transformProducts
+  // const { isLoading, error, sendRequest: fetchProductsByCategory } = useHttp();
+
+  // useEffect(() => {
+  //   const transformProducts = (productsObj) => {
+  //     for (const productKey in productsObj) {
+  //       setProducts(productsObj[productKey]);
+  //     }
+  //   };
+
+  //   fetchProductsByCategory(
+  //     {
+  //       url: `/api/products/category/${categoryId}`,
+  //     },
+  //     transformProducts
+  //   );
+  // }, [fetchProductsByCategory]);
+
+  let content;
+
+  if (products && products.length > 0) {
+    content = (
+      <>
+        {products.map((product) => {
+          return <ProductCard key={product.id} product={product} />;
+        })}
+      </>
     );
-  }, [fetchProductsByCategory]);
-
-  let content = <p>Found no products.</p>;
-
-  if (products.length > 0) {
-    content = products.map((product) => {
-      return <ProductCard key={product.id} product={product} />;
-    });
   }
 
   if (error) {
@@ -44,12 +63,7 @@ const CategoryProductsPage = () => {
 
   return (
     <div className={classes.CategoryProductsPage}>
-      <h2 style={{ textAlign: 'center' }}>
-        {products.length === 0
-          ? ''
-          : products[0].category.charAt(0).toUpperCase() +
-            products[0].category.slice(1)}
-      </h2>
+      <h2 className={classes.header}>{category}</h2>
       <main className={classes.main}>{content}</main>
     </div>
   );
