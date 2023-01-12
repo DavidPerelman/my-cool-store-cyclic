@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
 import ProductCard from '../../components/Products/ProductCard/ProductCard';
 import classes from './CategoryProductsPage.module.css';
-import { useQuery } from 'react-query';
-import { fetchAllProductsByCategory } from '../../api/productsApi';
-import { fetchCategory } from '../../api/categoriesApi';
 import useProductsQuery from '../../hooks/useProductsQuery';
 import useCategoriesQuery from '../../hooks/useCategoriesQuery';
 
