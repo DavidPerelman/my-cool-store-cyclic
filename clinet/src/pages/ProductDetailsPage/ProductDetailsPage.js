@@ -21,6 +21,12 @@ const ProductDetailsPage = () => {
 
   let content;
 
+  const containerStyles = {
+    width: '90%',
+    height: '280px',
+    margin: '0 auto',
+  };
+
   if (product) {
     content = (
       <div className={classes.detailsContainer}>
@@ -44,16 +50,8 @@ const ProductDetailsPage = () => {
           </div>
         </div>
         <div className={classes.productImagesContainer}>
-          <div className={classes.productImagesDiv}>
-            <h1>images</h1>
+          <div style={containerStyles}>
             <ImageSlider images={product.images} />
-            {product.images && (
-              // product.images.map((image) => {
-              //   console.log(image);
-              //   return <img src={image} />;
-              // })
-              <ImageSlider images={product.images} />
-            )}
           </div>
         </div>
       </div>

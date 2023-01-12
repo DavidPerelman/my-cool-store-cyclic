@@ -1,0 +1,41 @@
+.slideStyles {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-position: center;
+  background-size: cover;
+}
+
+.sliderStyles {
+  position: relative;
+  height: 100%;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translate(0 -50%);
+  font-size: 45px;
+  color: #b8b8b8;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.arrowLeft {
+  left: 32px;
+}
+
+.arrowRight {
+  right: 32px;
+}
+
+.dotsContainerStyles {
+  display: flex;
+  justify-content: center;
+}
+
+.dotStyles {
+  margin: 0 3px;
+  cursor: pointer;
+  font-size: 20px;
+}
