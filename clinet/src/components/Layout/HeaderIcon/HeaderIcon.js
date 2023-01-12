@@ -2,7 +2,7 @@ import classes from './HeaderIcon.module.css';
 
 const HeaderIcon = ({ type, count, amount, onClick, isLoggedIn }) => {
   return (
-    <h2>
+    <h4>
       <div className={classes.cart} onClick={onClick}>
         {count && <span className={classes.count}>{amount}</span>}
         <i
@@ -11,7 +11,7 @@ const HeaderIcon = ({ type, count, amount, onClick, isLoggedIn }) => {
           }`}
         ></i>
       </div>
-    </h2>
+    </h4>
   );
 };
 

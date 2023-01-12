@@ -35,7 +35,7 @@ const ProductDetailsPage = () => {
               <Link>{product.category}</Link>
               {/* <Link to={`/products/${category._id}`}>{product.category}</Link> */}
             </p>
-            <p>{product.description}</p>
+            <p className={classes.productDescription}>{product.description}</p>
 
             <div className={classes.productContentAction}>
               <h5>{`$${product.price.toFixed(2)}`}</h5>
@@ -43,16 +43,18 @@ const ProductDetailsPage = () => {
             </div>
           </div>
         </div>
-        <div className={classes.productImages}>
-          <h1>images</h1>
-          <ImageSlider images={product.images} />
-          {product.images && (
-            // product.images.map((image) => {
-            //   console.log(image);
-            //   return <img src={image} />;
-            // })
+        <div className={classes.productImagesContainer}>
+          <div className={classes.productImagesDiv}>
+            <h1>images</h1>
             <ImageSlider images={product.images} />
-          )}
+            {product.images && (
+              // product.images.map((image) => {
+              //   console.log(image);
+              //   return <img src={image} />;
+              // })
+              <ImageSlider images={product.images} />
+            )}
+          </div>
         </div>
       </div>
     );

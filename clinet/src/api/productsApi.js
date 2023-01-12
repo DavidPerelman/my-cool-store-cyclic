@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-export const fetchProductsByCategory = async (id) => {
-  //   console.log('Fetching products');
-  const response = await axios.get(`api/products/${id}`);
+export const fetchContainerProductsByCategory = async (categoryId) => {
+  //   console.log('Fetching product');
+  const response = await axios.get(`/api/products/category/${categoryId}/4`);
   const products = response.data.products;
 
-  //   console.log('Products: ', products);
+  // console.log('Product: ', products);
   return products;
 };
 

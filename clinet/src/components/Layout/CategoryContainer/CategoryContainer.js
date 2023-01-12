@@ -4,11 +4,15 @@ import Button from '../../UI/Button/Button';
 import ProductCard from '../../Products/ProductCard/ProductCard';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../UI/LoadingSpinner/LoadingSpinner';
-import useProductsQuery from '../../../hooks/useProductsQuery';
+import { useContainerProductsQuery } from '../../../hooks/useProductsQuery';
 
 const CategoryContainer = ({ category }) => {
   const navigate = useNavigate();
-  const { isLoading, error, data: products } = useProductsQuery(category._id);
+  const {
+    isLoading,
+    error,
+    data: products,
+  } = useContainerProductsQuery(category._id);
 
   const onCategoryClick = () => {
     navigate(`/products/${category._id}`);

@@ -40,7 +40,7 @@ const getSingleProduct = async (req, res) => {
   }
 };
 
-const getAllProductsByCategoryId = async (req, res) => {
+const getContainerProductsByCategory = async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
 
@@ -77,5 +77,5 @@ module.exports = {
   getSingleProduct,
   deleteAllProducts,
   getAllProductsByCategory,
-  getAllProductsByCategoryId,
+  getContainerProductsByCategory,
 };
