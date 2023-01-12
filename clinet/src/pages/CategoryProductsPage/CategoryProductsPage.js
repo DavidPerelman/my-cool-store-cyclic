@@ -6,40 +6,13 @@ import classes from './CategoryProductsPage.module.css';
 import { useQuery } from 'react-query';
 import { fetchAllProductsByCategory } from '../../api/productsApi';
 import { fetchCategory } from '../../api/categoriesApi';
+import useProductsQuery from '../../hooks/useProductsQuery';
+import useCategoriesQuery from '../../hooks/useCategoriesQuery';
 
 const CategoryProductsPage = () => {
-  // const [products, setProducts] = useState([]);
   const { categoryId } = useParams();
-
-  const { data: category } = useQuery('category', () =>
-    fetchCategory(categoryId)
-  );
-
-  console.log(category);
-  const {
-    isLoading,
-    isError,
-    error,
-    data: products,
-    refetch,
-  } = useQuery('products', () => fetchAllProductsByCategory(categoryId));
-
-  // const { isLoading, error, sendRequest: fetchProductsByCategory } = useHttp();
-
-  // useEffect(() => {
-  //   const transformProducts = (productsObj) => {
-  //     for (const productKey in productsObj) {
-  //       setProducts(productsObj[productKey]);
-  //     }
-  //   };
-
-  //   fetchProductsByCategory(
-  //     {
-  //       url: `/api/products/category/${categoryId}`,
-  //     },
-  //     transformProducts
-  //   );
-  // }, [fetchProductsByCategory]);
+  const { data: category } = useCategoriesQuery(categoryId);
+  const { isLoading, error, data: products } = useProductsQuery(categoryId);
 
   let content;
 

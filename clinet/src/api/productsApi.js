@@ -23,6 +23,6 @@ export const fetchAllProductsByCategory = async (categoryId) => {
   const response = await axios.get(`/api/products/category/${categoryId}`);
   const products = response.data.products;
 
-  console.log('Product: ', products);
+  // console.log('Product: ', products);
   return products;
 };
