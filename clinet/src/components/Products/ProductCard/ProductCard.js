@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useLocalStorage from '../../../hooks/use-local-storage';
 import CartContext from '../../../store/cart-context';
@@ -7,18 +7,16 @@ import Icon from '../../UI/Icon/Icon';
 import classes from './ProductCard.module.css';
 
 const ProductCard = ({ product }) => {
-  const [cartItems, setCartItems] = useLocalStorage('cartItems', []);
   const cartCtx = useContext(CartContext);
 
   const price = `$${product.price.toFixed(2)}`;
-
-  const existingCartItemIndex = cartItems.findIndex((cartItem) => {
+  const existingCartItemIndex = cartCtx.items.findIndex((cartItem) => {
     return product._id === cartItem.product._id;
   });
 
-  const existingCartItem = cartItems[existingCartItemIndex];
-
+  const existingCartItem = cartCtx.items[existingCartItemIndex];
   let existingCartItemId;
+
   if (existingCartItem) {
     existingCartItemId = Object.values(existingCartItem)[0]._id;
   }
@@ -26,15 +24,6 @@ const ProductCard = ({ product }) => {
   const addToCartHandler = () => {
     cartCtx.addItem(product);
   };
-
-  // let cartIcon;
-  // if (product._id !== existingCartItemId) {
-  //   cartIcon = (
-  //     <Icon type='fa-solid fa-cart-plus' onClick={addToCartHandler} size='lg' />
-  //   );
-  // } else {
-  //   cartIcon = <span className={classes['in-cart']}>In Cart</span>;
-  // }
 
   return (
     <Card>
@@ -55,12 +44,17 @@ const ProductCard = ({ product }) => {
           {existingCartItemId !== product._id ? (
             <Icon
               type='fa-solid fa-cart-plus'
-              onClick={addToCartHandler}
+              onClick={(e) => addToCartHandler(e)}
               size='lg'
             />
           ) : (
             <span className={classes['in-cart']}>In Cart</span>
           )}
+          {/* {existingCartItemId === product._id ? (
+            <span className={classes['in-cart']}>In Cart</span>
+          ) : (
+            <p>dsd</p>
+          )} */}
         </span>
       </div>
       <div className={classes['product-details-link']}>

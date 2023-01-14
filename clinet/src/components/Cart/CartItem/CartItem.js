@@ -4,7 +4,7 @@ const CartItem = ({ item, onAdd, onRemove }) => {
   const price = `$${item.product.price.toFixed(2)}`;
 
   return (
-    <li className={classes['cart-item']}>
+    <li key={item._id} className={classes['cart-item']}>
       <div className={classes['cart-product-details']}>
         <img className={classes['cart-image']} src={item.product.thumbnail} />
         <div>

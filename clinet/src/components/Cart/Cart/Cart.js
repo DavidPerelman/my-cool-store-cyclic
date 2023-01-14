@@ -27,7 +27,6 @@ const Cart = ({ onCloseCart }) => {
       {cartCtx.items.map((item) => {
         return (
           <CartItem
-            key={item.id}
             item={item}
             onAdd={cartItemAddHandler.bind(null, item)}
             onRemove={cartItemRemoveHandler.bind(null, item)}
