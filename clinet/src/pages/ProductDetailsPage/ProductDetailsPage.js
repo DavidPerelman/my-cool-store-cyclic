@@ -7,6 +7,7 @@ import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner';
 import Button from '../../components/UI/Button/Button';
 import classes from './ProductDetailsPage.module.css';
 import Icon from '../../components/UI/Icon/Icon';
+import Carousel from '../../components/UI/Carousel/Carousel';
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
@@ -50,9 +51,7 @@ const ProductDetailsPage = () => {
           </div>
         </div>
         <div className={classes.productImagesContainer}>
-          <div style={containerStyles}>
-            <ImageSlider images={product.images} />
-          </div>
+          <Carousel images={product.images} />
         </div>
       </div>
     );

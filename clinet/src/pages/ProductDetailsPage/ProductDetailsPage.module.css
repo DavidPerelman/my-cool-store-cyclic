@@ -18,13 +18,15 @@
 }
 
 .detailsContainer {
-  margin-top: 0rem;
+  /* margin-top: 0rem;
   display: flex;
   flex-direction: row;
-  margin-top: 5rem;
-  /* justify-content: space-around; */
-  /* padding-top: 10rem;
-  padding-bottom: 10rem; */
+  margin-top: 5rem; */
+
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+  height: 100%;
 }
 
 .productContent {
@@ -92,7 +94,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 1.4rem;
+  /* padding-top: 1.4rem; */
 }
 
 @keyframes product-appear {
