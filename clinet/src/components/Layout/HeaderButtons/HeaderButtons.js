@@ -1,22 +1,22 @@
 import React, { useContext } from 'react';
-import UserContext from '../../../store/user-context';
 import HeaderIcon from '../HeaderIcon/HeaderIcon';
 import classes from './HeaderButtons.module.css';
 import { getAuth } from 'firebase/auth';
 import CartContext from '../../../store/cart-context';
+import AuthContext from '../../../store/auth-context';
 
 const HeaderButtons = () => {
   const isLoggedIn = getAuth().currentUser;
 
   const cartCtx = useContext(CartContext);
-  const userCtx = useContext(UserContext);
+  const authCtx = useContext(AuthContext);
 
   const showCartHandler = () => {
     cartCtx.showCart();
   };
 
   const showUserModalHandler = () => {
-    userCtx.showUserModal();
+    authCtx.showUserModal();
   };
 
   const numOfCartItems = cartCtx.items.length;

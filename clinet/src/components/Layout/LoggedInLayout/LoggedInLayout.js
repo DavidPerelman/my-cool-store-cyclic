@@ -1,23 +1,21 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../store/auth-context';
-import UserContext from '../../../store/user-context';
 import Button from '../../UI/Button/Button';
 import classes from './LoggedInLayout.module.css';
 
 const LoggedInLayout = ({ onCloseUserModal }) => {
-  const userCtx = useContext(UserContext);
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onEditProfileHandler = () => {
-    userCtx.hideUserModal();
+    authCtx.hideUserModal();
     navigate(`/:userId/dashboard`);
   };
 
   const onLogoutHandler = () => {
     authCtx.logout();
-    userCtx.hideUserModal();
+    authCtx.hideUserModal();
 
     navigate(`/`);
   };

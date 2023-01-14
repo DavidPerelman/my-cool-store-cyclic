@@ -16,7 +16,6 @@ const AuthForm = ({ onCloseUserModal }) => {
   const passwordInputRef = useRef();
   const isLoggedIn = getAuth().currentUser;
   const [error, setError] = useState(null);
-  const usersCollectionRef = collection(db, 'users');
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -61,10 +60,16 @@ const AuthForm = ({ onCloseUserModal }) => {
     if (isLogin) {
       await authCtx.login(enteredEmail, enteredPassword);
       setIsLoading(false);
+
+      if (authCtx.currentUser !== null) {
+      }
     } else {
       await authCtx.signup(enteredUserName, enteredEmail, enteredPassword);
       setIsLoading(false);
+      console.log(authCtx.currentUser);
     }
+
+    // onCloseUserModal();
   };
 
   return (
