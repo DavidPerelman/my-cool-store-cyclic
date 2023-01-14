@@ -23,6 +23,7 @@
 }
 
 .product-details-link a {
+  text-decoration: none;
   margin-top: auto;
   margin: 1px !important;
   /* margin: 1rem; */
