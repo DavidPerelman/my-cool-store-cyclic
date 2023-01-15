@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 import { auth, db } from '../firebase';
 import { addDoc, collection } from 'firebase/firestore';
+import axios from 'axios';
 
 const AuthContext = createContext({
   userModalIsShown: false,
@@ -66,6 +67,12 @@ export const AuthContextProvider = (props) => {
           email: email,
           username: username,
           role: 'customer',
+        });
+
+        await axios.post('/api/auth/createUser', {
+          uid: user.user.uid,
+          email: email,
+          userName: username,
         });
 
         setCurrentUser({
