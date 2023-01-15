@@ -10,6 +10,7 @@ const cartCtx = createContext({
   addItem: (item) => {},
   addCartItemAmount: (id) => {},
   removeCartItemAmount: (id) => {},
+  makeAnOrderClick: (userId) => {},
 });
 
 export const CartContextProvider = (props) => {
@@ -102,6 +103,11 @@ export const CartContextProvider = (props) => {
     setCartItems(updatedItems);
   };
 
+  const makeAnOrderClick = (currentUser, cartItems) => {
+    console.log(currentUser.uid);
+    console.log(cartItems);
+  };
+
   const contextValue = {
     cartIsShown: cartIsShown,
     showCart: onShowCart,
@@ -111,6 +117,7 @@ export const CartContextProvider = (props) => {
     addItem: addCartItem,
     addCartItemAmount: addCartItemAmount,
     removeCartItemAmount: removeCartItemAmount,
+    makeAnOrderClick: makeAnOrderClick,
   };
 
   return (

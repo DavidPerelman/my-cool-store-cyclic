@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import AuthContext from '../../../store/auth-context';
 import CartContext from '../../../store/cart-context';
 import Modal from '../../UI/Modal/Modal';
 import CartItem from '../CartItem/CartItem';
@@ -6,6 +7,7 @@ import classes from './Cart.module.css';
 
 const Cart = ({ onCloseCart }) => {
   const cartCtx = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
 
   if (cartCtx.totalAmount < 0) {
     cartCtx.totalAmount = 0;
@@ -38,6 +40,7 @@ const Cart = ({ onCloseCart }) => {
 
   return (
     <Modal onClose={onCloseCart}>
+      {!authCtx.currentUser && <p>You must be logged in to place an order!</p>}
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
@@ -47,7 +50,16 @@ const Cart = ({ onCloseCart }) => {
         <button className={classes['button--alt']} onClick={onCloseCart}>
           Close
         </button>
-        {hasItems && <button className={classes.button}>Order</button>}
+        {hasItems && authCtx.currentUser && (
+          <button
+            className={classes.button}
+            onClick={() =>
+              cartCtx.makeAnOrderClick(authCtx.currentUser, cartCtx.items)
+            }
+          >
+            Order
+          </button>
+        )}
       </div>
     </Modal>
   );
